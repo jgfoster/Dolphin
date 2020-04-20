@@ -775,30 +775,30 @@ testStreamUtfRoundTrip
 				self assert: (self assimilateString: actual) equals: expected]!
 
 testSubStringsByCharacter
-	"Test legacy subStrings: behavior for single character delimiter. This will be changed in 7.2"
+	"Test revised subStrings: behavior for single character delimiter (symmetric with respect to leading/trailing separators)."
 
 	| empty sep |
 	empty := self newCollection: ''.
 	self assert: (empty subStrings: $-) equals: (#() collect: [:e | self newCollection: e]).
-	self assert: ('-' subStrings: $-) equals: {empty}.
+	self assert: ('-' subStrings: $-) equals: {empty. empty}.
 	self assert: ((self newCollection: 'a') subStrings: $-)
 		equals: (#('a') collect: [:e | self newCollection: e]).
 	self assert: ((self newCollection: '-a') subStrings: $-)
 		equals: (#('' 'a') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a-') subStrings: $-)
-		equals: (#('a') collect: [:e | self newCopy: e]).
+		equals: (#('a' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: '--a') subStrings: $-)
 		equals: (#('' '' 'a') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a--') subStrings: $-)
-		equals: (#('a' '') collect: [:e | self newCopy: e]).
+		equals: (#('a' '' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab') subStrings: $-)
 		equals: (#('ab') collect: [:e | self newCollection: e]).
 	self assert: ((self newCollection: '-ab') subStrings: $-)
 		equals: (#('' 'ab') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab-') subStrings: $-)
-		equals: (#('ab') collect: [:e | self newCopy: e]).
+		equals: (#('ab' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab---') subStrings: $-)
-		equals: (#('ab' '' '') collect: [:e | self newCopy: e]).
+		equals: (#('ab' '' '' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: '--ab') subStrings: $-)
 		equals: (#('' '' 'ab') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a-b') subStrings: $-)
@@ -806,50 +806,17 @@ testSubStringsByCharacter
 	self assert: ((self newCollection: 'a--b') subStrings: $-)
 		equals: (#('a' '' 'b') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab-c-') subStrings: $-)
-		equals: (#('ab' 'c') collect: [:e | self newCopy: e]).
+		equals: (#('ab' 'c' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a-b--c') subStrings: $-)
 		equals: (#('a' 'b' '' 'c') collect: [:e | self newCopy: e]).
 
-	"And again but using a string argument of only one character"
-	sep := self newCollection: '-'.
-	self assert: (empty subStrings: sep) equals: (#() collect: [:e | self newCollection: e]).
-	self assert: (sep subStrings: sep) equals: {empty}.
-	self assert: ((self newCollection: 'a') subStrings: sep)
-		equals: (#('a') collect: [:e | self newCollection: e]).
-	self assert: ((self newCollection: '-a') subStrings: sep)
-		equals: (#('' 'a') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'a-') subStrings: sep)
-		equals: (#('a') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: '--a') subStrings: sep)
-		equals: (#('' '' 'a') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'a--') subStrings: sep)
-		equals: (#('a' '') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'ab') subStrings: sep)
-		equals: (#('ab') collect: [:e | self newCollection: e]).
-	self assert: ((self newCollection: '-ab') subStrings: sep)
-		equals: (#('' 'ab') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'ab-') subStrings: sep)
-		equals: (#('ab') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'ab---') subStrings: sep)
-		equals: (#('ab' '' '') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: '--ab') subStrings: sep)
-		equals: (#('' '' 'ab') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'a-b') subStrings: sep)
-		equals: (#('a' 'b') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'a--b') subStrings: sep)
-		equals: (#('a' '' 'b') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'ab-c-') subStrings: sep)
-		equals: (#('ab' 'c') collect: [:e | self newCopy: e]).
-	self assert: ((self newCollection: 'a-b--c') subStrings: sep)
-		equals: (#('a' 'b' '' 'c') collect: [:e | self newCopy: e]).
-
-	"Note that if the string consists only of separators, then we get N empty strings if there are N chars"
+	"Note that if the string consists only of separators, then we get N+1 empty strings if there are N chars"
 	1 to: 3
 		do: 
 			[:i |
 			| subject |
 			subject := self newCollection: (String new: i withAll: $a).
-			self assert: (subject subStrings: $a) equals: (Array new: i withAll: empty)]!
+			self assert: (subject subStrings: $a) equals: (Array new: i+1 withAll: empty)]!
 
 testSubStringsByString
 	"Test subStrings: with a multi-character string argument. This is the historic behaviour, which ignored a trailing terminator. This will be corrected in 7.2 which will also adopt the ANSI specified behaviour of splitting by any of the 
@@ -863,28 +830,27 @@ testSubStringsByString
 	"And again but using a string argument of more than one character"
 	sep := self newCollection: String lineDelimiter.
 
-	"Note historic incorrect behaviour that splitting an empty string by anything yields a result with one empty element. Corrected in 7.2."
-	self assert: (empty subStrings: sep) equals: (#('') collect: [:e | self newCollection: e]).
+	self assert: (empty subStrings: sep) equals: #().
 
 	self assert: ((self newCollection: 'a') subStrings: sep)
 		equals: (#('a') collect: [:e | self newCollection: e]).
 	self assert: ((self newCollection: sep , 'a') subStrings: sep)
 		equals: (#('' 'a') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a' , sep) subStrings: sep)
-		equals: (#('a') collect: [:e | self newCopy: e]).
+		equals: (#('a' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: sep , sep , 'a') subStrings: sep)
 		equals: (#('' '' 'a') collect: [:e | self newCopy: e]).
 	"Note asymmetry - two leading separators and we get a 3 element result, two trailing separator and we get a 2 element result."
 	self assert: ((self newCollection: 'a' , sep , sep) subStrings: sep)
-		equals: (#('a' '') collect: [:e | self newCopy: e]).
+		equals: (#('a' '' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab') subStrings: sep)
 		equals: (#('ab') collect: [:e | self newCollection: e]).
 	self assert: ((self newCollection: sep , 'ab') subStrings: sep)
 		equals: (#('' 'ab') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab' , sep) subStrings: sep)
-		equals: (#('ab') collect: [:e | self newCopy: e]).
+		equals: (#('ab' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab' , sep , sep , sep) subStrings: sep)
-		equals: (#('ab' '' '') collect: [:e | self newCopy: e]).
+		equals: (#('ab' '' '' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: sep , sep , 'ab') subStrings: sep)
 		equals: (#('' '' 'ab') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a' , sep , 'b') subStrings: sep)
@@ -892,7 +858,7 @@ testSubStringsByString
 	self assert: ((self newCollection: 'a' , sep , sep , 'b') subStrings: sep)
 		equals: (#('a' '' 'b') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'ab' , sep , 'c' , sep) subStrings: sep)
-		equals: (#('ab' 'c') collect: [:e | self newCopy: e]).
+		equals: (#('ab' 'c' '') collect: [:e | self newCopy: e]).
 	self assert: ((self newCollection: 'a' , sep , 'b' , sep , sep , 'c') subStrings: sep)
 		equals: (#('a' 'b' '' 'c') collect: [:e | self newCopy: e]).
 	1 to: 3
@@ -901,7 +867,7 @@ testSubStringsByString
 			| subject |
 			subject := self
 						newCollection: (String streamContents: [:strm | i timesRepeat: [strm nextPutAll: 'ab']]).
-			self assert: (subject subStrings: 'ab') equals: (Array new: i  withAll: empty)]!
+			self assert: (subject subStrings: 'ab') equals: (Array new: i+1  withAll: empty)]!
 
 testTrimNulls
 	"#1187"

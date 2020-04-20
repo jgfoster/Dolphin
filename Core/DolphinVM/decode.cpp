@@ -349,17 +349,17 @@ wostream& operator<<(wostream& st, const CharOTE* ote)
 		{
 		case StringEncoding::Ansi:
 		{
-			char16_t codePoint = Interpreter::m_ansiToUnicodeCharMap[codeUnit & 0xff];
+			wchar_t codePoint = Interpreter::m_ansiToUnicodeCharMap[codeUnit & 0xff];
 			if (iswgraph(codePoint))
 			{
-				return st << static_cast<char16_t>(codePoint);
+				return st << codePoint;
 			}
 			break;
 		}
 		case StringEncoding::Utf16:
-			if (iswgraph(static_cast<char16_t>(codeUnit)))
+			if (iswgraph(static_cast<wchar_t>(codeUnit)))
 			{
-				return st << static_cast<char16_t>(codeUnit);
+				return st << static_cast<wchar_t>(codeUnit);
 			}
 			break;
 
@@ -367,9 +367,9 @@ wostream& operator<<(wostream& st, const CharOTE* ote)
 			break;
 
 		case StringEncoding::Utf32:
-			if (U_IS_BMP(codeUnit) && iswgraph(static_cast<char16_t>(codeUnit)))
+			if (U_IS_BMP(codeUnit) && iswgraph(static_cast<wchar_t>(codeUnit)))
 			{
-				return st << static_cast<char16_t>(codeUnit);
+				return st << static_cast<wchar_t>(codeUnit);
 			}
 			break;
 
@@ -379,7 +379,7 @@ wostream& operator<<(wostream& st, const CharOTE* ote)
 		}
 	}
 
-	return st << L"\\x" << std::hex << codeUnit;
+	return st << L"\\x" << std::hex << static_cast<uint32_t>(codeUnit);
 }
 
 wostream& operator<<(wostream& st, const FloatOTE* ote)

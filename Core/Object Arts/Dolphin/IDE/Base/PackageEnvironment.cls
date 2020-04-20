@@ -27,28 +27,25 @@ classesDo: aBlock
 					[:each |
 					(environment includesClass: each)
 						ifTrue: 
-							[seen add: each name.	"#1324"
+							[seen add: each fullyQualifiedReference.
 							aBlock value: each]].
 			eachPackage methodNames do: 
 					[:each |
 					| className |
-					className := each key.
+					className := each className.
 					(seen includes: className)
 						ifFalse: 
-							[(eachPackage behaviorFromName: className ifAbsent: [])
-								ifNotNil: 
-									[:behavior |
-									| class |
-									class := behavior instanceClass.
-									(environment includesClass: class)
-										ifTrue: 
-											["Both class and metaclass must be in the environment, regardless of the where loose methods reside."
-											aBlock
-												value: class;
-												value: class class].
-									seen
-										add: class name;
-										add: class class name]]]]!
+							[| class |
+							class := className valueOrNil ifNotNil: [:behavior | behavior instanceClass].
+							(class notNil and: [environment includesClass: class])
+								ifTrue: 
+									["Both class and metaclass must be in the environment, regardless of the where loose methods reside."
+									aBlock
+										value: class;
+										value: class class].
+							seen
+								add: className instance;
+								add: className meta]]]!
 
 defaultLabel
 	| stream |
@@ -58,17 +55,13 @@ defaultLabel
 	^stream contents!
 
 definesClass: aClass
-	^packages includes: (PackageManager current packageOfClass: aClass)!
+	^packages identityIncludes: aClass owningPackage!
 
-definesLooseMethodsInClass: aClass 
-	| class className metaclassName |
-	class := aClass instanceClass.
-	className := class name.
-	metaclassName := class class name.
-	^packages anySatisfy: 
-			[:eachPackage | 
-			eachPackage methodNames 
-				anySatisfy: [:each | each key == className or: [each key = metaclassName]]]!
+definesLooseMethodsInClass: aClass
+	| className |
+	className := aClass instanceClass fullyQualifiedReference.
+	^packages
+		anySatisfy: [:eachPackage | eachPackage methodNames anySatisfy: [:each | each className instance = className]]!
 
 includesClass: aClass 
 	^(super includesClass: aClass) 
@@ -123,12 +116,13 @@ selectorsForClass: aClass do: aBlock
 
 	"#1325: Must enumerate any loose methods, regardless of whether one of the packages in this
 	environment defines the class."
+	name := aClass fullyQualifiedReference.
 	packages do: 
 			[:eachPackage |
 			eachPackage methodNames do: 
-					[:each |
-					each key = name
-						ifTrue: [(environment includesSelector: each value in: aClass) ifTrue: [aBlock value: each value]]]]!
+					[:each | 
+					each className = name 
+						ifTrue: [(environment includesSelector: each selector in: aClass) ifTrue: [aBlock value: each selector]]]]!
 
 storeOn: aStream
 	aStream nextPut: $(.

@@ -158,7 +158,7 @@ namespace ST
 	const size_t ClassUtf8String = 104;
 	const size_t ClassUtf16String = 93;
 
-	class Utf8String : public ByteStringT<CP_UTF8, ClassUtf8String, Utf8StringOTE, uint8_t>
+	class Utf8String : public ByteStringT<CP_UTF8, ClassUtf8String, Utf8StringOTE, char8_t>
 	{
 	public:
 		static POTE __fastcall NewFromAnsi(const char* pChars, size_t len);

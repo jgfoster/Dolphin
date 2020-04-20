@@ -88,9 +88,9 @@ void Interpreter::initializeVMReferences()
 
 	m_pProcessor = _Pointers.Scheduler->m_location;
 
-	if (ObjectMemory::fetchClassOf(Oop(_Pointers.EmptyString)) != _Pointers.ClassAnsiString)
+	if (ObjectMemory::fetchClassOf(Oop(_Pointers.EmptyString)) != _Pointers.ClassUtf8String)
 	{
-		_Pointers.EmptyString = AnsiString::New("");
+		_Pointers.EmptyString = Utf8String::New("");
 		_Pointers.EmptyString->beImmutable();
 	}
 
