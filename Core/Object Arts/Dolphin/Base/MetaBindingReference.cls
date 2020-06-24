@@ -91,8 +91,10 @@ valueOfBinding: aVariableBinding
 !MetaBindingReference class methodsFor!
 
 instance: aBindingReference
-	<primitive: 157>
-	^self basicNew setInstance: aBindingReference!
+	^self basicNew
+		setInstance: aBindingReference;
+		isImmutable: true;
+		yourself!
 
 newPath: anArray context: anObject
 	^self instance: (BindingReference newPath: anArray context: anObject)!

@@ -59,27 +59,27 @@ path
 
 	^path
 		ifNil: 
-			[| immutable |
-			immutable := self isImmutable: false.
-			path := $. split: pathString.
-			self isImmutable: immutable.
+			[self setPath: ($. split: pathString).
 			path]!
 
 pathString
 	"Answer a <readableString> that expresses the receiver as a qualified name in the context of the home namespace."
 
-	^pathString ifNil: [pathString := $. join: path]!
+	^pathString
+		ifNil: 
+			[self setPathString: ($. join: path).
+			pathString]!
 
 setBinding: aVariableBindingOrNil
-	| immutable |
-	immutable := self isImmutable: false.
-	binding := aVariableBindingOrNil.
-	self isImmutable: immutable!
+	<mutable>
+	binding := aVariableBindingOrNil!
 
 setPath: anArray
+	<mutable>
 	path := anArray!
 
 setPathString: aString
+	<mutable>
 	pathString := aString! !
 !BindingReference categoriesFor: #asString!converting!public! !
 !BindingReference categoriesFor: #bindingOrNil!accessing!public! !
@@ -102,23 +102,16 @@ clearCachedBindings
 	instances := self primAllInstances.
 	1 to: instances size do: [:i | (instances at: i) setBinding: nil]!
 
-errorInvalidIdentifier: aString
-	^self error: ('Invalid identifier: ''<s>''' expandMacrosWith: aString)!
-
 initialize
 	VMLibrary default
 		registryAt: self name put: self;
 		registryAtIndex: 65 put: #pathString:context:meta:!
 
-newPath: anArray
-	^self basicNew
-		setPath: anArray;
-		yourself!
-
 newPath: anArray context: anObject
 	^self basicNew
 		setPath: anArray;
 		context: anObject;
+		isImmutable: true;
 		yourself!
 
 pathString: aString
@@ -137,6 +130,7 @@ pathString: aString context: aBehavior
 	^self basicNew
 		setPathString: aString;
 		context: aBehavior;
+		isImmutable: true;
 		yourself!
 
 pathString: aString context: anObject meta: aBoolean
@@ -151,9 +145,7 @@ uninitialize
 		registryAt: self name put: nil;
 		registryAtIndex: 65 put: nil! !
 !BindingReference class categoriesFor: #clearCachedBindings!private! !
-!BindingReference class categoriesFor: #errorInvalidIdentifier:!exceptions!private! !
 !BindingReference class categoriesFor: #initialize!class initialization!public! !
-!BindingReference class categoriesFor: #newPath:!instance creation!private! !
 !BindingReference class categoriesFor: #newPath:context:!instance creation!private! !
 !BindingReference class categoriesFor: #pathString:!instance creation!public! !
 !BindingReference class categoriesFor: #pathString:context:!instance creation!public! !

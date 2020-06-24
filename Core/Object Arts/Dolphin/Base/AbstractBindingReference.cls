@@ -250,6 +250,9 @@ valueOrNil
 
 !AbstractBindingReference class methodsFor!
 
+errorInvalidIdentifier: aString
+	^self error: ('Invalid identifier: ''<s>''' expandMacrosWith: aString)!
+
 initialize
 	Undeclared := UndeclaredVariable new!
 
@@ -358,6 +361,7 @@ simpleName: aString in: aNamespace
 
 splitQualifiedName: aString
 	^$. split: aString! !
+!AbstractBindingReference class categoriesFor: #errorInvalidIdentifier:!exceptions!private! !
 !AbstractBindingReference class categoriesFor: #initialize!class initialization!public! !
 !AbstractBindingReference class categoriesFor: #internQualifiers:!helpers!private! !
 !AbstractBindingReference class categoriesFor: #isQualifiedName:!enquiries!public! !
