@@ -178,7 +178,9 @@ refersToLiteral: anObject
 	"Private - Answer whether the receiver is a reference to the literal argument.
 	This assumes that the receiver is in the role of a literal. Normally this would only be true of LiteralBindingReferences, but other types of BindingReferences could find their way into literal frames if they result from the evaluation of a static expression."
 
-	^self = anObject or: [anObject notNil and: [self bindingOrNil refersToLiteral: anObject]]!
+	^self = anObject or: 
+			[anObject notNil
+				and: [self bindingOrNil ifNil: [false] ifNotNil: [:binding | binding refersToLiteral: anObject]]]!
 
 simpleName
 	"Answer the unqualified name part of the receiver (the final component of the name)."
@@ -239,7 +241,7 @@ valueOrNil
 !AbstractBindingReference categoriesFor: #path!accessing!public! !
 !AbstractBindingReference categoriesFor: #pathString!accessing!public! !
 !AbstractBindingReference categoriesFor: #printOn:!printing!public! !
-!AbstractBindingReference categoriesFor: #refersToLiteral:!public!testing! !
+!AbstractBindingReference categoriesFor: #refersToLiteral:!private!testing! !
 !AbstractBindingReference categoriesFor: #simpleName!accessing!public! !
 !AbstractBindingReference categoriesFor: #species!comparing!public! !
 !AbstractBindingReference categoriesFor: #storeOn:!public!storing! !
