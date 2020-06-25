@@ -23,12 +23,18 @@ classesDo: aBlock
 	seen := Set new: 20.
 	packages do: 
 			[:eachPackage |
-			eachPackage behaviorsDo: 
+			eachPackage classNames do: 
 					[:each |
-					(environment includesClass: each)
+					| class |
+					class := each value.
+					(environment includesClass: class)
 						ifTrue: 
-							[seen add: each fullyQualifiedReference.
-							aBlock value: each]].
+							[seen add: each.
+							aBlock value: class].
+					(environment includesClass: class class)
+						ifTrue: 
+							[seen add: each meta.
+							aBlock value: class class]].
 			eachPackage methodNames do: 
 					[:each |
 					| className |
@@ -39,7 +45,7 @@ classesDo: aBlock
 							class := className valueOrNil ifNotNil: [:behavior | behavior instanceClass].
 							(class notNil and: [environment includesClass: class])
 								ifTrue: 
-									["Both class and metaclass must be in the environment, regardless of the where loose methods reside."
+									["Both class and metaclass must be in the environment, regardless of where the loose methods reside."
 									aBlock
 										value: class;
 										value: class class].
