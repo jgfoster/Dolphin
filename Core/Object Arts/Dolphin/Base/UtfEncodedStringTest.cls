@@ -4,7 +4,8 @@ StringTest subclass: #UtfEncodedStringTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	classInstanceVariableNames: ''!
+	classInstanceVariableNames: ''
+	classConstants: {}!
 UtfEncodedStringTest guid: (GUID fromString: '{f3d4f4a7-05b6-445f-8380-d0b838804877}')!
 UtfEncodedStringTest isAbstract: true!
 UtfEncodedStringTest comment: ''!
@@ -350,7 +351,7 @@ testIdentityIncludes
 	super testIdentityIncludes.
 	pound := Character value: 163.
 	dolphin := self collectionClass with: Character dolphin.
-	subject : = (self newCollection : 'a'), dolphin, 'b', pound asString, 'c'.
+	subject := (self newCollection: 'a'), dolphin, 'b', pound asString, 'c'.
 	{$a. Character dolphin. $\x1F42C. $b. pound. $c}
 		do: [:each | self assert: (subject identityIncludes: each)].
 	"Should include all the surrogates too"
@@ -366,7 +367,7 @@ testIncludes
 	super testIncludes.
 	pound := Character value: 163.
 	dolphin := self collectionClass with: Character dolphin.
-	subject : = (self newCollection : 'a'), dolphin, 'b', pound asString, 'c'.
+	subject := (self newCollection: 'a'), dolphin, 'b', pound asString, 'c'.
 	{$a. Character dolphin. $\x1F42C. $b. pound. $c} do: [:each | self assert: (subject includes: each)].
 	dolphin do: [:each | self assert: (subject includes: each)].
 	foreign := self collectionClass encoding == #utf8
