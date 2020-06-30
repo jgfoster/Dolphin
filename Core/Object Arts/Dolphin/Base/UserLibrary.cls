@@ -816,8 +816,7 @@ clear
 	instances of the receiver from previous runs. etc."
 
 	super clear.
-	#(#SystemMetrics) 
-		do: [:each | self environment at: each ifPresent: [:c | c reset]]!
+	#(#{SystemMetrics}) do: [:each | each ifDefined: [:c | c reset]]!
 
 fileName
 	"Answer the host system file name of the external library which 
