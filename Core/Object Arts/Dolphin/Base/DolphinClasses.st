@@ -4147,6 +4147,12 @@ Stream subclass: #SequencedStream
 	poolDictionaries: ''
 	classInstanceVariableNames: ''
 	classConstants: {}!
+SequencedStream subclass: #LimitedWriteStream
+	instanceVariableNames: 'stream limit limitBlock start printed'
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''
+	classConstants: {}!
 SequencedStream subclass: #PositionableStream
 	instanceVariableNames: 'collection position readLimit'
 	classVariableNames: ''

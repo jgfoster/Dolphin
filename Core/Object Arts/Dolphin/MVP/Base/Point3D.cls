@@ -168,11 +168,13 @@ printOn: aStream
 	"Append a short textual description of the receiver to aStream."
 
 	aStream 
+		nextPut: $(;
 		print: x;
 		nextPut: $@;
 		print: y;
 		nextPut: $@;
-		print: z
+		print: z;
+		nextPut: $)
 !
 
 r

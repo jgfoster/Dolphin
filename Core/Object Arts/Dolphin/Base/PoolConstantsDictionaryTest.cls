@@ -1,6 +1,6 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-AbstractDictionaryTest subclass: #PoolConstantsDictionaryTest
+DolphinTest subclass: #PoolConstantsDictionaryTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -11,14 +11,22 @@ PoolConstantsDictionaryTest comment: ''!
 !PoolConstantsDictionaryTest categoriesForClass!Unclassified! !
 !PoolConstantsDictionaryTest methodsFor!
 
-collectionClass
-	^PoolConstantsDictionary!
-
 key3Value
 	^$l!
 
 makeKey: anObject
 	^'_' , anObject displayString!
+
+newDictionary
+	| subject |
+	"We are no longer using PoolConstantsDictionary, but retain the test unchanged to verify that the behaviour of SharedPool classes is compatible."
+	subject := self newEmpty.
+	subject at: #key put: 1.
+	^subject!
+
+newEmpty
+	"We are no longer using PoolConstantsDictionary, but retain the test unchanged to verify that the behaviour of SharedPool classes is compatible."
+	^SharedPool newAnonymousSubclass!
 
 testAddExisting
 	| dictionary |
@@ -47,18 +55,17 @@ testIncludesKey
 	dictionary := self newDictionary.
 	self assert: (dictionary includesKey: #key).
 	self assert: (dictionary includesKey: 'key').
-	self deny: (dictionary includesKey: #value)
-
-!
+	self deny: (dictionary includesKey: #value)!
 
 testRemoveKeyString
 	| dictionary |
 	dictionary := self newDictionary.
 	self assert: (dictionary removeKey: 'key') identicalTo: 1.
 	self should: [dictionary removeKey: 'key'] raise: NotFoundError! !
-!PoolConstantsDictionaryTest categoriesFor: #collectionClass!helpers!private! !
 !PoolConstantsDictionaryTest categoriesFor: #key3Value!private! !
 !PoolConstantsDictionaryTest categoriesFor: #makeKey:!helpers!private! !
+!PoolConstantsDictionaryTest categoriesFor: #newDictionary!private!unit tests! !
+!PoolConstantsDictionaryTest categoriesFor: #newEmpty!private!unit tests! !
 !PoolConstantsDictionaryTest categoriesFor: #testAddExisting!public!unit tests! !
 !PoolConstantsDictionaryTest categoriesFor: #testAtIfAbsentString!public!unit tests! !
 !PoolConstantsDictionaryTest categoriesFor: #testAtPutExisting!public!unit tests! !

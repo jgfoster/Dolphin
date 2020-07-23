@@ -220,14 +220,15 @@ multiplyByPoint: aPoint
 
 	^(x * aPoint x) @ (y * aPoint y)!
 
-printOn: target
-	"Append a short textual description of the receiver to the
-	<puttableStream>, target."
+printOn: aStream
+	"Append a short textual description of the receiver to the <puttableStream> argument."
 
-	target 
+	aStream
+		nextPut: $(;
 		print: x;
 		nextPut: $@;
-		print: y!
+		print: y;
+		nextPut: $)!
 
 r
 	"Answer the receiver's radius (magnitude) in a polar coordinate 

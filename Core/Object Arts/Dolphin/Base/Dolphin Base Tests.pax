@@ -16,6 +16,7 @@ package setClassNames: #(
 	#{ArrayFieldTest};
 	#{ArrayPointerFieldTest};
 	#{ArrayTest}
+	#{AssociationTest}
 	#{BagTest}
 	#{BehaviorTest}
 	#{BehaviorTestClasses}
@@ -75,6 +76,7 @@ package setClassNames: #(
 	#{IntrosortAlgorithmTest}
 	#{KeyboardTest}
 	#{LargeIntegerTest}
+	#{LimitedWriteStreamTest}
 	#{LinkTest};
 	#{LocaleTest}
 	#{LookupTableTest}
@@ -219,6 +221,12 @@ DolphinTest subclass: #AbstractKeyboardTest
 	instanceVariableNames: 'savedLayout'
 	classVariableNames: ''
 	poolDictionaries: 'Win32Constants'
+	classInstanceVariableNames: ''
+	classConstants: {}!
+DolphinTest subclass: #AssociationTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
 	classInstanceVariableNames: ''
 	classConstants: {}!
 DolphinTest subclass: #BagTest
@@ -448,6 +456,12 @@ DolphinTest subclass: #PackageTest
 	poolDictionaries: ''
 	classInstanceVariableNames: ''
 	classConstants: {}!
+DolphinTest subclass: #PoolConstantsDictionaryTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''
+	classConstants: {}!
 DolphinTest subclass: #ProcessTest
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -605,12 +619,6 @@ AbstractDictionaryTest subclass: #LookupTableTest
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractDictionaryTest subclass: #MethodDictionaryTest
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''
-	classConstants: {}!
-AbstractDictionaryTest subclass: #PoolConstantsDictionaryTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -923,6 +931,12 @@ AbstractFileStreamTest subclass: #FileStreamTest
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractFileStreamTest subclass: #StdioFileStreamTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	classInstanceVariableNames: ''
+	classConstants: {}!
+WriteStreamTest subclass: #LimitedWriteStreamTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''

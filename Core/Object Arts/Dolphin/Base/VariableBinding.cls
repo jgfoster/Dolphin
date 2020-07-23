@@ -68,8 +68,7 @@ stbConvertFrom: anSTBClassFormat
 	1 to: data size do: [:i | answer instVarAt: i put: (data at: i)].
 	"In most cases a VariableBinding will be in STB because it is referenced from the literal frame of a method. For those cases where the reference is to a class, it is very likely that the variable is from the Smalltalk dictionary, so we patch the environment to that. For other cases, we don't have enough context here to be able to determine the correct environment, so we leave it nil."
 	value := answer value.
-	(value isBehavior and: [value isMeta not and: [answer key == value name]])
-		ifTrue: [answer environment: Smalltalk].
+	(value class isMeta and: [answer key == value name]) ifTrue: [answer environment: Smalltalk].
 	answer]!
 
 stbVersion

@@ -18,14 +18,26 @@ testCyclicRefPrinting
 	| array |
 	array := Array new: 1.
 	array at: 1 put: array.
-	self assert: array debugPrintString equals: '#(... a cyclic ref to an Array...)'!
+	self assert: array debugPrintString equals: 'an Array(... a cyclic ref to an Array...)'!
 
 testIsLiteral
-	| example1 |
-	example1 := #(1 2 3 4 5) copy.
-	self assert: example1 isLiteral.
-	example1 at: 1 put: self.
-	self deny: example1 isLiteral!
+	| subject |
+	subject := #(1 2 2 4 5) copy.
+	self assert: subject isLiteral.
+	subject at: 1 put: self.
+	self deny: subject isLiteral.
+	subject at: 1 put: subject.
+	self deny: subject isLiteral.
+!
+
+testIsSelfEvaluating
+	| subject |
+	subject := {1 to: 5. 123. 'abc'. #(1 2). 123. #a -> 'A'}.
+	self assert: subject isSelfEvaluating.
+	subject at: 1 put: self.
+	self deny: subject isSelfEvaluating.
+	subject at: 1 put: subject.
+	self deny: subject isSelfEvaluating!
 
 testLiteralStoreOn
 	| stream storeString rehydrated |
@@ -168,6 +180,7 @@ testWithWithWithWithWith
 !ArrayTest categoriesFor: #collectionClass!helpers!private! !
 !ArrayTest categoriesFor: #testCyclicRefPrinting!public! !
 !ArrayTest categoriesFor: #testIsLiteral!public!unit tests! !
+!ArrayTest categoriesFor: #testIsSelfEvaluating!public!unit tests! !
 !ArrayTest categoriesFor: #testLiteralStoreOn!public!unit tests! !
 !ArrayTest categoriesFor: #testMixedConcatenation!public! !
 !ArrayTest categoriesFor: #testNonLiteralStoreOn!public!unit tests! !

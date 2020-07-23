@@ -273,9 +273,10 @@ testLoad70Pax
 	self assert: scribbleTestPackage binaryVariableNames asArray equals: {binaryVariableName}.
 	self assert: binaryVariableName value equals: #('Scribble').
 	sourceVariableName := 'ScribbleTestSourceGlobal' asQualifiedReference.
-	self assert: scribbleTestPackage sourceVariableNames asArray equals: {sourceVariableName}.
+	self assert: scribbleTestPackage sourceVariableNames asArray equals: #().
+	self assert: (scribbleTestPackage classNames includes: sourceVariableName).
 	testPool := sourceVariableName value.
-	self assert: testPool isKindOf: PoolConstantsDictionary!
+	self assert: testPool isKindOf: SharedPool class!
 
 testLoad72Pax
 	| scribbleTestPackage aliasName binaryVariableName sourceVariableName testPool |
@@ -288,9 +289,10 @@ testLoad72Pax
 	self assert: scribbleTestPackage binaryVariableNames asArray equals: {binaryVariableName}.
 	self assert: binaryVariableName value equals: #('Scribble').
 	sourceVariableName := 'ScribbleTestSourceGlobal' asQualifiedReference.
-	self assert: scribbleTestPackage sourceVariableNames asArray equals: {sourceVariableName}.
+	self assert: scribbleTestPackage sourceVariableNames asArray equals: #().
+	self assert: (scribbleTestPackage classNames includes: sourceVariableName).
 	testPool := sourceVariableName value.
-	self assert: testPool isKindOf: PoolConstantsDictionary!
+	self assert: testPool isKindOf: SharedPool class!
 
 testLoadedPackagesAreWellFormed
 	Package manager packages do: [:each |
