@@ -625,10 +625,10 @@ center: centrePoint extent: extentPoint
 
 initialize
 	"Empty can't be a class constant or it creates a load order problem in that the Number>>@ method is not defined when the class is declared in the .pax file"
-	self addClassVariable: 'Empty'
-		value: (self new
+
+	Empty := self new
 				isImmutable: true;
-				yourself)!
+				yourself!
 
 left: leftNumber top: topNumber right: rightNumber bottom: bottomNumber 
 	"Answer an instance of the receiver with the specified coodinates."
