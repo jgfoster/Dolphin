@@ -68,7 +68,7 @@ STBOutFiler subclass: #STLOutFiler
 
 literalPrintOn: aWriteStream
 	aWriteStream nextPutAll: '#('.
-	self do: [:each | each printOn: aWriteStream] separatedBy: [aWriteStream space].
+	self do: [:each | each literalPrintOn: aWriteStream] separatedBy: [aWriteStream space].
 	aWriteStream nextPut: $)! !
 !Array categoriesFor: #literalPrintOn:!public! !
 

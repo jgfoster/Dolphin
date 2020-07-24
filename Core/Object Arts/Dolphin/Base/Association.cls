@@ -78,10 +78,12 @@ owningPackage: aPackage
 printOn: aStream
 	"Append a short textual description of the receiver to aStream."
 
-	aStream 
-		print: key;
-		nextPutAll: ' -> ';
-		print: value!
+	aStream print: self
+		with: 
+			[aStream
+				print: key;
+				nextPutAll: ' -> ';
+				print: value]!
 
 setKey: aKey
 	<mutable>

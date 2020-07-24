@@ -19,6 +19,15 @@ testIsSelfEvaluating
 	self deny: subject isSelfEvaluating
 	
 
-! !
+!
+
+testPrintOn
+	| subject |
+	subject := #'1' -> 2.
+	self assert: subject printString equals: '#''1'' -> 2'.
+	subject key: #a.
+	subject value: subject.
+	self assert: subject printString equals: '#a -> ... a cyclic ref to an Association...'! !
 !AssociationTest categoriesFor: #testIsSelfEvaluating!public! !
+!AssociationTest categoriesFor: #testPrintOn!public! !
 

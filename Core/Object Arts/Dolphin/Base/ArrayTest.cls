@@ -40,6 +40,20 @@ testIsSelfEvaluating
 	self deny: subject isSelfEvaluating!
 
 testLiteralStoreOn
+	| stream subject storeString rehydrated stlArray |
+	stream := Array writeStream.
+	subject := {Object. 1. 's'. {ArrayTest}}.
+	subject literalStoreOn: stream.
+	stlArray := stream contents.
+	stream := String writeStream.
+	stlArray literalPrintOn: stream.
+	storeString := stream contents.
+	rehydrated := Compiler evaluate: storeString.
+	self assert: rehydrated equals: stlArray.
+	rehydrated := Object fromLiteralStoreArray: stlArray.
+	self assert: rehydrated equals: subject!
+
+testLiteralStoreString
 	| stream storeString rehydrated |
 	stream := String writeStream.
 	#(1 2) storeOn: stream.
@@ -89,7 +103,7 @@ testMixedConcatenation
 						self deny: eachArray identicalTo: result.
 						self assert: result class identicalTo: Array]]!
 
-testNonLiteralStoreOn
+testNonLiteralStoreString
 	| stream storeString rehydrated array |
 	stream := String writeStream.
 	array := Array with: 1 -> '1' with: 2 -> '2'.
@@ -182,6 +196,7 @@ testWithWithWithWithWith
 !ArrayTest categoriesFor: #testIsLiteral!public!unit tests! !
 !ArrayTest categoriesFor: #testIsSelfEvaluating!public!unit tests! !
 !ArrayTest categoriesFor: #testLiteralStoreOn!public!unit tests! !
+!ArrayTest categoriesFor: #testLiteralStoreString!public!unit tests! !
 !ArrayTest categoriesFor: #testMixedConcatenation!public! !
 !ArrayTest categoriesFor: #testNonLiteralStoreOn!public!unit tests! !
 !ArrayTest categoriesFor: #testWith!public!unit tests! !
