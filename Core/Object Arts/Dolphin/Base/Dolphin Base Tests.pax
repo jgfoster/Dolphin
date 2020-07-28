@@ -68,6 +68,7 @@ package setClassNames: #(
 	#{GenericExternalArrayTest}
 	#{GUIDTest}
 	#{HeapsortAlgorithmTest}
+	#{HRESULTTest}
 	#{IdentityDictionaryTest}
 	#{IdentitySearchPolicyTest}
 	#{InsertionSortAlgorithmTest}
@@ -155,7 +156,6 @@ package setMethodNames: #(
 
 package setPrerequisites: #(
 	'..\ActiveX\Components\Scripting\ActiveX Scripting'
-	'..\System\Trace\Debug Trace Stream'
 	'..\IDE\Base\Development System'
 	'Dolphin'
 	'Dolphin Additional Sort Algorithms'
@@ -393,6 +393,12 @@ DolphinTest subclass: #FloatTest
 DolphinTest subclass: #GUIDTest
 	instanceVariableNames: ''
 	classVariableNames: 'Default'
+	poolDictionaries: ''
+	classInstanceVariableNames: ''
+	classConstants: {}!
+DolphinTest subclass: #HRESULTTest
+	instanceVariableNames: ''
+	classVariableNames: ''
 	poolDictionaries: ''
 	classInstanceVariableNames: ''
 	classConstants: {}!

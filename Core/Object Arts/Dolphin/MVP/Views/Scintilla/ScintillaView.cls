@@ -98,7 +98,7 @@ N.B. Scintilla is an excellent editor control, but does not do much parameter va
   `annotationStyles`		`IdentityDictionary`
 
 ## Class Variables:
-  `AnnotationStylesOffset`	`<integer>`. Offsets must always be multiples of 256 for implementation reasons
+  `AnnotationStylesOffset`	`<integer>`
   `BackgroundDwellEvents`	`<integer>`
   `BraceHilightingMask`		`<integer>` bit mask for accessing brace highlighting flag.
   `CodePages`				`IdentityDictionary` mapping `<integer>` to `Symbol`
@@ -615,6 +615,17 @@ basicAnnotateLine: anInteger withText: aString inStyles: aByteArray
 	self
 		sciAnnotationSetText: anInteger text: aString;
 		sciAnnotationSetStyles: anInteger styles: aByteArray!
+
+basicClearAll
+	"Private - Delete all text in the document."
+
+	this
+		ifNotNil: 
+			[Library
+				directFunction: this
+				msg: SCI_CLEARALL
+				wParam: 0
+				lParam: 0]!
 
 basicClearContainerIndicators
 	"Private - Clear all the containers indicators (those with Id's starting with
@@ -1200,13 +1211,7 @@ charNearestPosition: aPoint
 clearAll
 	"Delete all text in the document."
 
-	this
-		ifNotNil: 
-			[Library
-				directFunction: this
-				msg: SCI_CLEARALL
-				wParam: 0
-				lParam: 0]!
+	self modifyText: [self basicClearAll]!
 
 clearContainerIndicators
 	"Clear all the indicators (e.g. squiggly underlines) from the receiver."
@@ -10339,12 +10344,12 @@ setText: aString
 
 setWhitespaceBackcolor
 	whitespaceBackcolor
-		ifNil: [self sciSetWhitespaceBack: false back: nil]
+		ifNil: [self sciSetWhitespaceBack: false back: Color white]
 		ifNotNil: [self sciSetWhitespaceBack: true back: whitespaceBackcolor]!
 
 setWhitespaceForecolor
 	whitespaceForecolor
-		ifNil: [self sciSetWhitespaceFore: false fore: nil]
+		ifNil: [self sciSetWhitespaceFore: false fore: Color white]
 		ifNotNil: [self sciSetWhitespaceFore: true fore: whitespaceForecolor]!
 
 showAutoCompletionList: aCollection prefixLength: anInteger
@@ -11017,7 +11022,7 @@ whitespaceBackcolor: aColorOrNil
 	"Set the background colour of all whitespace. The argument can be nil to adopt the default
 	background colour."
 
-	whitespaceBackcolor := aColorOrNil.
+	whitespaceBackcolor := aColorOrNil == Color default ifFalse: [aColorOrNil].
 	self setWhitespaceBackcolor!
 
 whitespaceForecolor
@@ -11032,7 +11037,7 @@ whitespaceForecolor: aColorOrNil
 	"Set the foreground colour to be used to display whitespace markers (when visible). If nil
 	then the default white space colour will be used."
 
-	whitespaceForecolor := aColorOrNil.
+	whitespaceForecolor := aColorOrNil == Color default ifFalse: [aColorOrNil].
 	self setWhitespaceForecolor!
 
 whitespaceMarkerSize
@@ -11388,6 +11393,7 @@ zoomOut
 !ScintillaView categoriesFor: #backspaceUnindents!**auto generated**!public!scintilla interface!tabs & indentation guides!testing! !
 !ScintillaView categoriesFor: #backspaceUnindents:!**auto generated**!public!scintilla interface!tabs & indentation guides! !
 !ScintillaView categoriesFor: #basicAnnotateLine:withText:inStyles:!annotations!helpers!private! !
+!ScintillaView categoriesFor: #basicClearAll!**auto generated**!private!scintilla interface! !
 !ScintillaView categoriesFor: #basicClearContainerIndicators!indicators!private! !
 !ScintillaView categoriesFor: #basicClearSelection!**auto generated**!private!scintilla interface!selection! !
 !ScintillaView categoriesFor: #basicKeyBindings!key bindings!private! !
@@ -11445,7 +11451,7 @@ zoomOut
 !ScintillaView categoriesFor: #characterAt:!public!text retrieval & modification! !
 !ScintillaView categoriesFor: #charCloseToPosition:!public!selection! !
 !ScintillaView categoriesFor: #charNearestPosition:!public!selection! !
-!ScintillaView categoriesFor: #clearAll!**auto generated**!commands!public!scintilla interface!text retrieval & modification! !
+!ScintillaView categoriesFor: #clearAll!commands!public!scintilla interface!text retrieval & modification! !
 !ScintillaView categoriesFor: #clearContainerIndicators!indicators!public! !
 !ScintillaView categoriesFor: #clearIndicator:from:to:!indicators!public! !
 !ScintillaView categoriesFor: #clearRange:!public!text retrieval & modification! !
@@ -12612,7 +12618,7 @@ lexerLanguages
 	are not languages as such: #automatic is an instruction to Scintilla to choose a lexer, and #container
 	sends colourization requests back to the control's container (i.e. into our Smalltalk wrapper)."
 
-	^#(#container #text #python #cpp #hypertext #xml #perl #sql #vb #props #errorlist #makefile #batch nil #latex #lua #diff #conf #pascal #ave #ada #lisp #ruby #eiffel #eiffelkw #tcl #nncrontab #bullant #vbscript nil nil #baan #matlab #scriptol #asm #cppnocase #fortran #f77 #css #pov #lout #escript #ps #nsis #mmixal #clarion #clarionnocase #lot #yaml #tex #metapost #powerbasic #forth #erlang #octave #mssql #verilog #kix #gui4cli #specman #au3 #apdl #bash #asn1 #vhdl #caml #blitzbasic #purebasic #haskell #phpscript #tads3 #rebol #smalltalk #flagship #csound #freebasic #inno #opal #spice #d #cmake #gap #'PL/M' #abl #abaqus #asy #r #magiksf #powershell #mysql #po #TAL #COBOL #TACL #sorcins #powerpro #nimrod #SML #markdown #txt2tags #a68k #modula #coffeescript #tcmd #avs #ecl #oscript #visualprolog #literatehaskell #fcST #kvirc #rust #DMAP #as #DMIS #registry #bib #srec #ihex #tehex #json #edifact #indent #maxima #stata #sas #nim #cil #x12 #dataflex #hollywood #raku)!
+	^#(#container #null #python #cpp #hypertext #xml #perl #sql #vb #props #errorlist #makefile #batch nil #latex #lua #diff #conf #pascal #ave #ada #lisp #ruby #eiffel #eiffelkw #tcl #nncrontab #bullant #vbscript nil nil #baan #matlab #scriptol #asm #cppnocase #fortran #f77 #css #pov #lout #escript #ps #nsis #mmixal #clarion #clarionnocase #lot #yaml #tex #metapost #powerbasic #forth #erlang #octave #mssql #verilog #kix #gui4cli #specman #au3 #apdl #bash #asn1 #vhdl #caml #blitzbasic #purebasic #haskell #phpscript #tads3 #rebol #smalltalk #flagship #csound #freebasic #inno #opal #spice #d #cmake #gap #'PL/M' #abl #abaqus #asy #r #magiksf #powershell #mysql #po #TAL #COBOL #TACL #sorcins #powerpro #nimrod #SML #markdown #txt2tags #a68k #modula #coffeescript #tcmd #avs #ecl #oscript #visualprolog #literatehaskell #fcST #kvirc #rust #DMAP #as #DMIS #registry #bib #srec #ihex #tehex #json #edifact #indent #maxima #stata #sas #nim #cil #x12 #dataflex #hollywood #raku)!
 
 lineEndings
 	"Answer the symbolic names of the end-of-line modes supported by Scintilla. These correspond

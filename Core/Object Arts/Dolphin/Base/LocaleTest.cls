@@ -18,11 +18,22 @@ defaultSubject
 setUp
 	super setUp.
 	savedLocale := Locale userDefault.
-	Locale userDefault: (Locale lcid: 1081)!
+	"Deliberately switch to another default locale to catch any reliance on Locale specific dependencies in the test"
+	Locale userDefault: (Locale named: 'hi-IN')!
 
 tearDown
 	savedLocale ifNotNil: [Locale userDefault: savedLocale. savedLocale := nil].
 	super tearDown!
+
+testPrimary
+	"Sad, but true"
+
+	self assert: (Locale named: 'en-GB') primary equals: (Locale named: 'en-US').
+	self assert: (Locale named: 'fr-CA') primary equals: (Locale named: 'fr-FR').
+	self assert: Locale invariant primary equals: Locale invariant.
+	self assert: (Locale lcid: Win32Constants.LOCALE_CUSTOM_DEFAULT) primary
+		equals: Locale userDefault primary.
+	self assert: Locale smalltalk primary equals: (Locale named: 'en-US')!
 
 testPrintDateTimeOnFormat
 	| subject now expected |
@@ -120,6 +131,7 @@ testPrintFloatSeparators
 !LocaleTest categoriesFor: #defaultSubject!helpers!private! !
 !LocaleTest categoriesFor: #setUp!private!running! !
 !LocaleTest categoriesFor: #tearDown!private!running! !
+!LocaleTest categoriesFor: #testPrimary!public!unit tests! !
 !LocaleTest categoriesFor: #testPrintDateTimeOnFormat!public!unit tests! !
 !LocaleTest categoriesFor: #testPrintDurationOnFormat!public!unit tests! !
 !LocaleTest categoriesFor: #testPrintFloat!public!unit tests! !
