@@ -3,7 +3,7 @@
 AddClassChange subclass: #DolphinAddClassChange
 	instanceVariableNames: 'classConstants'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 DolphinAddClassChange guid: (GUID fromString: '{aa997683-c5f3-48d4-99c3-38db54fd285a}')!
@@ -33,10 +33,8 @@ fillOutDefinitionArguments: parseTree
 				ifNotNil: [:arg | arg childrenDo: [:each | each halt]]!
 
 isValidMessageName: aMessageNode
-	^(#(#subclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:classConstants: 
-		#variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:classConstants: 
-		#variableByteSubclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:classConstants:)
-			includes: aMessageNode selector) or: [super isValidMessageName: aMessageNode]!
+	^(#(#subclass:instanceVariableNames:classVariableNames:imports: #subclass:instanceVariableNames:classVariableNames:imports:classInstanceVariableNames:classConstants: #variableSubclass:instanceVariableNames:classVariableNames:imports: #variableSubclass:instanceVariableNames:classVariableNames:imports:classInstanceVariableNames:classConstants: #variableByteSubclass:instanceVariableNames:classVariableNames:imports: #variableByteSubclass:instanceVariableNames:classVariableNames:imports:classInstanceVariableNames:classConstants:)
+		includes: aMessageNode selector) or: [super isValidMessageName: aMessageNode]!
 
 namesIn: aString 
 	^aString subStrings! !

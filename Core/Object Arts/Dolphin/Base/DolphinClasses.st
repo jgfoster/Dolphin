@@ -3,7 +3,7 @@
 SharedPool subclass: #_PrimitiveFailureCode
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'AccessViolation' -> -16r3FF8FC1A.
@@ -53,7 +53,7 @@ SharedPool subclass: #_PrimitiveFailureCode
 SharedPool subclass: #CompilerFlags
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'DebugMethod' -> 16r40.
@@ -68,7 +68,7 @@ SharedPool subclass: #CompilerFlags
 SharedPool subclass: #CRTConstants
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_DN_FLUSH' -> 16r1000000.
@@ -137,7 +137,7 @@ SharedPool subclass: #CRTConstants
 SharedPool subclass: #ExtCallArgTypes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'ExtCallArgBOOL' -> 16r9.
@@ -180,7 +180,7 @@ SharedPool subclass: #ExtCallArgTypes
 SharedPool subclass: #FacilityCodes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'FACILITY_CERT' -> 16rB.
@@ -198,7 +198,7 @@ SharedPool subclass: #FacilityCodes
 SharedPool subclass: #MessageBoxConstants
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'IDTIMEOUT' -> 16r7D00.
@@ -231,7 +231,7 @@ SharedPool subclass: #MessageBoxConstants
 SharedPool subclass: #OpcodePool
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'BlockCopy' -> 16rFC.
@@ -339,7 +339,7 @@ SharedPool subclass: #OpcodePool
 SharedPool subclass: #SmalltalkParseErrorCodes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'CErrArgTypeCannotBeVoid' -> 16r33.
@@ -440,7 +440,7 @@ SharedPool subclass: #SmalltalkParseErrorCodes
 SharedPool subclass: #VMConstants
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'DoubleSize' -> 16r8.
@@ -470,7 +470,7 @@ SharedPool subclass: #VMConstants
 SharedPool subclass: #Win32Constants
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'ABOVE_NORMAL_PRIORITY_CLASS' -> 16r8000.
@@ -1660,7 +1660,7 @@ SharedPool subclass: #Win32Constants
 SharedPool subclass: #Win32Errors
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'CLASS_E_CLASSNOTAVAILABLE' -> -16r7FFBFEEF.
@@ -1709,7 +1709,7 @@ SharedPool subclass: #Win32Errors
 SharedPool subclass: #WinNlsConstants
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'C1_ALPHA' -> 16r100.
@@ -1902,31 +1902,37 @@ SharedPool subclass: #WinNlsConstants
 nil subclass: #Object
 	instanceVariableNames: ''
 	classVariableNames: '_AssertionFailureSignal _DependentsRegister _EventsRegister _PropertyRegister'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 nil subclass: #ProtoObject
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #AbstractBindingReference
 	instanceVariableNames: ''
 	classVariableNames: 'Undeclared'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
+	classConstants: {}!
+Object subclass: #AbstractNamespace
+	instanceVariableNames: ''
+	classVariableNames: 'AbsentCookie'
+	imports: #()
+	classInstanceVariableNames: 'imports'
 	classConstants: {}!
 Object subclass: #ArrayFieldLength
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #AttributeDescriptor
 	instanceVariableNames: 'flags'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'AccessorMask' -> 16r4.
@@ -1941,7 +1947,7 @@ Object subclass: #AttributeDescriptor
 Object subclass: #Behavior
 	instanceVariableNames: 'superclass methodDictionary instanceSpec'
 	classVariableNames: '_NullMethodDictionary'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_BasicSpecMask' -> 16r7FFF.
@@ -1963,25 +1969,25 @@ Object subclass: #Behavior
 Object variableSubclass: #BlockClosure
 	instanceVariableNames: 'outer method initialIP info receiver'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Boolean
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Bytecode
 	instanceVariableNames: 'instruction args jumpTarget ip'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ByteCodeDispatcher
 	instanceVariableNames: 'byteCodes method ip interpreter instructionLength byteCode instructions'
 	classVariableNames: 'RunStarts'
-	poolDictionaries: 'OpcodePool'
+	imports: #(#{OpcodePool})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'FirstShowSpecialSend' -> 16r7E.
@@ -1991,19 +1997,19 @@ Object subclass: #ByteCodeDispatcher
 Object subclass: #Category
 	instanceVariableNames: 'name'
 	classVariableNames: 'PermanentCategories'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ChunkReader
 	instanceVariableNames: 'chunkBlock endAction context'
 	classVariableNames: 'Null'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ClassBuilder
-	instanceVariableNames: 'currentClass className instanceVariables superclass instanceSpec classVariables sharedPools comment flags categories classConstants environment'
+	instanceVariableNames: 'currentClass className instanceVariables superclass instanceSpec classVariables imports comment flags categories classConstants environment'
 	classVariableNames: 'FixedInitialLayout FixedLayout Unsubclassable'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'IgnoreInstsMask' -> 16r2.
@@ -2012,19 +2018,19 @@ Object subclass: #ClassBuilder
 Object subclass: #Collection
 	instanceVariableNames: ''
 	classVariableNames: 'AbsentCookie'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #CompilationResult
 	instanceVariableNames: 'method rawTextMap rawTempsMap textMap tempsMap oldMethod package'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object variableSubclass: #CompiledCode
 	instanceVariableNames: 'header methodClass selector sourceDescriptor byteCodes'
 	classVariableNames: 'InfoCacheKeys InfoCacheValues'
-	poolDictionaries: 'OpcodePool'
+	imports: #(#{OpcodePool})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'PrivateMask' -> 16r1
@@ -2032,37 +2038,37 @@ Object variableSubclass: #CompiledCode
 Object subclass: #Compiler
 	instanceVariableNames: ''
 	classVariableNames: 'DefaultFlags DisabledWarnings'
-	poolDictionaries: 'CompilerFlags SmalltalkParseErrorCodes'
+	imports: #(#{CompilerFlags} #{SmalltalkParseErrorCodes})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object variableSubclass: #Context
 	instanceVariableNames: 'outer block'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #DeadObject
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #DeafObject
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #DeferredValue
 	instanceVariableNames: 'valueAvailable value exception'
 	classVariableNames: 'ValuePending'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Delay
 	instanceVariableNames: 'duration resumptionTime waitSemaphore'
 	classVariableNames: 'AccessProtect Current HighestResolution ImageClock LowestResolution Pending Resolution TicksToNanos TimingProcess TimingSemaphore'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'DefaultResolution' -> 16r3D09
@@ -2070,31 +2076,31 @@ Object subclass: #Delay
 Object subclass: #DiskVolumeInformation
 	instanceVariableNames: 'path rootPath label serialNumber maxComponentLength fileSystemFlags fileSystemName sectorsPerCluster bytesPerSector freeClusters totalClusters freeBytes totalBytes totalFreeBytes'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Exception
 	instanceVariableNames: 'tag messageText _activeHandler _process _signalFrame _environmentWhenRaised _continueBlock _resignalBlock _resignalException'
 	classVariableNames: ''
-	poolDictionaries: 'MessageBoxConstants Win32Constants Win32Errors'
+	imports: #(#{MessageBoxConstants} #{Win32Constants} #{Win32Errors})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ExceptionHandlerAbstract
 	instanceVariableNames: 'outer protectedBlock returnContinuation'
 	classVariableNames: 'RetryCookie'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ExceptionSet
 	instanceVariableNames: 'selectors'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ExternalCallback
 	instanceVariableNames: 'thunk cookie descriptor'
 	classVariableNames: 'Registry ThunkBase'
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'ArgSizeOffset' -> 16rE.
@@ -2104,7 +2110,7 @@ Object subclass: #ExternalCallback
 Object variableSubclass: #ExternalDescriptor
 	instanceVariableNames: 'descriptor'
 	classVariableNames: 'CallingConventions ExternalReferenceTypes ExternalValueTypes Shared TypeNames TypeSizes'
-	poolDictionaries: 'ExtCallArgTypes'
+	imports: #(#{ExtCallArgTypes})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'RetClassIndex' -> 16r4.
@@ -2113,13 +2119,13 @@ Object variableSubclass: #ExternalDescriptor
 Object subclass: #ExternalLibrary
 	instanceVariableNames: 'handle'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants Win32Errors'
+	imports: #(#{Win32Constants} #{Win32Errors})
 	classInstanceVariableNames: 'default'
 	classConstants: {}!
 Object subclass: #ExternalStructure
 	instanceVariableNames: 'bytes'
 	classVariableNames: 'RecordClasses'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: 'template flags alignment'
 	classConstants: {
 		'CompiledMask' -> 16r1
@@ -2127,7 +2133,7 @@ Object subclass: #ExternalStructure
 Object subclass: #File
 	instanceVariableNames: 'handle spec flags shareFlags intBuffer'
 	classVariableNames: 'CheckModes NoCheckModes ShareModes'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'AccessFlagsMask' -> -16r8.
@@ -2136,190 +2142,184 @@ Object subclass: #File
 Object subclass: #FileLocator
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object variableByteSubclass: #GUID
 	instanceVariableNames: ''
 	classVariableNames: 'Null'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #InputState
 	instanceVariableNames: 'inputSemaphore idler idleTimer main windows deferredActions lastWindow wakeupEvent msgWindow queueStatusMask'
 	classVariableNames: 'EnumHandlesDescriptor MaxIdleSleep SamplingInterval UserInterruptSignal'
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #InstructionInterpreter
 	instanceVariableNames: 'dispatcher'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Keyboard
 	instanceVariableNames: 'state virtualKeys modifierKeys keyNames'
 	classVariableNames: 'DefaultInstance InvariantInstance'
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Link
 	instanceVariableNames: 'nextLink'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Locale
 	instanceVariableNames: 'numberFormat'
 	classVariableNames: 'InstalledUILanguages Invariant SystemDefault TimeZoneInfo UserDefault'
-	poolDictionaries: 'WinNlsConstants'
+	imports: #(#{WinNlsConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Magnitude
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #MemoryManager
 	instanceVariableNames: 'finalizer lastRequests hospice hospiceHighWater maxObjects undertaker bereavements bereaved bereavedHighWater gcInterval lastGCTime lastGCDuration objectHeaderSize events'
 	classVariableNames: 'Current GCInterval'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Message
 	instanceVariableNames: 'selector args'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #MessageSequenceAbstract
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #MethodName
 	instanceVariableNames: 'className selector'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #MethodProtocol
 	instanceVariableNames: 'name comment selectors flags'
 	classVariableNames: 'ANSIMask Protocols ReadOnlyMask StubAddedSignal'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ModalMsgLoop
 	instanceVariableNames: 'loop'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Model
 	instanceVariableNames: 'events'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Mutex
 	instanceVariableNames: 'owner semaphore'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ObjectRegistry
 	instanceVariableNames: 'registry'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Package
 	instanceVariableNames: 'name packagePathname comment classNames methodNames variableNames prerequisiteNames events scripts doNotReuse imageStripperBytes aboutBlock packageVersion manualPrerequisites timestamp untracedVariables changeIndex properties preDeclareClassesOnLoad'
 	classVariableNames: '_Uncommitted BinaryPacLoader ChangedIcon CheckTimestamps ClashSignal PreDeclareClassesOnLoad SourcePackageIcon UnsaveableSignal'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #PackageManager
 	instanceVariableNames: 'packages processEvents packagedVariables looseMethods events defaultPackage basePackages'
 	classVariableNames: 'Current DuplicatePackageSignal PackageNotFoundSignal PrerequisiteNotFoundSignal SystemPackage'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #PostedActionWindow
 	instanceVariableNames: 'handle actions'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ProcessorScheduler
 	instanceVariableNames: 'processLists activeProcess pendingReturns comStubs _reserved pendingTerminations'
 	classVariableNames: 'ConstWriteSignal InterruptSelectors'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #PropertyManager
 	instanceVariableNames: 'register'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #ResourceIdentifier
 	instanceVariableNames: 'owningClass selector'
 	classVariableNames: 'SelectorPrefix'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #SearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #SessionManager
 	instanceVariableNames: 'inputState resourceLibrary imagePath servers argv cmdLineFlags state sentry startupArgs consoleHandler stdioStreams eventLogHandle flags sessionId hConsole settingsChanged events'
 	classVariableNames: 'Current PreStartFile'
-	poolDictionaries: 'Win32Constants Win32Errors'
+	imports: #(#{Win32Constants} #{Win32Errors})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'EmbeddingMask' -> 16r1.
 		'SettingsChangeTimerId' -> 16r2
 	}!
-Object subclass: #SharedPool
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''
-	classConstants: {}!
 Object subclass: #SharedQueue
 	instanceVariableNames: 'accessProtect valueAvailable contents'
 	classVariableNames: 'AbsentCookie'
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Signal
 	instanceVariableNames: 'description resumable'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #SortAlgorithm
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Sound
 	instanceVariableNames: 'name location type fileLocator'
 	classVariableNames: 'Registry'
-	poolDictionaries: 'MessageBoxConstants Win32Constants'
+	imports: #(#{MessageBoxConstants} #{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #SourceFiler
 	instanceVariableNames: 'stream evaluationContext flags'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'SourceOnlyMask' -> 16r1
@@ -2327,13 +2327,13 @@ Object subclass: #SourceFiler
 Object subclass: #SourceManager
 	instanceVariableNames: 'mutex'
 	classVariableNames: 'ChangesIndex DefaultInstance SourcesIndex'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #StackFrame
 	instanceVariableNames: 'process index'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'BPOffset' -> 16r5.
@@ -2347,13 +2347,13 @@ Object subclass: #StackFrame
 Object subclass: #STBClassConversion
 	instanceVariableNames: 'version instSize dataClass isVariable converterBlock filer'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #STBFiler
 	instanceVariableNames: 'stream context version'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'MaxPredefinedRef' -> 16r18
@@ -2361,7 +2361,7 @@ Object subclass: #STBFiler
 Object subclass: #STBPrefix
 	instanceVariableNames: 'dword'
 	classVariableNames: 'DataPrefix ProxyPrefix'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'BytesMask' -> 16r10.
@@ -2382,301 +2382,331 @@ Object subclass: #STBPrefix
 Object subclass: #STBProxy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #Stream
 	instanceVariableNames: ''
 	classVariableNames: 'EndOfStreamSignal'
-	poolDictionaries: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+Object subclass: #Test
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #UndeclaredVariable
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #UndefinedObject
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Object subclass: #VersionInfo
 	instanceVariableNames: 'fileInfo prefix fixedInfo'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractBindingReference subclass: #BindingReference
 	instanceVariableNames: 'pathString path context binding generation'
 	classVariableNames: 'Generation'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractBindingReference subclass: #MetaBindingReference
 	instanceVariableNames: 'instance'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+AbstractNamespace subclass: #Namespace
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+AbstractNamespace subclass: #RootNamespace
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+AbstractNamespace subclass: #SystemNamespace
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+Namespace subclass: #SharedPool
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayFieldLength subclass: #FixedArrayFieldLength
 	instanceVariableNames: 'elementCount'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AttributeDescriptor subclass: #ExternalField
 	instanceVariableNames: 'offset structClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalField subclass: #EmbeddedField
 	instanceVariableNames: 'fieldClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalField subclass: #FillerField
 	instanceVariableNames: 'byteSize'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalField subclass: #PointerField
 	instanceVariableNames: 'pointerClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalField subclass: #ScalarField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 EmbeddedField subclass: #ArrayField
 	instanceVariableNames: 'arrayLength'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 EmbeddedField subclass: #StructureField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayField subclass: #StringField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayField subclass: #StructureArrayField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StructureArrayField subclass: #PointerArrayField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PointerField subclass: #ArrayPointerField
 	instanceVariableNames: 'arrayLength'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayPointerField subclass: #StructureArrayPointerField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StructureArrayPointerField subclass: #PointerArrayPointerField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #AbstractCHARField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #BOOLField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #BYTEField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #DOUBLEField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #DWORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #FLOATField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #INT_PTRField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #QWORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #SBYTEField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #SDWORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #SQWORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #SWORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #UINT_PTRField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ScalarField subclass: #WORDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractCHARField subclass: #CHARField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 AbstractCHARField subclass: #WCHARField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 BOOLField subclass: #BOOLEANField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UINT_PTRField subclass: #HANDLEField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UINT_PTRField subclass: #LPVOIDField
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Behavior subclass: #ClassDescription
 	instanceVariableNames: 'instanceVariables methodsCatalogue protocols'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ClassDescription subclass: #Class
-	instanceVariableNames: 'subclasses name classPool sharedPools environment comment classCategories _guid'
+	instanceVariableNames: 'subclasses name classPool imports environment comment classCategories _guid'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ClassDescription subclass: #Metaclass
 	instanceVariableNames: 'instanceClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Boolean subclass: #False
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Boolean subclass: #True
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Category subclass: #ClassCategory
 	instanceVariableNames: ''
 	classVariableNames: 'Table Unclassified'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Category subclass: #MethodCategory
 	instanceVariableNames: ''
 	classVariableNames: 'Private Pseuds Public Table'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Collection subclass: #Bag
 	instanceVariableNames: 'contents'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Collection subclass: #SequenceableCollection
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Collection variableSubclass: #Set
 	instanceVariableNames: 'tally'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'MaxOffsetIndex' -> 16r402.
@@ -2686,43 +2716,43 @@ Collection variableSubclass: #Set
 SequenceableCollection subclass: #ArrayedCollection
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequenceableCollection subclass: #Interval
 	instanceVariableNames: 'start stop step'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequenceableCollection subclass: #SequencedGrowableCollection
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayedCollection variableSubclass: #Array
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayedCollection variableByteSubclass: #ByteArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayedCollection subclass: #RunArray
 	instanceVariableNames: 'values runs'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArrayedCollection variableByteSubclass: #String
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: 'empty'
 	classConstants: {
 		'EncodingAnsi' -> 16r0.
@@ -2736,67 +2766,67 @@ ArrayedCollection variableByteSubclass: #String
 ArrayedCollection variableSubclass: #WeakArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ByteArray variableByteSubclass: #ExternalIntegerBytes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalIntegerBytes variableByteSubclass: #DWORDBytes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalIntegerBytes variableByteSubclass: #UIntPtrBytes
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UIntPtrBytes variableByteSubclass: #ExternalAddress
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UIntPtrBytes variableByteSubclass: #ExternalHandle
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalAddress variableByteSubclass: #ExternalMemory
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalAddress variableByteSubclass: #REFGUID
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 String variableByteSubclass: #AnsiString
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 String variableByteSubclass: #UtfEncodedString
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UtfEncodedString variableByteSubclass: #Utf16String
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'Bom' -> #[255 254].
@@ -2806,7 +2836,7 @@ UtfEncodedString variableByteSubclass: #Utf16String
 UtfEncodedString variableByteSubclass: #Utf8String
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'Bom' -> #[239 187 191].
@@ -2818,7 +2848,7 @@ UtfEncodedString variableByteSubclass: #Utf8String
 Utf8String variableByteSubclass: #Symbol
 	instanceVariableNames: ''
 	classVariableNames: 'Table'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'CharClassifications' -> #(nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil #binary nil nil nil #binary #binary nil nil nil #binary #binary #binary #binary nil #binary #digit #digit #digit #digit #digit #digit #digit #digit #digit #digit #colon nil #binary #binary #binary #binary #binary #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic nil #binary nil nil #alphabetic nil #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic #alphabetic nil #binary nil #binary nil)
@@ -2826,499 +2856,499 @@ Utf8String variableByteSubclass: #Symbol
 WeakArray variableSubclass: #MourningWeakArray
 	instanceVariableNames: 'pathologist'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequencedGrowableCollection subclass: #LinkedList
 	instanceVariableNames: 'firstLink lastLink'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequencedGrowableCollection variableSubclass: #OrderedCollection
 	instanceVariableNames: 'firstIndex lastIndex'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LinkedList subclass: #Semaphore
 	instanceVariableNames: 'signals'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 OrderedCollection variableSubclass: #SortedCollection
 	instanceVariableNames: 'algorithm'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Set variableSubclass: #Dictionary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Set variableSubclass: #IdentitySet
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Set variableSubclass: #PluggableSet
 	instanceVariableNames: 'searchPolicy'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Set variableSubclass: #SharedSet
 	instanceVariableNames: 'mutex'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Dictionary variableSubclass: #LookupTable
 	instanceVariableNames: 'values'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Dictionary variableSubclass: #PoolDictionary
 	instanceVariableNames: 'environment'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Dictionary variableSubclass: #SystemDictionary
 	instanceVariableNames: 'events allClasses allRoots'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LookupTable variableSubclass: #IdentityDictionary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LookupTable variableSubclass: #PluggableLookupTable
 	instanceVariableNames: 'searchPolicy'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LookupTable variableSubclass: #SharedLookupTable
 	instanceVariableNames: 'mutex'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 IdentityDictionary variableSubclass: #MethodDictionary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedLookupTable variableSubclass: #DeferredValueTable
 	instanceVariableNames: 'priority'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedLookupTable variableSubclass: #SharedIdentityDictionary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedLookupTable variableSubclass: #WeakLookupTable
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedIdentityDictionary variableSubclass: #EventsCollection
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 EventsCollection variableSubclass: #NullEventsCollection
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 WeakLookupTable variableSubclass: #WeakIdentityDictionary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedSet variableSubclass: #SharedIdentitySet
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SharedSet variableSubclass: #WeakSet
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 WeakSet variableSubclass: #WeakIdentitySet
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompiledCode variableSubclass: #CompiledExpression
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompiledCode variableSubclass: #CompiledMethod
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompiledMethod variableSubclass: #CompileFailedMethod
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompiledMethod variableSubclass: #ExternalMethod
 	instanceVariableNames: ''
 	classVariableNames: 'ArgsLenIndex ArgumentStartIndex CallingConventionIndex ReturnParmIndex ReturnTypeIndex'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Exception subclass: #Error
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Exception subclass: #Notification
-	instanceVariableNames: ''
+	instanceVariableNames: 'isSuppressible'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Exception subclass: #ProcessTermination
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Exception subclass: #StackOverflow
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #ArithmeticError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #BoundsError
 	instanceVariableNames: 'receiver'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #CannotReturnError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #ClassRemovalError
 	instanceVariableNames: 'originalError'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #CRTError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #HRESULTError
 	instanceVariableNames: 'errorInfo osErrorMessage'
 	classVariableNames: 'FacilityClasses'
-	poolDictionaries: 'FacilityCodes'
+	imports: #(#{FacilityCodes})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #InvalidArgumentError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #InvalidExternalCall
 	instanceVariableNames: 'argument type'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #InvalidFormat
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #MessageNotUnderstood
 	instanceVariableNames: 'receiver'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #NotFoundError
 	instanceVariableNames: 'receiver'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #OperationAborted
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #RaisedSignal
 	instanceVariableNames: 'signalType'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #STBError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Error subclass: #SubclassResponsibilityError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArithmeticError subclass: #FloatingPointException
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ArithmeticError subclass: #ZeroDivide
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 HRESULTError subclass: #Win32Error
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Error subclass: #FileException
 	instanceVariableNames: 'file resumable'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Error subclass: #OutOfMemoryError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Error subclass: #RPCError
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Error subclass: #Win32Fault
 	instanceVariableNames: 'exceptionRecord'
 	classVariableNames: 'ExceptionNames'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Fault subclass: #GPFault
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Notification subclass: #CompilerNotification
 	instanceVariableNames: 'position ranges line extras methodClass source selector offset'
 	classVariableNames: 'ErrorFormats'
-	poolDictionaries: 'SmalltalkParseErrorCodes'
+	imports: #(#{SmalltalkParseErrorCodes})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Notification subclass: #HRESULTNotification
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Notification subclass: #MethodCompileFailed
 	instanceVariableNames: 'compilerErrorNotification'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Notification subclass: #RaisedNotificationSignal
 	instanceVariableNames: 'signalType'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Notification subclass: #Warning
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompilerNotification subclass: #CompilerErrorNotification
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompilerNotification subclass: #CompilerInfoNotification
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CompilerNotification subclass: #CompilerWarningNotification
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExceptionHandlerAbstract subclass: #ExceptionHandler
 	instanceVariableNames: 'selector handler'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExceptionHandlerAbstract subclass: #ExceptionHandlerSet
 	instanceVariableNames: 'handlers'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalCallback subclass: #BlockCallback
 	instanceVariableNames: 'block'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalCallback subclass: #MessageCallback
 	instanceVariableNames: 'receiver selector closure'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #AdvApiLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #CompilerLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #ExternalResourceLibrary
 	instanceVariableNames: 'fileName loadFlags'
 	classVariableNames: 'Libraries'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #PermanentLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #RPCLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #ShlwapiLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #VersionLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalLibrary subclass: #WinMMLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PermanentLibrary subclass: #CRTLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PermanentLibrary subclass: #KernelLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PermanentLibrary subclass: #NTLibrary
 	instanceVariableNames: ''
 	classVariableNames: 'IsWine'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PermanentLibrary subclass: #UserLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: 'MessageBoxConstants'
+	imports: #(#{MessageBoxConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PermanentLibrary subclass: #VMLibrary
 	instanceVariableNames: 'wndProc dlgProc genericCallback vtable specialSelectorStart'
 	classVariableNames: 'Registry RegistryKeys WinVerOrGreaterMask'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 CRTLibrary subclass: #CRTLibraryNonBlocking
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalStructure subclass: #_FPIEEE_RECORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_cause' -> 16r4.
@@ -3332,7 +3362,7 @@ ExternalStructure subclass: #_FPIEEE_RECORD
 ExternalStructure subclass: #_FPIEEE_VALUE
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_filler' -> 16r14.
@@ -3342,7 +3372,7 @@ ExternalStructure subclass: #_FPIEEE_VALUE
 ExternalStructure subclass: #CPINFOEXW
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_codepage' -> 16r14.
@@ -3355,13 +3385,13 @@ ExternalStructure subclass: #CPINFOEXW
 ExternalStructure subclass: #ExternalArray
 	instanceVariableNames: 'length'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalStructure subclass: #ExternalScalar
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_value' -> 16r0
@@ -3369,139 +3399,139 @@ ExternalStructure subclass: #ExternalScalar
 ExternalStructure subclass: #StructurePointer
 	instanceVariableNames: 'elementClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalStructure subclass: #VOID
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalStructure subclass: #Win32Structure
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #DOUBLEArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #DWORDArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #FLOATArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #GenericExternalArray
 	instanceVariableNames: 'elementClass owner'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #INT_PTRArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #SBYTEArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #SDWORDArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #SWORDArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #UINT_PTRArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalArray subclass: #WORDArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 GenericExternalArray subclass: #StructureArray
 	instanceVariableNames: 'elementSpacing'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UINT_PTRArray subclass: #HandleArray
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UINT_PTRArray subclass: #PointerArray
 	instanceVariableNames: 'elementClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalScalar subclass: #DOUBLE
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalScalar subclass: #ExternalInteger
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalScalar subclass: #FLOAT
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalScalar subclass: #LPVOID
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalInteger subclass: #BYTE
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalInteger subclass: #DWORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalInteger subclass: #HRESULT
 	instanceVariableNames: ''
 	classVariableNames: 'Facilities Fail'
-	poolDictionaries: 'FacilityCodes Win32Constants Win32Errors'
+	imports: #(#{FacilityCodes} #{Win32Constants} #{Win32Errors})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'FACILITY_NT_BIT' -> 16r10000000
@@ -3509,7 +3539,7 @@ ExternalInteger subclass: #HRESULT
 ExternalInteger subclass: #QWORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_highPart' -> 16r4.
@@ -3518,85 +3548,85 @@ ExternalInteger subclass: #QWORD
 ExternalInteger subclass: #UINT_PTR
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ExternalInteger subclass: #WORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 BYTE subclass: #BOOLEAN
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 BYTE subclass: #SBYTE
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 DWORD subclass: #SDWORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SDWORD subclass: #BOOL
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 QWORD subclass: #LARGE_INTEGER
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 QWORD subclass: #ULARGE_INTEGER
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UINT_PTR subclass: #INT_PTR
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 WORD subclass: #SWORD
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LPVOID subclass: #ExternalPointer
 	instanceVariableNames: 'byteSize'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LPVOID subclass: #LPSTR
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 LPVOID subclass: #LPWSTR
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Win32Structure subclass: #EXCEPTION_RECORD
 	instanceVariableNames: 'info'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_ExceptionAddress' -> 16rC.
@@ -3609,7 +3639,7 @@ Win32Structure subclass: #EXCEPTION_RECORD
 Win32Structure subclass: #FILETIME
 	instanceVariableNames: ''
 	classVariableNames: 'UnixEpoch'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_dwHighDateTime' -> 16r4.
@@ -3618,7 +3648,7 @@ Win32Structure subclass: #FILETIME
 Win32Structure subclass: #MSG
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_hwnd' -> 16r0.
@@ -3632,7 +3662,7 @@ Win32Structure subclass: #MSG
 Win32Structure subclass: #MSGBOXPARAMSW
 	instanceVariableNames: 'text caption'
 	classVariableNames: ''
-	poolDictionaries: 'MessageBoxConstants'
+	imports: #(#{MessageBoxConstants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_dwContextHelpId' -> 16r1C.
@@ -3649,7 +3679,7 @@ Win32Structure subclass: #MSGBOXPARAMSW
 Win32Structure subclass: #NUMBERFMTW
 	instanceVariableNames: 'decimalSeparator numberGrouping groupSeparator'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_Grouping' -> 16r8.
@@ -3662,7 +3692,7 @@ Win32Structure subclass: #NUMBERFMTW
 Win32Structure subclass: #OSVERSIONINFOEXW
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_dwBuildNumber' -> 16rC.
@@ -3680,7 +3710,7 @@ Win32Structure subclass: #OSVERSIONINFOEXW
 Win32Structure subclass: #SECURITY_ATTRIBUTES
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_bInheritHandle' -> 16r8.
@@ -3690,7 +3720,7 @@ Win32Structure subclass: #SECURITY_ATTRIBUTES
 Win32Structure subclass: #SYSTEMTIME
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_wDay' -> 16r6.
@@ -3705,7 +3735,7 @@ Win32Structure subclass: #SYSTEMTIME
 Win32Structure subclass: #TIME_ZONE_INFORMATION
 	instanceVariableNames: 'zoneId offset'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_bias' -> 16r0.
@@ -3719,7 +3749,7 @@ Win32Structure subclass: #TIME_ZONE_INFORMATION
 Win32Structure subclass: #VS_FIXEDFILEINFO
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_dwFileDateLS' -> 16r30.
@@ -3739,7 +3769,7 @@ Win32Structure subclass: #VS_FIXEDFILEINFO
 Win32Structure subclass: #WIN32_FIND_DATAW
 	instanceVariableNames: 'directory'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
+	imports: #(#{Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'_OffsetOf_cAlternateFileName' -> 16r234.
@@ -3756,55 +3786,55 @@ Win32Structure subclass: #WIN32_FIND_DATAW
 FILETIME subclass: #LocalFILETIME
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 FileLocator subclass: #AbsoluteFileLocator
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 FileLocator subclass: #ClassLocator
 	instanceVariableNames: 'packageName codeBase key'
 	classVariableNames: 'Aliases DefaultFileLocator ImportedClasses ImportedClassesMutex InstallationFileLocator'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 FileLocator subclass: #RelativeFileLocator
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ClassLocator subclass: #ValidatingClassLocator
 	instanceVariableNames: 'validationBlock'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 RelativeFileLocator subclass: #FolderRelativeFileLocator
 	instanceVariableNames: 'basePath'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 RelativeFileLocator subclass: #ImageRelativeFileLocator
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 RelativeFileLocator subclass: #InstallRelativeFileLocator
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 InstructionInterpreter subclass: #MessageSendCollector
 	instanceVariableNames: 'messageBlock superMessageBlock'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'SendInstructions' -> #(nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSpecialSend: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendZeroArgs: #shortSendSelfZeroArgs: #shortSendSelfZeroArgs: #shortSendSelfZeroArgs: #shortSendSelfZeroArgs: #shortSendSelfZeroArgs: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendOneArg: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: #shortSendTwoArgs: nil nil #shortSpecialSendEx: #shortSpecialSendEx: #shortSpecialSendEx: #shortSpecialSendEx: nil nil nil nil nil nil nil nil nil nil nil nil #send: #supersend: #specialSend: nil nil nil nil nil nil nil #sendTempZeroArgs: nil nil nil nil #sendSelfZeroArgs: nil nil nil nil nil nil nil #longSend:with: #longSupersend:with: nil nil nil nil nil nil nil nil nil nil nil nil #exLongSend:with:with: #exLongSupersend:with:with: nil)
@@ -3812,7 +3842,7 @@ InstructionInterpreter subclass: #MessageSendCollector
 Link variableSubclass: #Process
 	instanceVariableNames: 'suspendedFrame priority myList callbackDepth _unused6 _unused7 fpControl threadSync thread exceptionEnvironment _unused12 _unused13 debugger name debugStream'
 	classVariableNames: 'DefaultMaxStack'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'DefaultFpControl' -> 16r80007.
@@ -3821,31 +3851,31 @@ Link variableSubclass: #Process
 Locale subclass: #SmalltalkLocale
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Locale subclass: #WindowsLocale
 	instanceVariableNames: 'lcid info'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Magnitude subclass: #ArithmeticValue
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Magnitude subclass: #Association
 	instanceVariableNames: 'key value'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Magnitude subclass: #Character
 	instanceVariableNames: 'code'
 	classVariableNames: 'AnsiCharacters AnsiCodePage AnsiCodePoints CharacterSet Utf8Default'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'EncodingMask' -> 16r3F000000.
@@ -3861,7 +3891,7 @@ Magnitude subclass: #Character
 Magnitude subclass: #DateAndTime
 	instanceVariableNames: 'rataDie seconds offset'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'FiletimeEpochSeconds' -> -16r234474600.
@@ -3872,7 +3902,7 @@ Magnitude subclass: #DateAndTime
 Magnitude subclass: #Duration
 	instanceVariableNames: 'seconds'
 	classVariableNames: 'Zero'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'SecondsPerDay' -> 16r15180.
@@ -3881,13 +3911,13 @@ Magnitude subclass: #Duration
 ArithmeticValue subclass: #Number
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Number variableByteSubclass: #Float
 	instanceVariableNames: ''
 	classVariableNames: 'DefaultDecimalExponent FMinDenormalized Infinity NaN NegativeInfinity'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'EMax' -> 16r3FF.
@@ -3913,175 +3943,175 @@ Number variableByteSubclass: #Float
 Number subclass: #Fraction
 	instanceVariableNames: 'numerator denominator'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Number subclass: #Integer
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Number subclass: #ScaledDecimal
 	instanceVariableNames: 'fraction scale'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Integer variableByteSubclass: #LargeInteger
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Integer subclass: #SmallInteger
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Association subclass: #VariableBinding
 	instanceVariableNames: 'environment'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Message subclass: #MessageSendAbstract
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 MessageSendAbstract variableSubclass: #EventMessageSend
 	instanceVariableNames: 'expectedArgCount'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 MessageSendAbstract subclass: #MessageSend
 	instanceVariableNames: 'receiver'
 	classVariableNames: 'EmptySend'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 MessageSequenceAbstract subclass: #EventMessageSequence
 	instanceVariableNames: 'receivers messages tally'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 MessageSequenceAbstract subclass: #MessageSequence
 	instanceVariableNames: 'list'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ObjectRegistry subclass: #PermanentRegistry
 	instanceVariableNames: 'freeHead'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ObjectRegistry subclass: #WeakRegistry
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SearchPolicy subclass: #PluggableSearchPolicy
 	instanceVariableNames: 'compareBlock hashBlock'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SearchPolicy subclass: #SingletonSearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: 'current'
 	classConstants: {}!
 SingletonSearchPolicy subclass: #AlwaysSearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SingletonSearchPolicy subclass: #CaseInsensitiveSearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SingletonSearchPolicy subclass: #EqualitySearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SingletonSearchPolicy subclass: #IdentitySearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SingletonSearchPolicy subclass: #NeverSearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 EqualitySearchPolicy subclass: #AssociationSearchPolicy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SessionManager subclass: #BootSessionManager
 	instanceVariableNames: 'productDetails startTime'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SessionManager subclass: #ConsoleSessionManager
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: 'CRTConstants'
+	imports: #(#{CRTConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Signal subclass: #NotificationSignal
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 NotificationSignal subclass: #WarningSignal
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SortAlgorithm subclass: #DefaultSortAlgorithm
 	instanceVariableNames: ''
 	classVariableNames: 'Current'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SortAlgorithm subclass: #PluggableSortAlgorithm
 	instanceVariableNames: 'sortBlock'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PluggableSortAlgorithm subclass: #IntrosortAlgorithm
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SourceFiler subclass: #ChunkSourceFiler
 	instanceVariableNames: 'sourceFileIndex'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'NormalizeEolsMask' -> 16r2
@@ -4089,13 +4119,13 @@ SourceFiler subclass: #ChunkSourceFiler
 StackFrame subclass: #BlockFrame
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBFiler subclass: #STBInFiler
 	instanceVariableNames: 'readMap converters classLocator deferredActions flags'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'UpgradingMask' -> 16r1
@@ -4103,85 +4133,85 @@ STBFiler subclass: #STBInFiler
 STBFiler subclass: #STBOutFiler
 	instanceVariableNames: 'writeMap globals globalNils proxyOverrides refOffset'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBInFiler subclass: #STBValidatingInFiler
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBProxy subclass: #STBClassProxy
 	instanceVariableNames: 'packageName locatorKey'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBProxy subclass: #STBCollectionProxy
 	instanceVariableNames: 'class array'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBProxy subclass: #STBExternalResourceLibraryProxy
 	instanceVariableNames: 'fileName _reserved1'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBProxy subclass: #STBGlobalObjectProxy
 	instanceVariableNames: 'symbol object'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBProxy subclass: #STBSingletonProxy
 	instanceVariableNames: 'class selector'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBClassProxy subclass: #STBMetaclassProxy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBCollectionProxy subclass: #STBIdentityDictionaryProxy
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 STBCollectionProxy subclass: #STBSortedCollectionProxy
 	instanceVariableNames: 'sortAlgorithm'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Stream subclass: #SequencedStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequencedStream subclass: #LimitedWriteStream
 	instanceVariableNames: 'stream limit limitBlock start visited visitedBlock'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequencedStream subclass: #PositionableStream
 	instanceVariableNames: 'collection position readLimit locale'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SequencedStream subclass: #StdioFileStream
 	instanceVariableNames: 'stream flags name oldFd fd crtlib locale'
 	classVariableNames: 'ClassForEncoding'
-	poolDictionaries: 'CRTConstants'
+	imports: #(#{CRTConstants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'DeviceMask' -> 16r40.
@@ -4191,25 +4221,25 @@ SequencedStream subclass: #StdioFileStream
 PositionableStream subclass: #ReadStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 PositionableStream subclass: #WriteStream
 	instanceVariableNames: 'writeLimit'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 WriteStream subclass: #ReadWriteStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 ReadWriteStream subclass: #FileStream
 	instanceVariableNames: 'file flags pageBase logicalFileSize offset'
 	classVariableNames: 'BufferClasses'
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {
 		'BufferUpdatedMask' -> 16r3.
@@ -4221,37 +4251,37 @@ ReadWriteStream subclass: #FileStream
 StdioFileStream subclass: #StdioBinaryFileStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StdioFileStream subclass: #StdioTextFileStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StdioTextFileStream subclass: #StdioAnsiFileStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StdioTextFileStream subclass: #StdioUnicodeFileStream
 	instanceVariableNames: 'offset'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StdioUnicodeFileStream subclass: #StdioUtf16FileStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 StdioUnicodeFileStream subclass: #StdioUtf8FileStream
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
 
