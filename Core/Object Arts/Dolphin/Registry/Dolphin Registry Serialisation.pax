@@ -55,7 +55,6 @@ readFromRegKey: aRegKey
 
 	| params inst basicSize instVars |
 	params := aRegKey value.
-	self assert: [params first = self name].
 	basicSize := params size > 1 ifTrue: [Integer fromString: params second] ifFalse: [0].
 	inst := basicSize > 0 ifTrue: [self basicNew: basicSize] ifFalse: [self basicNew].
 	instVars := LookupTable new.
@@ -219,7 +218,6 @@ readFromRegKey: aRegKey
 
 	| params |
 	params := aRegKey value.
-	self assert: [params first = self name].
 	^self intern: params second! !
 !Core.Symbol class categoriesFor: #readFromRegKey:!public! !
 
