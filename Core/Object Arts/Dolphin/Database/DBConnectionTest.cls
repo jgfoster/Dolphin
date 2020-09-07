@@ -212,7 +212,7 @@ testDSNlessConnection
 
 testPackagesCorrectlySetUp
 	"The base package should not be dependent upon the development system."
-	self assert: ((Package manager packageNamed: 'Database Connection Base') prerequisites allSatisfy: [:each | each name = 'Dolphin' or: [each name = 'Dolphin Legacy Date & Time']])!
+	self assert: ((Package manager packageNamed: 'Database Connection Base') prerequisites collect: [:each | each name]) asArray sort equals: #('Dolphin' 'Dolphin Legacy Date & Time')!
 
 testPreparedQuery
 	| statement results |
