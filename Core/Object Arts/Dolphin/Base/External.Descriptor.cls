@@ -576,7 +576,7 @@ parsePointerToStruct: anAssociation environment: aNamespace
 	^(structClass isIndirection and: [anAssociation key == ExtCallArgSTRUCT])
 		ifTrue: [ExtCallArgLPPVOID -> nil]
 		ifFalse: 
-			[(#{IUnknown} valueOrNil
+			[(#{Smalltalk.IUnknown} valueOrNil
 				ifNil: [ExtCallArgLP]
 				ifNotNil: [:unkClass | (structClass includesBehavior: unkClass) ifTrue: [ExtCallArgCOMPTR] ifFalse: [ExtCallArgLP]])
 					-> structClass]!
