@@ -49,6 +49,20 @@ diagnostic
 	stream nextPutAll: self stacktrace.
 	^stream contents!
 
+displayOn: aPuttableStream
+	aPuttableStream
+		print: self case;
+		nextPutAll: ' (';
+		nextPutAll: self outcome;
+		nextPutAll: ' in '.
+	self outcome == #passed
+		ifTrue: 
+			[self duration printHumanReadableOn: aPuttableStream.
+			aPuttableStream nextPut: $)]
+		ifFalse: 
+			[self printSourceOn: aPuttableStream.
+			aPuttableStream nextPut: $)]!
+
 duration
 	"Answer the <Duration> of the test execution. If the test didn't pass, the value is undefined."
 
@@ -104,6 +118,7 @@ stacktrace
 !XProgramming.SUnit.TestCaseResult categoriesFor: #captureDiagnostics:!initializing!private! !
 !XProgramming.SUnit.TestCaseResult categoriesFor: #case!accessing!public! !
 !XProgramming.SUnit.TestCaseResult categoriesFor: #diagnostic!accessing!public! !
+!XProgramming.SUnit.TestCaseResult categoriesFor: #displayOn:!printing!private! !
 !XProgramming.SUnit.TestCaseResult categoriesFor: #duration!accessing!public! !
 !XProgramming.SUnit.TestCaseResult categoriesFor: #outcome!accessing!public! !
 !XProgramming.SUnit.TestCaseResult categoriesFor: #printSourceOn:!printing!private! !
