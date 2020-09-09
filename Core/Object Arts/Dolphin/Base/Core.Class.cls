@@ -365,6 +365,20 @@ fileOutStem
 
 	^environment == Smalltalk ifTrue: [self unqualifiedName] ifFalse: [self fullName]!
 
+fullName
+	"Answer the <String> fully qualified name of the receiver, which is a dot-separated path that binds to the receiver from the global namespace, Root."
+
+	"Implementation Note: Overridden only to provide an optimized implementation because this method is called very frequently in many dev. scenarios."
+
+	| stream |
+	(name isNil or: [environment == Root]) ifTrue: [^self name].
+	stream := WriteStream on: (Utf8String new: 32).
+	environment printNameOn: stream relativeTo: Root.
+	^stream
+		nextPut: $.;
+		nextPutAll: name;
+		contents!
+
 fullNameFor: aString
 	"Private - Answer the full name  of a variable with the specified local identifier, assumed to be in this namespace. This will be a (potentially) dot-separated path string that is bindable from any top-level namespace, including Smalltalk."
 
@@ -1060,6 +1074,7 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #fileIn!development!public!source filing! !
 !Core.Class categoriesFor: #fileOutName!development!private!source filing! !
 !Core.Class categoriesFor: #fileOutStem!development!private!source filing! !
+!Core.Class categoriesFor: #fullName!accessing!namespaces!public! !
 !Core.Class categoriesFor: #fullNameFor:!helpers!namespaces!private! !
 !Core.Class categoriesFor: #fullPath!accessing!namespaces!private! !
 !Core.Class categoriesFor: #fullyQualifiedReference!accessing!namespaces!public! !

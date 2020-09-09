@@ -66,7 +66,7 @@ contents
 	the contents we have 'read' all the elements in the receiver.
 	The readLimit is mostly of use to readable subclasses."
 
-	readLimit := readLimit max: position.
+	readLimit < position ifTrue: [readLimit := position].
 	^collection copyFrom: 1 to: position!
 
 grabContents
@@ -152,8 +152,7 @@ nextPutAll: aCollection
 		ifFalse: [aCollection appendToStream: self]!
 
 on: aCollection
-	collection := aCollection.
-	writeLimit := collection size.
+	writeLimit := (collection := aCollection) size.
 	position := readLimit := 0.
 	locale := Locale.UserDefault!
 
