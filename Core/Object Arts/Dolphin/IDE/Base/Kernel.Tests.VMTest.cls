@@ -3686,6 +3686,7 @@ verifyPrimitiveNextPutAllOnUtfStrings: method
 !Kernel.Tests.VMTest categoriesFor: #testPrimitiveSubtract!public!unit tests! !
 !Kernel.Tests.VMTest categoriesFor: #testPrimitiveYourAddress!public!unit tests! !
 !Kernel.Tests.VMTest categoriesFor: #testQwordAtOffset!public!unit tests! !
+!Kernel.Tests.VMTest categoriesFor: #testRegistry!public!unit tests! !
 !Kernel.Tests.VMTest categoriesFor: #testSignedFromUnsigned!public!unit tests! !
 !Kernel.Tests.VMTest categoriesFor: #testSqwordAtOffset!public!unit tests! !
 !Kernel.Tests.VMTest categoriesFor: #testVMPointersImmutable!public!unit tests! !

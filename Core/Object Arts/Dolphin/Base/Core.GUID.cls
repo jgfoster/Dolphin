@@ -317,7 +317,8 @@ initialize
 	"Private - Initialize the receiver's class variables.
 		GUID initialize
 	"
-	self extraInstanceSpec: self byteSize!
+	self extraInstanceSpec: self byteSize.
+	VMLibrary default registryAt: self name put: self!
 
 new
 	"Answer a new, null, instance of the receiver."
@@ -359,7 +360,7 @@ uninitialize
 	"Private - Tidy up the receiver in preparation for removal from the system."
 
 	Null := nil.
-	VMLibrary default registryAt: #GUID put: nil! !
+	VMLibrary default registryAt: self name put: nil! !
 !Core.GUID class categoriesFor: #alignment!constants!private! !
 !Core.GUID class categoriesFor: #atAddress:!instance creation!public! !
 !Core.GUID class categoriesFor: #basicByteSize!public! !

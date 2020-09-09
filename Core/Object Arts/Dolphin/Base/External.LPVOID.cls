@@ -44,12 +44,26 @@ defineFields
 
 	self defineField: #value type: LPVOIDField new beOverride!
 
+initialize
+	"Private - Initialize the receiver's class variables.
+		self initialize
+	"
+
+	VMLibrary default registryAt: self name put: self!
+
 new
 	"Answer a new instance of the receiver.
 	Implementation Note: LPVOID and its subclasses represent pointers, and are typically
 	used for double indirections, thus a reference is normally required."
 
-	^self newPointer! !
+	^self newPointer!
+
+uninitialize
+	"Private - Uninitialize the receiver prior to its removal from the image."
+
+	VMLibrary default registryAt: self name put: nil! !
 !External.LPVOID class categoriesFor: #defineFields!public!template definition! !
+!External.LPVOID class categoriesFor: #initialize!development!initializing!private! !
 !External.LPVOID class categoriesFor: #new!instance creation!public! !
+!External.LPVOID class categoriesFor: #uninitialize!class hierarchy-removing!private! !
 
