@@ -317,7 +317,7 @@ fromString: aString environment: aNamespace
 
 	Shared isNil ifTrue: [^self newFromString: aString environment: aNamespace ].	
 	^Shared at: {aString. aNamespace}
-		ifAbsentPut: [self newFromString: aString environment: aNamespace]!
+		ifAbsentPutClean: [self newFromString: aString environment: aNamespace]!
 
 initialize
 	"Private - Initialize the class variables of the receiver.

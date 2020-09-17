@@ -495,13 +495,13 @@ package setMethodNames: #(
 	#(#{Smalltalk class} #publishedEvents)
 	#(#{Smalltalk class} #renameVariable:to:)
 	#(#{Smalltalk.AXControlSite class} #publishedAspectsOfInstances)
+	#(#{Smalltalk.AXValueConvertingControlSite class} #publishedAspectsOfInstances)
 	#(#{Smalltalk.StyledGradientBrush class} #publishedAspectsOfInstances)
 	#(#{Smalltalk.StyledPen class} #publishedAspectsOfInstances)
 	#(#{UI.AbstractCardContainer class} #publishedAspectsOfInstances)
 	#(#{UI.AbstractCardContainer class} #publishedEventsOfInstances)
 	#(#{UI.AbstractDocumentShell} #saveStateOn:)
 	#(#{UI.AbstractToTextConverter class} #publishedAspectsOfInstances)
-	#(#{Smalltalk.AXValueConvertingControlSite class} #publishedAspectsOfInstances)
 	#(#{UI.BasicListAbstract class} #publishedAspectsOfInstances)
 	#(#{UI.BooleanToText class} #publishedAspectsOfInstances)
 	#(#{UI.BorderLayout} #arrangementAspect)
@@ -5317,6 +5317,23 @@ publishedAspectsOfInstances
 		yourself! !
 !AXControlSite class categoriesFor: #publishedAspectsOfInstances!constants!must strip!public! !
 
+!AXValueConvertingControlSite class methodsFor!
+
+publishedAspectsOfInstances
+	"Answer a <LookupTable> of the <Aspect>s published by instances of the receiver."
+
+	| applicableTypeConverters |
+	applicableTypeConverters := Set new.
+	self applicableTypeConverterCategories do: [:each | applicableTypeConverters addAll: each classes].
+	^super publishedAspectsOfInstances
+		add: (Tools.Aspect choice: #typeconverter
+					evaluationFrom: (applicableTypeConverters asSortedCollection asArray
+							collect: [:each | each name , ' new']))
+						beImmutable;
+		add: (Tools.Aspect name: #value);
+		yourself! !
+!AXValueConvertingControlSite class categoriesFor: #publishedAspectsOfInstances!constants!must strip!public! !
+
 !StyledGradientBrush class methodsFor!
 
 publishedAspectsOfInstances
@@ -5384,23 +5401,6 @@ publishedAspectsOfInstances
 		add: (Tools.Aspect name: #locale);
 		yourself! !
 !UI.AbstractToTextConverter class categoriesFor: #publishedAspectsOfInstances!constants!public! !
-
-!Smalltalk.AXValueConvertingControlSite class methodsFor!
-
-publishedAspectsOfInstances
-	"Answer a <LookupTable> of the <Aspect>s published by instances of the receiver."
-
-	| applicableTypeConverters |
-	applicableTypeConverters := Set new.
-	self applicableTypeConverterCategories do: [:each | applicableTypeConverters addAll: each classes].
-	^super publishedAspectsOfInstances
-		add: (Tools.Aspect choice: #typeconverter
-					evaluationFrom: (applicableTypeConverters asSortedCollection asArray
-							collect: [:each | each name , ' new']))
-						beImmutable;
-		add: (Tools.Aspect name: #value);
-		yourself! !
-!Smalltalk.AXValueConvertingControlSite class categoriesFor: #publishedAspectsOfInstances!constants!must strip!public! !
 
 !UI.BasicListAbstract class methodsFor!
 
