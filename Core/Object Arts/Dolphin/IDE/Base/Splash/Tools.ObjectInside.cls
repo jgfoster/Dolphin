@@ -52,22 +52,14 @@ drawEdgePointsOn: aGdiplusGraphics
 	aGdiplusGraphics transform: self matrix.
 	self edgePoints do: [:each | aGdiplusGraphics drawRectangle: (each extent: 1)]!
 
-drawOn: aGdiplusGraphics 
+drawOn: aGdiplusGraphics
 	| attributes extent |
 	extent := self extent.
 	attributes := Gdiplus.ImageAttributes new.
-	self color 
+	self color ifNotNil: [:col | attributes remapColor: self baseColor to: col].
+	self alpha
 		ifNotNil: 
-			[:col | 
-			| table |
-			table := External.StructureArray length: 1 elementClass: Gdiplus.GpColorMap.
-			(table at: 1)
-				oldColor: self baseColor argbCode;
-				newColor: col argbCode.
-			attributes remapTable: table].
-	self alpha 
-		ifNotNil: 
-			[:alph | 
+			[:alph |
 			| colorMatrix |
 			colorMatrix := Gdiplus.GpColorMatrix identity.
 			colorMatrix atPoint: 4 @ 4 put: alph.
@@ -76,9 +68,9 @@ drawOn: aGdiplusGraphics
 		interpolationMode: InterpolationModeHighQualityBicubic;
 		transform: self matrix;
 		drawImage: self image
-			at: Point zero
+			at: Point.Zero
 			extent: extent
-			from: Point zero
+			from: Point.Zero
 			extent: extent
 			unit: UnitPixel
 			attributes: attributes;

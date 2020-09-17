@@ -289,7 +289,7 @@ drawImage: aGdiplusImage at: dstOrigin extent: dstExtent from: srcOrigin extent:
 				imageAttributes: imageAttributes asParameter
 				callback: nil
 				callbackData: nil.
-	status = Ok ifFalse: [GdiplusError signal: 'GdipDrawImageRectRectI failed' with: status]!
+	status == Ok ifFalse: [GdiplusError signal: 'GdipDrawImageRectRectI failed' with: status]!
 
 drawImage: anImage points: threePoints
 	"Draw anImage on the receiver stretched to fit the parallelogram specified by threePoints."
@@ -530,6 +530,12 @@ fillRectangle: aRectangle brush: aGdiplusBrush
 				width: aRectangle width asInteger
 				height: aRectangle height asInteger) == Ok
 		ifFalse: [GdiplusError signal: 'GdipFillRectangleI failed' with: status]!
+
+fillRectangle: aRectangle color: aColor 
+	| fillBrush |
+	fillBrush := SolidBrush color: aColor.
+	self fillRectangle: aRectangle brush: fillBrush.
+	fillBrush free!
 
 fillRegion: aRegion brush: aBrush
 	"Fill aRegion on the receiver using aBrush."
@@ -860,6 +866,7 @@ translateTransform: aRealPoint order: aMatrixOrderConstant
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #fillPolygon:brush:!filling!public! !
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #fillPolygon:brush:fillMode:!filling!public! !
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #fillRectangle:brush:!filling!public! !
+!Graphics.Gdiplus.GdiplusGraphics categoriesFor: #fillRectangle:color:!filling!public! !
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #fillRegion:brush:!filling!public! !
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #getHDC!gdi interop!private! !
 !Graphics.Gdiplus.GdiplusGraphics categoriesFor: #interpolationMode!accessing-modes!public! !

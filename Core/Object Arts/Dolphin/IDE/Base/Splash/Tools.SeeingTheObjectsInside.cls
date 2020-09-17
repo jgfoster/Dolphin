@@ -34,11 +34,10 @@ addInsideObject: anObject minScale: minScale maxScale: maxScale
 !
 
 background
-	^background 
+	^background
 		ifNil: 
-			[background := Gdiplus.Bitmap fromFile: 'Resources\Dolphin7Splash.png'
-						usingLocator: FileLocator installRelative.
-			self baseStyle = 1 
+			[background := self splashBitmap.
+			self baseStyle = 1
 				ifFalse: 
 					[background := Gdiplus.Bitmap fromImage: background
 								centeredIn: (background extent * self baseScale) rounded]]!
@@ -86,6 +85,14 @@ dolphinOutline
 						usingLocator: FileLocator installRelative.
 			self baseStyle = 1 
 				ifFalse: [dolphinOutline := Gdiplus.Bitmap fromImage: dolphinOutline scaledBy: self baseScale]]!
+
+dolphinSplashBackcolor
+	"Private - The ambient background colour in the Dolphin splash bitmap as shipped. We could pull a pixel out of the bitmap, but that is very slow, so it is hard coded below."
+
+	^Color
+		r: 41
+		g: 124
+		b: 182!
 
 drawInfoTextOn: graphics
 	| fontCopyright brush stringFormat |
@@ -351,6 +358,27 @@ showHintBubble
 		position: (self mapPointToScreen: self sunPosition);
 		notify: 'Find the dolphin inside and click to continue.'!
 
+splashBitmap
+	| bitmap rawBitmap extent imageAttr |
+	rawBitmap := Gdiplus.Bitmap fromFile: 'Resources\Dolphin7Splash.png'
+				usingLocator: FileLocator installRelative.
+	extent := rawBitmap extent.
+	bitmap := Gdiplus.Bitmap extent: extent.
+	imageAttr := Gdiplus.ImageAttributes new
+				remapColor: self dolphinSplashBackcolor to: SmalltalkSystemShell backcolor;
+				yourself.
+	bitmap graphics
+		drawImage: rawBitmap
+			at: Point.Zero
+			extent: extent
+			from: Point.Zero
+			extent: extent
+			unit: nil
+			attributes: imageAttr;
+		free.
+	imageAttr free.
+	^bitmap!
+
 startStepProcess
 	self stopStepProcess.
 	startTime := Delay millisecondClockValue.
@@ -401,6 +429,7 @@ sunPosition
 !Tools.SeeingTheObjectsInside categoriesFor: #dolphinMaxScale!public! !
 !Tools.SeeingTheObjectsInside categoriesFor: #dolphinMinScale!public! !
 !Tools.SeeingTheObjectsInside categoriesFor: #dolphinOutline!accessing!private! !
+!Tools.SeeingTheObjectsInside categoriesFor: #dolphinSplashBackcolor!constants!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #drawInfoTextOn:!operations!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #elapsedTime!operations!public! !
 !Tools.SeeingTheObjectsInside categoriesFor: #fill!event handling!private! !
@@ -424,6 +453,7 @@ sunPosition
 !Tools.SeeingTheObjectsInside categoriesFor: #randomFrom:!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #render!operations!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #showHintBubble!private! !
+!Tools.SeeingTheObjectsInside categoriesFor: #splashBitmap!helpers!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #startStepProcess!initializing!private! !
 !Tools.SeeingTheObjectsInside categoriesFor: #step!operations!public! !
 !Tools.SeeingTheObjectsInside categoriesFor: #stepDolphinInsideIntensity!operations!private! !

@@ -22,7 +22,7 @@ colorKeys: aColorAdjustTypeConstant colorLow: lowARGB colorHigh: highARGB
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesColorKeys: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
+				enableFlag: TRUE
 				colorLow: lowARGB argbCode
 				colorHigh: highARGB argbCode) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesColorKeys failed' with: status]!
@@ -42,10 +42,10 @@ colorMatrix: aColorMatrix type: aColorAdjustTypeConstant mode: aColorMatrixFlags
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesColorMatrix: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
+				enableFlag: TRUE
 				colorMatrix: aColorMatrix asParameter
 				grayMatrix: nil
-				flags: aColorMatrixFlagsConstant) = Ok
+				flags: aColorMatrixFlagsConstant) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesColorMatrix  failed' with: status]!
 
 gamma: aFloat
@@ -60,8 +60,8 @@ gamma: aFloat type: aColorAdjustTypeConstant
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesGamma: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
-				gamma: aFloat) = Ok
+				enableFlag: TRUE
+				gamma: aFloat) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesGamma  failed' with: status]!
 
 outputChannel: aColorAdjustTypeConstant channelFlags: channelFlags
@@ -69,9 +69,26 @@ outputChannel: aColorAdjustTypeConstant channelFlags: channelFlags
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesOutputChannel: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
-				channelFlags: channelFlags) = Ok
+				enableFlag: TRUE
+				channelFlags: channelFlags) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesOutputChannel failed' with: status]!
+
+remapColor: oldColor to: newColor
+	self remapColor: oldColor to: newColor type: ColorAdjustTypeDefault!
+
+remapColor: oldColor to: newColor type: anInteger
+	| colorMapping status |
+	colorMapping := GpColorMap newBuffer.
+	colorMapping
+		oldColor: oldColor argbCode;
+		newColor: newColor argbCode.
+	(status := GdiplusLibrary default
+				gdipSetImageAttributesRemapTable: self asParameter
+				type: anInteger
+				enableFlag: TRUE
+				mapSize: 1
+				map: colorMapping) == Ok
+		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesRemapTable failed' with: status]!
 
 remapTable: aColorMapArray
 	^self remapTable: aColorMapArray type: ColorAdjustTypeDefault!
@@ -81,7 +98,7 @@ remapTable: aColorMapArray type: aColorAdjustTypeConstant
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesRemapTable: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
+				enableFlag: TRUE
 				mapSize: aColorMapArray size
 				map: aColorMapArray) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesRemapTable failed' with: status]!
@@ -98,8 +115,8 @@ threshold: aFloat type: aColorAdjustTypeConstant
 	(status := GdiplusLibrary default
 				gdipSetImageAttributesThreshold: self asParameter
 				type: aColorAdjustTypeConstant
-				enableFlag: true asParameter
-				threshold: aFloat) = Ok
+				enableFlag: TRUE
+				threshold: aFloat) == Ok
 		ifFalse: [GdiplusError signal: 'GdipSetImageAttributesThreshold  failed' with: status]! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #basicFree!private!realizing/unrealizing! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #colorKeys:colorLow:colorHigh:!accessing!public! !
@@ -108,6 +125,8 @@ threshold: aFloat type: aColorAdjustTypeConstant
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #gamma:!accessing!public! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #gamma:type:!accessing!public! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #outputChannel:channelFlags:!accessing!public! !
+!Graphics.Gdiplus.ImageAttributes categoriesFor: #remapColor:to:!accessing!public! !
+!Graphics.Gdiplus.ImageAttributes categoriesFor: #remapColor:to:type:!accessing!public! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #remapTable:!accessing!public! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #remapTable:type:!accessing!public! !
 !Graphics.Gdiplus.ImageAttributes categoriesFor: #threshold:!accessing!public! !
