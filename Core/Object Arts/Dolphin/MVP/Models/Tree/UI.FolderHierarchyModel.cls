@@ -45,5 +45,5 @@ initialize
 				isImmutable: true;
 				yourself)! !
 !UI.FolderHierarchyModel class categoriesFor: #defaultSearchPolicy!constants!public! !
-!UI.FolderHierarchyModel class categoriesFor: #initialize!private! !
+!UI.FolderHierarchyModel class categoriesFor: #initialize!development!initializing!private! !
 
