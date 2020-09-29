@@ -22,9 +22,7 @@ Instance Variables:
 
 	| cmp |
 	cmp := self name <==> aClassDescription name.
-	^cmp == 0
-		ifTrue: [self environment printString <==> aClassDescription environment printString <= 0]
-		ifFalse: [cmp < 0]!
+	^cmp == 0 ifTrue: [self fullName <= aClassDescription fullName] ifFalse: [cmp < 0]!
 
 >> aSymbol
 	^self compiledMethodAt: aSymbol!
@@ -840,7 +838,7 @@ resourceIdentifiers
 
 resourceIdentifiersDo: aMonadicValuable
 	self
-		resourceSelectorsDo: [:each | aMonadicValuable value: (UI.ResourceIdentifier class: self selector: each)]!
+		resourceSelectorsDo: [:each | aMonadicValuable value: (UI.ResourceIdentifier newClass: self selector: each)]!
 
 resourceNames
 	| names |
@@ -904,6 +902,12 @@ storeClassCategories
 	"Private - Record the categories of the receiver to the change log."
 
 	"Ignored in the absence of the development system"!
+
+storeOn: aStream
+	"Append to the <puttableStream> argument, target, an expression which when 
+	evaluated will answer a collection similar to the receiver."
+
+	self printFullNameOn: aStream!
 
 subclasses
 	"Answer a <collection> containing the receiver's immediate subclasses."
@@ -1086,6 +1090,7 @@ withAllSubclassesDo: aMonadicValuable
 !Core.ClassDescription categoriesFor: #sourceManager!accessing!public! !
 !Core.ClassDescription categoriesFor: #stbReadFrom:format:!binary filing!public! !
 !Core.ClassDescription categoriesFor: #storeClassCategories!private!source filing-methods! !
+!Core.ClassDescription categoriesFor: #storeOn:!binding!printing!public! !
 !Core.ClassDescription categoriesFor: #subclasses!class hierarchy-accessing!public! !
 !Core.ClassDescription categoriesFor: #subclassesDo:!class hierarchy-accessing!public! !
 !Core.ClassDescription categoriesFor: #subclassInstVarNames!instance variables!public! !
