@@ -107,4 +107,5 @@ testStoreOn
 !UI.Tests.ResourceIdentifierTest categoriesFor: #testDeserializeAll!public!unit tests! !
 !UI.Tests.ResourceIdentifierTest categoriesFor: #testReferenceToNonExistentView!public!unit tests! !
 !UI.Tests.ResourceIdentifierTest categoriesFor: #testResourceSelector!public!unit tests! !
+!UI.Tests.ResourceIdentifierTest categoriesFor: #testStoreOn!public!unit tests! !
 
