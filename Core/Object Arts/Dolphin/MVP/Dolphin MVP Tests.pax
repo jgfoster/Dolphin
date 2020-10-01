@@ -28,6 +28,7 @@ package setClassNames: #(
 	#{UI.Tests}
 	#{UI.Tests.AbstractContainerViewTest}
 	#{UI.Tests.AbstractKeyboardTest}
+	#{UI.Tests.AbstractMultilineTextEditTest}
 	#{UI.Tests.AbstractTextEditTest}
 	#{UI.Tests.AcceleratorTableTest}
 	#{UI.Tests.BorderLayoutTest}
