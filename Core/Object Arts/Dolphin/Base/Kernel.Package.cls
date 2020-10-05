@@ -1607,8 +1607,6 @@ tracePrerequisitesOfLiterals: anIdentityDictionary packagedVariables: aLookupTab
 			[:eachMethod |
 			eachMethod literalReferencesDo: 
 					[:eachLiteral |
-					"((eachLiteral isKindOf: VariableBinding) and: [
-						eachLiteral key = #TestCase and: [eachMethod selector == #icon]]) ifTrue: [self halt]."
 					(self bindingRefToLiteral: eachLiteral)
 						ifNotNil: 
 							[:ref |
