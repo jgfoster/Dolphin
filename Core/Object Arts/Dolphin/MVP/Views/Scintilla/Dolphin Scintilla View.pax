@@ -1551,7 +1551,7 @@ UI.Scintilla.Styler subclass: #'UI.Scintilla.NullStyler'
 	classConstants: {}!
 UI.MultilineTextEdit subclass: #'UI.Scintilla.ScintillaView'
 	instanceVariableNames: 'this currentTextStyles styleIdMap styler markerDefinitions markers wordChars registeredImages modificationEventMask autoCStops autoCFillups whitespaceBackcolor whitespaceForecolor selectionBackcolor selectionForecolor indicators callTipTabWidth punctuation callTipHighlightColor braceChars whitespaces scFlags allTextStyles foldMarginColor foldMarginHiColor foldMarkerStyle foldFlags stringClass keyBindings indicatorStyles secondarySelectionForecolor secondarySelectionBackcolor annotationStyles _unused50'
-	classVariableNames: 'CodePages DefaultKeyBindings DefaultTextStyles Library'
+	classVariableNames: 'CodePages DefaultKeyBindings DefaultTextStyles LexerKeywords Library'
 	imports: #(#{UI.Scintilla.ScintillaConstants})
 	classInstanceVariableNames: ''
 	classConstants: {
