@@ -31,16 +31,14 @@ isVBCollection
 !CDO.INNTPFinalScriptConnector class methodsFor!
 
 clsid
-	"Private - Answer the CLSID of the coclass (NNTPFinalConnector) for which the receiver is the default interface.
-	"
+	"Private - Answer the CLSID of the coclass (NNTPFinalConnector) for which the receiver is the default interface."
 
-	^CLSID fromString: '{CD000010-8B95-11D1-82DB-00C04FB1625D}'
+	^CLSID fromString: '{cd000010-8b95-11d1-82db-00c04fb1625d}'
 !
 
 initializeTypeLib
 	"Private - Establish a connection to the receiver's type library.
-		CDOINNTPFinalScriptConnector initializeTypeLib
-	"
+		INNTPFinalScriptConnector initializeTypeLib"
 
 	typeLib := CDOLib! !
 !CDO.INNTPFinalScriptConnector class categoriesFor: #clsid!**auto generated**!constants!private! !

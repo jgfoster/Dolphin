@@ -31,16 +31,14 @@ isVBCollection
 !CDO.INNTPPostScriptConnector class methodsFor!
 
 clsid
-	"Private - Answer the CLSID of the coclass (NNTPPostConnector) for which the receiver is the default interface.
-	"
+	"Private - Answer the CLSID of the coclass (NNTPPostConnector) for which the receiver is the default interface."
 
-	^CLSID fromString: '{CD000009-8B95-11D1-82DB-00C04FB1625D}'
+	^CLSID fromString: '{cd000009-8b95-11d1-82db-00c04fb1625d}'
 !
 
 initializeTypeLib
 	"Private - Establish a connection to the receiver's type library.
-		CDOINNTPPostScriptConnector initializeTypeLib
-	"
+		INNTPPostScriptConnector initializeTypeLib"
 
 	typeLib := CDOLib! !
 !CDO.INNTPPostScriptConnector class categoriesFor: #clsid!**auto generated**!constants!private! !
