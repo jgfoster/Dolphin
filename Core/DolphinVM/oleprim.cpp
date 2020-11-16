@@ -20,7 +20,7 @@
 
 static Oop* AnswerNewStructure(BehaviorOTE* oteClass, void* ptr)
 {
-	if (oteClass->isNil())
+	if (isNil(oteClass))
 		return Interpreter::primitiveFailure(_PrimitiveFailureCode::ClassNotRegistered);
 
 	OTE* oteStruct = ExternalStructure::New(oteClass, ptr);
@@ -32,7 +32,7 @@ static Oop* AnswerNewStructure(BehaviorOTE* oteClass, void* ptr)
 
 static Oop* AnswerNewInterfacePointer(BehaviorOTE* oteClass, IUnknown* punk)
 {
-	if (oteClass->isNil())
+	if (isNil(oteClass))
 		return Interpreter::primitiveFailure(_PrimitiveFailureCode::ClassNotRegistered);
 
 	if (punk)

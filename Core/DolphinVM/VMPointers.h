@@ -224,3 +224,25 @@ struct VMPointers //: public Object
 // Globally accessible pointers, but please don't write to them!
 extern /*const*/ VMPointers Pointers;
 extern VMPointers _Pointers;
+
+#if defined (VM)
+template <class T> inline bool isNil(const TOTE<T>* ote)
+{
+	return ote == reinterpret_cast<const TOTE<T>*>(Pointers.Nil);
+}
+
+template <class T> inline bool isBehavior(const TOTE<T>* ote)
+{
+	return isMetaclass(ote) || isMetaclass(ote->m_oteClass);
+}
+template <class T> inline bool isMetaclass(const TOTE<T>* ote)
+{
+	return ote->m_oteClass == Pointers.ClassMetaclass;
+}
+
+template <class T> inline void NilOutPointer(TOTE<T>*& ote)
+{
+	ote->countDown();
+	ote = reinterpret_cast<TOTE<T>*>(Pointers.Nil);
+}
+#endif

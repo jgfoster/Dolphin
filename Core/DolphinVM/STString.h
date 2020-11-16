@@ -61,6 +61,8 @@ typedef UINT codepage_t;
 
 namespace ST
 {
+	class StringClass;
+
 	class String : public ArrayedCollection
 	{
 	public:
@@ -194,7 +196,7 @@ namespace ST
 		template <codepage_t CP, class T> static Utf16StringOTE* __fastcall New(const T* pChars, size_t len);
 		static Utf16StringOTE* __fastcall New(OTE* oteByteString);
 		static Utf16StringOTE* __fastcall New(size_t cwch);
-		static Utf16StringOTE * ST::Utf16String::NewFromBSTR(BSTR bs)
+		static Utf16StringOTE * NewFromBSTR(BSTR bs)
 		{
 			return New(bs, ::SysStringLen(bs));
 		}
