@@ -204,7 +204,7 @@ deallocateThunks
 descriptorClass
 	"Private - Answer the class used to build and represent function descriptors."
 
-	^Descriptor!
+	^FunctionDescriptor!
 
 fromCookie: anInteger
 	"Answer the receiver's registered instance with the cookie, anInteger. If there is no such

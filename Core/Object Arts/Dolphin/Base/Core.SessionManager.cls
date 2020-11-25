@@ -907,7 +907,7 @@ registerConsoleCtrlHandler
 			[consoleHandler := External.MessageCallback
 						receiver: self
 						selector: #onConsoleCtrl:
-						descriptor: (External.Descriptor fromString: 'stdcall: bool dword').
+						descriptor: (External.FunctionDescriptor fromString: 'stdcall: bool dword').
 			KernelLibrary default setConsoleCtrlHandler: consoleHandler asParameter add: true]!
 
 registerRunning

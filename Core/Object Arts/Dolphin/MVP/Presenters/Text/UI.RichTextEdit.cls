@@ -1006,7 +1006,7 @@ initialize
 	self addClassConstant: 'StreamInIndex' value: (self indexOfInstVar: 'streamIn').
 
 	"Descriptor for stream out callback"
-	StreamingDescriptor := External.Descriptor argumentTypes: 'dword lpvoid sdword DWORD*'.
+	StreamingDescriptor := External.FunctionDescriptor argumentTypes: 'dword lpvoid sdword DWORD*'.
 	ParagraphAlignmentMap := IdentityDictionary new
 				at: #left put: PFA_LEFT;
 				at: #right put: PFA_RIGHT;

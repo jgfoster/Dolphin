@@ -71,7 +71,7 @@ descriptorLiteral at: 11
 descriptorClass
 	"Private - Answer the class of descriptor to use for the receiver."
 
-	^Descriptor!
+	^FunctionDescriptor!
 
 descriptorLiteral
 	"Private - Answer the argument type descriptor literal from the receiver's 'literal frame'.

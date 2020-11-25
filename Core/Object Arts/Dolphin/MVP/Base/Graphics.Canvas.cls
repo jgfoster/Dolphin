@@ -342,7 +342,8 @@ fonts: aString do: operation
 						value: lplf
 						value: lptm
 						value: dwType]
-				descriptor: (External.Descriptor returnType: 'sdword' argumentTypes: 'LOGFONTW* lpvoid dword uintptr').
+				descriptor: (External.FunctionDescriptor returnType: 'sdword'
+						argumentTypes: 'LOGFONTW* lpvoid dword uintptr').
 	answer := GDILibrary default
 				enumFonts: self asParameter
 				lpFaceName: aString
@@ -1238,5 +1239,5 @@ withOwnedDC: hDC
 !Graphics.Canvas class categoriesFor: #withNonOwnedDC:!instance creation!public! !
 !Graphics.Canvas class categoriesFor: #withOwnedDC:!instance creation!public! !
 
-Canvas class methodProtocol: #dcSource attributes: #(#readOnly) selectors: #(#getDC #releaseDC:)!
+Graphics.Canvas class methodProtocol: #dcSource attributes: #(#readOnly) selectors: #(#getDC #releaseDC:)!
 
