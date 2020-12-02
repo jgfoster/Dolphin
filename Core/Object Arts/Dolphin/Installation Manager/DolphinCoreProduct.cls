@@ -3,10 +3,10 @@
 DolphinProduct subclass: #DolphinCoreProduct
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-DolphinCoreProduct guid: (GUID fromString: '{610c5616-617f-4b75-9c31-7589f234a3c2}')!
+DolphinCoreProduct guid: (Core.GUID fromString: '{610c5616-617f-4b75-9c31-7589f234a3c2}')!
 DolphinCoreProduct comment: ''!
 !DolphinCoreProduct categoriesForClass!System-Support! !
 !DolphinCoreProduct methodsFor!
@@ -64,6 +64,7 @@ contents
 
 	"Deprecated pieces"
 	contents
+		add: #('Core\Object Arts\Dolphin\MVP\Gdiplus\Gdiplus (Deprecated).pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Deprecated\Dolphin Legacy Resource Framework.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\MVP\Deprecated\Dolphin MVP (Deprecated).pax' #plain #imageBased);
 		yourself.
