@@ -398,5 +398,5 @@ initialize
 				with: MB_ICONWARNING
 				with: MB_ICONERROR)! !
 !UI.MessageBubble class categoriesFor: #icon!constants!development!public! !
-!UI.MessageBubble class categoriesFor: #initialize!private! !
+!UI.MessageBubble class categoriesFor: #initialize!class initialization!development!private! !
 

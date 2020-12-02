@@ -80,18 +80,6 @@ package setMethodNames: #(
 	#(#{UI.Menu} #replace:with:)
 	#(#{UI.MoenTreeView} #updateItem:andChildren:imagesOnly:)
 	#(#{UI.PaintEvent class} #handle:wParam:hdc:paintStruct:)
-	#(#{UI.Scintilla.Indicator} #type)
-	#(#{UI.Scintilla.IndicatorStyle} #alphaPercent)
-	#(#{UI.Scintilla.IndicatorStyle} #alphaPercent:)
-	#(#{UI.Scintilla.IndicatorStyle} #hoverStyleName)
-	#(#{UI.Scintilla.IndicatorStyle} #hoverStyleName:)
-	#(#{UI.Scintilla.IndicatorStyle} #styleName)
-	#(#{UI.Scintilla.IndicatorStyle} #styleName:)
-	#(#{UI.Scintilla.IndicatorStyle class} #styleNames)
-	#(#{UI.Scintilla.ScintillaView} #highlightRange:withIndicator:)
-	#(#{UI.Scintilla.ScintillaView} #indicatorDefinitions:)
-	#(#{UI.Scintilla.ScintillaView} #isKeyboardInputUnicode)
-	#(#{UI.Scintilla.ScintillaView} #isKeyboardInputUnicode:)
 	#(#{UI.ScrollingDecorator} #continuousTracking)
 	#(#{UI.ScrollingDecorator} #continuousTracking:)
 	#(#{UI.ShellView} #hasThickFrame)
@@ -131,36 +119,14 @@ package setVariableNames: #(
 	#{Smalltalk.CheckedPushButton}
 	#{Smalltalk.CompositePresenter}
 	#{Smalltalk.MultipleChoicePresenter}
-	#{Smalltalk.NullScintillaStyler}
-	#{Smalltalk.POINT}
-	#{Smalltalk.RECT}
-	#{Smalltalk.ScintillaIndicatorDefinition}
-	#{Smalltalk.ScintillaIndicatorStyle}
-	#{Smalltalk.ScintillaMargin}
-	#{Smalltalk.ScintillaMarkerDefinition}
-	#{Smalltalk.ScintillaTextStyle}
-	#{Smalltalk.ScintillaView}
-	#{Smalltalk.SIZE}
 	#{Smalltalk.StaticViewAbstract}
-	#{Smalltalk.WinImageList}
 ).
 
 package setAliasVariableNames: #(
 	#{Smalltalk.CheckedPushButton}
 	#{Smalltalk.CompositePresenter}
 	#{Smalltalk.MultipleChoicePresenter}
-	#{Smalltalk.NullScintillaStyler}
-	#{Smalltalk.POINT}
-	#{Smalltalk.RECT}
-	#{Smalltalk.ScintillaIndicatorDefinition}
-	#{Smalltalk.ScintillaIndicatorStyle}
-	#{Smalltalk.ScintillaMargin}
-	#{Smalltalk.ScintillaMarkerDefinition}
-	#{Smalltalk.ScintillaTextStyle}
-	#{Smalltalk.ScintillaView}
-	#{Smalltalk.SIZE}
 	#{Smalltalk.StaticViewAbstract}
-	#{Smalltalk.WinImageList}
 ).
 
 package setPrerequisites: #(
@@ -172,7 +138,6 @@ package setPrerequisites: #(
 	'..\Presenters\List\Dolphin List Presenter'
 	'..\Views\MoenTree\Dolphin MoenTree View'
 	'..\Base\Dolphin MVP Base'
-	'..\Views\Scintilla\Dolphin Scintilla View'
 	'..\Views\Scrollbars\Dolphin Scrollbars'
 	'..\Views\Slider\Dolphin Slider Control'
 	'..\Presenters\Text\Dolphin Text Presenter'
@@ -217,29 +182,7 @@ Smalltalk.CompositePresenter := UI.Presenter!
 
 Smalltalk.MultipleChoicePresenter := UI.ChoicePresenter!
 
-Smalltalk.NullScintillaStyler := UI.Scintilla.NullStyler!
-
-Smalltalk.POINT := OS.POINTL!
-
-Smalltalk.RECT := OS.RECTL!
-
-Smalltalk.ScintillaIndicatorDefinition := UI.Scintilla.IndicatorStyle!
-
-Smalltalk.ScintillaIndicatorStyle := UI.Scintilla.IndicatorStyle!
-
-Smalltalk.ScintillaMargin := UI.Scintilla.Margin!
-
-Smalltalk.ScintillaMarkerDefinition := UI.Scintilla.MarkerDefinition!
-
-Smalltalk.ScintillaTextStyle := UI.Scintilla.TextStyle!
-
-Smalltalk.ScintillaView := UI.Scintilla.ScintillaView!
-
-Smalltalk.SIZE := OS.SIZEL!
-
 Smalltalk.StaticViewAbstract := UI.StaticView!
-
-Smalltalk.WinImageList := Graphics.ImageList!
 
 
 "Loose Methods"!
@@ -746,104 +689,6 @@ handle: hWnd wParam: wParam hdc: hdc paintStruct: ps
 		hdc: hdc
 		paintStruct: ps! !
 !UI.PaintEvent class categoriesFor: #handle:wParam:hdc:paintStruct:!instance creation!public! !
-
-!UI.Scintilla.Indicator methodsFor!
-
-type
-	Notification deprecated.
-	^self styleName! !
-!UI.Scintilla.Indicator categoriesFor: #type!accessing!public! !
-
-!UI.Scintilla.IndicatorStyle methodsFor!
-
-alphaPercent
-	"Answer an <integer> representing the percentage alpha (transparency) for the indicator.
-	Note that this is a percentage (hence the name), and not the usual 0..255 range. Zero
-	represents completely transparent, 100 completely opaque. Note that this is currently only
-	relevant for the #roundBox indicator style."
-
-	#deprecated.
-	^self alpha ifNil: [30] ifNotNil: [:a | a * 100 // SC_ALPHA_OPAQUE]!
-
-alphaPercent: anInteger 
-	"Set the percentage alpha (transparency) for the indicator to the <integer> argument. Note
-	that this is a percentage (hence the name), and not the usual 0..255 range. Zero represents
-	completely transparent, 100 completely opaque. Note that this is currently only relevant for
-	the #roundBox indicator style."
-
-	#deprecated.
-	self alpha: SC_ALPHA_OPAQUE * anInteger // 100!
-
-hoverStyleName
-	Notification deprecated.
-	^self hoverStyle!
-
-hoverStyleName: aSymbol
-	Notification deprecated.
-	self hoverStyle: aSymbol!
-
-styleName
-	Notification deprecated.
-	^self style!
-
-styleName: aSymbol
-	Notification deprecated.
-	self style: aSymbol! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #alphaPercent!accessing!public! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #alphaPercent:!accessing!public! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #hoverStyleName!accessing!public! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #hoverStyleName:!accessing!public! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #styleName!accessing!public! !
-!UI.Scintilla.IndicatorStyle categoriesFor: #styleName:!accessing!public! !
-
-!UI.Scintilla.IndicatorStyle class methodsFor!
-
-styleNames
-	Notification deprecated.
-	^IndicatorStyles! !
-!UI.Scintilla.IndicatorStyle class categoriesFor: #styleNames!initializing!public! !
-
-!UI.Scintilla.ScintillaView methodsFor!
-
-highlightRange: anInterval withIndicator: idInteger 
-	"Apply the indicator identified by the <integer> argument to the range of text
-	specified by the <Interval> argument."
-
-	#deprecated.
-	self setIndicator: idInteger range: anInterval!
-
-indicatorDefinitions: aSequenceableCollection 
-	#deprecated.
-	self indicatorStyles: aSequenceableCollection!
-
-isKeyboardInputUnicode
-	"Are keys always interpreted as Unicode?"
-
-	#deprecated.
-	^this
-		ifNil: [false]
-		ifNotNil: 
-			[(Library
-				directFunction: this
-				msg: SCI_GETKEYSUNICODE
-				wParam: 0
-				lParam: 0) asBoolean]!
-
-isKeyboardInputUnicode: keysUnicodeBoolean
-	"Deprecated in 3.5.5 Always interpret keyboard input as Unicode"
-
-	#deprecated.
-	this
-		ifNotNil: 
-			[Library
-				directFunction: this
-				msg: SCI_SETKEYSUNICODE
-				wParam: keysUnicodeBoolean asParameter
-				lParam: 0]! !
-!UI.Scintilla.ScintillaView categoriesFor: #highlightRange:withIndicator:!indicators!public! !
-!UI.Scintilla.ScintillaView categoriesFor: #indicatorDefinitions:!indicators!public! !
-!UI.Scintilla.ScintillaView categoriesFor: #isKeyboardInputUnicode!**auto generated**!other settings!public!scintilla interface!testing! !
-!UI.Scintilla.ScintillaView categoriesFor: #isKeyboardInputUnicode:!**auto generated**!other settings!public!scintilla interface! !
 
 !UI.ScrollingDecorator methodsFor!
 

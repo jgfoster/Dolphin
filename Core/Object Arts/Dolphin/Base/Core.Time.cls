@@ -147,17 +147,6 @@ seconds: aNumber
 stonContainSubObjects 
 	^ false!
 
-stonOn: stonWriter
-	"Use an ISO style HH:MM:SS.N representation (with optional nanoseconds)"
-
-	stonWriter writeObject: self
-		listSingleton: (String streamContents: 
-					[:stream |
-					self
-						print24: true
-						showSeconds: true
-						on: stream])!
-
 storeOn: aStream
 	"Append to the <puttableStream> argument, target, an expression which when evaluated will answer a <Time> equivalent to the receiver."
 
@@ -196,7 +185,6 @@ subtractTime: aTimeOrDate
 !Core.Time categoriesFor: #seconds!accessing!public! !
 !Core.Time categoriesFor: #seconds:!accessing!private! !
 !Core.Time categoriesFor: #stonContainSubObjects!public!ston! !
-!Core.Time categoriesFor: #stonOn:!public!ston! !
 !Core.Time categoriesFor: #storeOn:!printing!public! !
 !Core.Time categoriesFor: #subtractTime:!arithmetic!public! !
 
@@ -243,9 +231,6 @@ fromSeconds: aNumber
 	If aNumber is negative, then the <Time> is that number of seconds before midnight."
 
 	^self basicNew seconds: aNumber asTrueFraction \\ Duration.SecondsPerDay!
-
-fromSton: stonReader
-	^ self readFrom: stonReader parseListSingleton readStream!
 
 fromString: aString
 	"Answer an instance of the receiver constructed from the string,
@@ -385,7 +370,6 @@ totalSeconds
 !Core.Time class categoriesFor: #fromDuration:!instance creation!public! !
 !Core.Time class categoriesFor: #fromMilliseconds:!instance creation!public! !
 !Core.Time class categoriesFor: #fromSeconds:!instance creation!public! !
-!Core.Time class categoriesFor: #fromSton:!public!ston! !
 !Core.Time class categoriesFor: #fromString:!instance creation!public! !
 !Core.Time class categoriesFor: #fromSYSTEMTIME:!instance creation!private! !
 !Core.Time class categoriesFor: #hours:minutes:seconds:!instance creation!public! !

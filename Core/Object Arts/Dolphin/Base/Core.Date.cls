@@ -293,20 +293,6 @@ setDays: dayCount
 stonContainSubObjects 
 	^ false!
 
-stonOn: stonWriter
-	"Use an ISO style YYYY-MM-DD representation.
-	Since my current implementation is time zone offset sensitive, the offset has to be included."
-
-	"Custom implementation for Dolphin replacing the Pharo implementation in STON-Core"
-
-	| stream offset |
-	stream := String writeStream: 15.
-	stream locale: Locale invariant.
-	self printOn: stream format: 'yyyy-MM-dd'.
-	offset := Locale timeZoneInformation offsetSeconds.
-	offset = 0 ifTrue: [stream nextPut: $Z] ifFalse: [offset seconds printOn: stream format: '+hh:mm'].
-	stonWriter writeObject: self listSingleton: stream grabContents!
-
 storeOn: aStream
 	"Append to the <puttableStream> argument, target, an expression which when evaluated will answer a <Date> equivalent to the receiver."
 
@@ -399,7 +385,6 @@ yyyymmdd
 !Core.Date categoriesFor: #seconds!accessing!public! !
 !Core.Date categoriesFor: #setDays:!accessing!private! !
 !Core.Date categoriesFor: #stonContainSubObjects!accessing!public!ston! !
-!Core.Date categoriesFor: #stonOn:!public!ston! !
 !Core.Date categoriesFor: #storeOn:!printing!public! !
 !Core.Date categoriesFor: #subtractDate:!arithmetic!public! !
 !Core.Date categoriesFor: #subtractDays:!arithmetic!public! !
@@ -489,27 +474,6 @@ fromSeconds: aNumber
 	"Answer a new instance of the receiver that incorporates the second which is the specified <number> of seconds after the Smalltalk epoch."
 
 	^self fromDays: aNumber // Duration.SecondsPerDay!
-
-fromSton: stonReader
-	"Read a ISO YYYY-MM-DD format.
-	Since my current implementation is time zone offset sensitive, the offset has to be taken into account.
-	A missing offset results in the local timezone offset to be used"
-
-	"Customised for Dolphin from the STON-Core original"
-
-	| readStream date |
-	readStream := stonReader parseListSingleton readStream.
-	date := self readFrom: readStream format: 'ymd'.
-	readStream atEnd
-		ifFalse: 
-			[| offset dt |
-			offset := DateAndTime readOffsetFrom: readStream sign: readStream next.
-			dt := DateAndTime
-						year: date year
-						day: date dayOfYear
-						offset: offset.
-			date := dt asLocal asDate].
-	^date!
 
 fromString: aString
 	"Answer an instance of the receiver constructed from the string,
@@ -754,7 +718,6 @@ yesterday
 !Core.Date class categoriesFor: #errorInvalidFormat!exceptions!private! !
 !Core.Date class categoriesFor: #fromDays:!instance creation!public! !
 !Core.Date class categoriesFor: #fromSeconds:!instance creation!public! !
-!Core.Date class categoriesFor: #fromSton:!instance creation!public! !
 !Core.Date class categoriesFor: #fromString:!instance creation!public! !
 !Core.Date class categoriesFor: #fromString:format:!instance creation!public! !
 !Core.Date class categoriesFor: #fromSYSTEMTIME:!instance creation!private! !

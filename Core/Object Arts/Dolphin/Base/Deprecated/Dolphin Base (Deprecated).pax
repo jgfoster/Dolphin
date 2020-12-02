@@ -27,7 +27,6 @@ package setMethodNames: #(
 	#(#{Core.Category class} #categoryIcon)
 	#(#{Core.Character class} #safeCodePoint:)
 	#(#{Core.Class} #allSharedPoolNames)
-	#(#{Core.Class} #noClassCategoryName)
 	#(#{Core.Class} #sharedPoolNames)
 	#(#{Core.Class} #subclass:instanceVariableNames:classVariableNames:poolDictionaries:)
 	#(#{Core.Class} #subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:)
@@ -188,9 +187,6 @@ package setVariableNames: #(
 	#{Smalltalk.ExternalScalar}
 	#{Smalltalk.ExternalStructure}
 	#{Smalltalk.SmalltalkParseErrorCodes}
-	#{Smalltalk.SmalltalkParser}
-	#{Smalltalk.SmalltalkScanner}
-	#{Smalltalk.StParseNodeVisitor}
 	#{Smalltalk.UnicodeString}
 	#{Smalltalk.WinNlsConstants}
 ).
@@ -210,9 +206,6 @@ package setAliasVariableNames: #(
 	#{Smalltalk.ExternalScalar}
 	#{Smalltalk.ExternalStructure}
 	#{Smalltalk.SmalltalkParseErrorCodes}
-	#{Smalltalk.SmalltalkParser}
-	#{Smalltalk.SmalltalkScanner}
-	#{Smalltalk.StParseNodeVisitor}
 	#{Smalltalk.UnicodeString}
 	#{Smalltalk.WinNlsConstants}
 ).
@@ -222,7 +215,6 @@ package setPrerequisites: #(
 	'..\Dolphin Conformant Array Fields'
 	'..\Dolphin Legacy Date & Time'
 	'..\Dolphin Message Box'
-	'..\..\System\Compiler\Smalltalk Parser'
 ).
 
 package!
@@ -304,12 +296,6 @@ Smalltalk.ExternalStructure := External.Structure!
 
 Smalltalk.SmalltalkParseErrorCodes := Kernel.ParseErrorCodes!
 
-Smalltalk.SmalltalkParser := Kernel.Parser!
-
-Smalltalk.SmalltalkScanner := Kernel.Scanner!
-
-Smalltalk.StParseNodeVisitor := Kernel.ParseNodeVisitor!
-
 Smalltalk.UnicodeString := Core.Utf16String!
 
 Smalltalk.WinNlsConstants := OS.NlsConstants!
@@ -358,12 +344,6 @@ safeCodePoint: anInteger
 allSharedPoolNames
 	#deprecated.
 	^self allSharedPools collect: [:each | each name]!
-
-noClassCategoryName
-	"Answer the String name of the ClassCategory used to mark that no
-	category has been set for a Class."
-
-	^self classCategoryClass unclassifiedName!
 
 sharedPoolNames
 	Notification deprecated.
@@ -484,7 +464,6 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 	subclass class instanceVariableNames: classInstVarString.
 	^subclass! !
 !Core.Class categoriesFor: #allSharedPoolNames!pool variables!public! !
-!Core.Class categoriesFor: #noClassCategoryName!constants!public! !
 !Core.Class categoriesFor: #sharedPoolNames!pool variables!public! !
 !Core.Class categoriesFor: #subclass:instanceVariableNames:classVariableNames:poolDictionaries:!class hierarchy-adding!public! !
 !Core.Class categoriesFor: #subclass:instanceVariableNames:classVariableNames:poolDictionaries:category:!class hierarchy-adding!public! !

@@ -75,9 +75,12 @@ contents
 
 	"Deprecated pieces"
 	contents
+		add: #('Core\Object Arts\Dolphin\System\Compiler\Smalltalk Parser (Deprecated).pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\MVP\Gdiplus\Gdiplus (Deprecated).pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Deprecated\Dolphin Legacy Resource Framework.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\MVP\Deprecated\Dolphin MVP (Deprecated).pax' #plain #imageBased);
+		add: #('Core\Object Arts\Dolphin\MVP\Deprecated\Dolphin MVP (Old Names).pax' #plain #imageBased);
+		add: #('Core\Object Arts\Dolphin\MVP\Views\Scintilla\Dolphin Scintilla View (Deprecated).pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\IDE\Base\Development System (Deprecated).pax' #plain #imageBased);
 		yourself.
 
