@@ -1,6 +1,6 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-SharedPool subclass: #Win32Constants
+Kernel.SharedPool subclass: #'OS.Win32Constants'
 	instanceVariableNames: ''
 	classVariableNames: ''
 	imports: #()
@@ -818,9 +818,6 @@ SharedPool subclass: #Win32Constants
 		'TA_TOP' -> 16r0.
 		'TA_UPDATECP' -> 16r1.
 		'TEST' -> 16r59.
-		'TIME_ZONE_ID_DAYLIGHT' -> 16r2.
-		'TIME_ZONE_ID_STANDARD' -> 16r1.
-		'TIME_ZONE_ID_UNKNOWN' -> 16r0.
 		'TME_CANCEL' -> -16r80000000.
 		'TME_HOVER' -> 16r1.
 		'TME_LEAVE' -> 16r2.
@@ -1199,12 +1196,7 @@ SharedPool subclass: #Win32Constants
 		'WVR_VALIDRECTS' -> 16r400.
 		'WVR_VREDRAW' -> 16r200
 	}!
-Win32Constants guid: (GUID fromString: '{f9d6e381-277b-4501-bfd5-b9a3513f1bf0}')!
-Win32Constants comment: ''!
-!Win32Constants categoriesForClass!Kernel-Objects! !
-!Win32Constants class methodsFor!
-
-bindings
-	^self classPool associations! !
-!Win32Constants class categoriesFor: #bindings!public! !
-
+OS.Win32Constants guid: (Core.GUID fromString: '{f9d6e381-277b-4501-bfd5-b9a3513f1bf0}')!
+OS.Win32Constants isNonInstantiable: true!
+OS.Win32Constants comment: ''!
+!OS.Win32Constants categoriesForClass!Kernel-Objects! !
