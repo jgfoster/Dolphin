@@ -150,7 +150,7 @@ testIsDefined
 testIsLiteral
 	self bindingTestCases do: [:each | self assert: (self newTestSubjectWithPath: each first) isLiteral]!
 
-testIsWilcard
+testIsWildcard
 	self bindingTestCases do: [:each | self deny: (self newTestSubjectWithPath: each first) isWildcard]!
 
 testLessOrEqual
@@ -260,7 +260,7 @@ valueOfBinding: aVariableBinding
 !AbstractBindingReferenceTest categoriesFor: #testInstance!public!unit tests! !
 !AbstractBindingReferenceTest categoriesFor: #testIsDefined!public!unit tests! !
 !AbstractBindingReferenceTest categoriesFor: #testIsLiteral!public!unit tests! !
-!AbstractBindingReferenceTest categoriesFor: #testIsWilcard!public!unit tests! !
+!AbstractBindingReferenceTest categoriesFor: #testIsWildcard!public!unit tests! !
 !AbstractBindingReferenceTest categoriesFor: #testLessOrEqual!public!unit tests! !
 !AbstractBindingReferenceTest categoriesFor: #testMeta!public!unit tests! !
 !AbstractBindingReferenceTest categoriesFor: #testPath!public!unit tests! !
