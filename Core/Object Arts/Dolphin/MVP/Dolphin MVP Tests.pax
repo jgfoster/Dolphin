@@ -52,7 +52,6 @@ package setClassNames: #(
 	#{UI.Tests.ListControlTest}
 	#{UI.Tests.ListPresenterTest}
 	#{UI.Tests.ListViewTest}
-	#{UI.Tests.MockScintillaView}
 	#{UI.Tests.MoenTreeViewTest}
 	#{UI.Tests.MoenTreeViewTest2}
 	#{UI.Tests.MultilineTextEditTest}
@@ -67,10 +66,6 @@ package setClassNames: #(
 	#{UI.Tests.ReferenceViewTest}
 	#{UI.Tests.ResourceIdentifierTest}
 	#{UI.Tests.RichTextEditTest}
-	#{UI.Tests.ScintillaIndicatorTest}
-	#{UI.Tests.ScintillaLexerMetadataTest}
-	#{UI.Tests.ScintillaLexerPropertyTest}
-	#{UI.Tests.ScintillaViewTest}
 	#{UI.Tests.ScrollingDecoratorTest}
 	#{UI.Tests.SelectableItemsTest}
 	#{UI.Tests.SelectableListItemsTest}
@@ -124,7 +119,6 @@ package setPrerequisites: #(
 	'Presenters\Number\Dolphin Number Presenter'
 	'Presenters\Radio\Dolphin Radio Buttons'
 	'Presenters\Text\Dolphin Rich Text Presenter'
-	'Views\Scintilla\Dolphin Scintilla View'
 	'Views\Scrollbars\Dolphin Scrollbars'
 	'Views\Slider\Dolphin Slider Control'
 	'Views\Styled Views\Dolphin Styled Views'
@@ -294,18 +288,6 @@ Core.Tests.DolphinTest subclass: #'UI.Tests.ResourceIdentifierTest'
 	instanceVariableNames: 'tempViewResource'
 	classVariableNames: ''
 	imports: #()
-	classInstanceVariableNames: ''
-	classConstants: {}!
-Core.Tests.DolphinTest subclass: #'UI.Tests.ScintillaIndicatorTest'
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''
-	classConstants: {}!
-Core.Tests.DolphinTest subclass: #'UI.Tests.ScintillaLexerMetadataTest'
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Tests.DolphinTest subclass: #'UI.Tests.TypeConverterTest'

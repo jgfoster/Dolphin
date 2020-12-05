@@ -1,12 +1,12 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-Presenter subclass: #ProfilerSamplesPresenter
+UI.Presenter subclass: #ProfilerSamplesPresenter
 	instanceVariableNames: 'selectorFilter filterTarget index frame'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ProfilerSamplesPresenter guid: (GUID fromString: '{425d0eb4-542e-11d3-998b-d5ca2c3c1d61}')!
+ProfilerSamplesPresenter guid: (Core.GUID fromString: '{425d0eb4-542e-11d3-998b-d5ca2c3c1d61}')!
 ProfilerSamplesPresenter comment: 'See [DolphinImageFolder]/Idb/Documentation for details
 
 (C) 2005 Ian Bartholomew
@@ -111,11 +111,11 @@ onFrameSelectionChanged
 
 	| selection text selectionRange styler |
 	selection := (self presenterNamed: 'frames') selectionOrNil.
-	selection isNil 
+	selection isNil
 		ifTrue: 
 			[text := String new.
 			selectionRange := 0 to: 0.
-			styler := NullScintillaStyler]
+			styler := Scintilla.NullStyler]
 		ifFalse: 
 			[text := selection coloredSource.
 			styler := selection compiledCode stylerClass.

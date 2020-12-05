@@ -8,7 +8,6 @@ package paxVersion: 2.1;
 package setClassNames: #(
 	#{Kernel.CompiledMethodTest}
 	#{Kernel.Tests.AbstractParserErrorTest}
-	#{Kernel.Tests.CompiledMethodTest}
 	#{Kernel.Tests.CompilerErrorTest}
 	#{Kernel.Tests.CompilerTest}
 	#{Kernel.Tests.CompilerTestClasses}
@@ -27,16 +26,17 @@ package setClassNames: #(
 	#{Smalltalk.RewriteTestCase}
 	#{Smalltalk.SmalltalkSystemTest}
 	#{Smalltalk.SmalltalkWorkspaceTest}
-	#{Smalltalk.StStyler}
+	#{UI.Scintilla.Tests.MockScintillaView}
+	#{UI.Scintilla.Tests.StStyler}
 	#{Smalltalk.VersionResourceTest}
 	#{Smalltalk.XMLDOMNodeTest}
 ).
 
 package setMethodNames: #(
 	#(#{UI.Tests.BorderLayoutTest} #testResourceBrowserPreview)
-	#(#{External.Tests.INTEGERTest} #testPrintOnNull)
-	#(#{External.Tests.INTEGERTest} #testPrintOnSigned)
-	#(#{External.Tests.INTEGERTest} #testPrintOnUnsigned)
+	#(#{External.Tests.IntegerTest} #testPrintOnNull)
+	#(#{External.Tests.IntegerTest} #testPrintOnSigned)
+	#(#{External.Tests.IntegerTest} #testPrintOnUnsigned)
 	#(#{UI.Tests.ScintillaViewTest} #testTokensFromTo)
 	yourself.
 
@@ -101,7 +101,7 @@ Core.Tests.DolphinTest subclass: #'Kernel.Tests.AbstractParserErrorTest'
 	imports: #(#{Kernel.ParseErrorCodes} #{External})
 	classInstanceVariableNames: ''
 	classConstants: {}!
-Core.Tests.DolphinTest subclass: #'Kernel.Tests.CompiledMethodTest'
+Core.Tests.DolphinTest subclass: #'Kernel.CompiledMethodTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
 	imports: #()
@@ -236,7 +236,7 @@ testResourceBrowserPreview
 	resourceView destroy! !
 !UI.Tests.BorderLayoutTest categoriesFor: #testResourceBrowserPreview!public!unit tests! !
 
-!External.Tests.INTEGERTest methodsFor!
+!External.Tests.IntegerTest methodsFor!
 
 testPrintOnNull
 	| subject |
@@ -252,9 +252,9 @@ testPrintOnUnsigned
 	| subject |
 	subject := DWORD fromInteger: 123.
 	self assert: subject printString equals: 'a DWORD(16r7B)'! !
-!External.Tests.INTEGERTest categoriesFor: #testPrintOnNull!public!unit tests! !
-!External.Tests.INTEGERTest categoriesFor: #testPrintOnSigned!public!unit tests! !
-!External.Tests.INTEGERTest categoriesFor: #testPrintOnUnsigned!public!unit tests! !
+!External.Tests.IntegerTest categoriesFor: #testPrintOnNull!public!unit tests! !
+!External.Tests.IntegerTest categoriesFor: #testPrintOnSigned!public!unit tests! !
+!External.Tests.IntegerTest categoriesFor: #testPrintOnUnsigned!public!unit tests! !
 
 !UI.Tests.ScintillaViewTest methodsFor!
 

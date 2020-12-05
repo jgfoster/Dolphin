@@ -3,10 +3,10 @@
 ProfilerListsPresenter subclass: #ProfilerSelectorListPresenter
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ProfilerSelectorListPresenter guid: (GUID fromString: '{425d0eb8-542e-11d3-998b-d5ca2c3c1d61}')!
+ProfilerSelectorListPresenter guid: (Core.GUID fromString: '{425d0eb8-542e-11d3-998b-d5ca2c3c1d61}')!
 ProfilerSelectorListPresenter comment: 'See [DolphinImageFolder]/Idb/Documentation for details
 
 (C) 2005 Ian Bartholomew
@@ -61,7 +61,7 @@ onSelectionChanged
 	"The selector selection has changed so update the source view accordingly"
 
 	| styler text |
-	self hasSelection 
+	self hasSelection
 		ifTrue: 
 			[| method |
 			method := self selectedMethod.
@@ -69,7 +69,7 @@ onSelectionChanged
 			styler := method stylerClass]
 		ifFalse: 
 			[text := String new.
-			styler := NullScintillaStyler].
+			styler := Scintilla.NullStyler].
 	(self presenterNamed: 'workspace')
 		text: text;
 		stylerClass: styler.

@@ -3,7 +3,7 @@
 UI.Tests.ListViewTest subclass: #'UI.Tests.SingleSelectListViewTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
-	imports: #(#{Smalltalk.ListViewConstants} #{OS.ListViewConstants})
+	imports: #(#{OS.ListViewConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UI.Tests.SingleSelectListViewTest guid: (Core.GUID fromString: '{176c59b9-4286-4753-8320-c9b5da469d9e}')!

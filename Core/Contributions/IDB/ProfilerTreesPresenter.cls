@@ -3,10 +3,10 @@
 ProfilerPresenter subclass: #ProfilerTreesPresenter
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ProfilerTreesPresenter guid: (GUID fromString: '{425d0eb6-542e-11d3-998b-d5ca2c3c1d61}')!
+ProfilerTreesPresenter guid: (Core.GUID fromString: '{425d0eb6-542e-11d3-998b-d5ca2c3c1d61}')!
 ProfilerTreesPresenter comment: 'See [DolphinImageFolder]/Idb/Documentation for details
 
 (C) 2005 Ian Bartholomew
@@ -78,26 +78,26 @@ onSelectionChanged
 	"The frame selection has changed so update the source view accordingly"
 
 	| sourceText sourceSelectionRange disassemblyText disassemblySelectionLine styler |
-	self selectedNode 
+	self selectedNode
 		ifNil: 
 			[sourceText := String new.
 			sourceSelectionRange := 0 to: 0.
 			disassemblyText := String new.
 			disassemblySelectionLine := 0.
-			styler := NullScintillaStyler]
+			styler := Scintilla.NullStyler]
 		ifNotNil: 
-			[:arg | 
+			[:arg |
 			sourceText := arg object coloredSource.
 			sourceSelectionRange := arg object selectionRange.
 			disassemblyText := arg object disassemblySource.
 			disassemblySelectionLine := arg object disassemblySelectionLine.
 			styler := arg object compiledCode stylerClass].
-	(self workspacePresenter)
+	self workspacePresenter
 		text: sourceText;
 		stylerClass: styler;
 		selectionRange: sourceSelectionRange.
 	(self presenterNamed: 'disassembly') text: disassemblyText.
-	disassemblySelectionLine ~~ 0 
+	disassemblySelectionLine ~~ 0
 		ifTrue: [(self presenterNamed: 'disassembly') selectLine: disassemblySelectionLine]!
 
 onViewOpened
