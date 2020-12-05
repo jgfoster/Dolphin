@@ -1,18 +1,18 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-BrowserEnvironmentWrapper subclass: #PackageEnvironment
+Refactory.Browser.BrowserEnvironmentWrapper subclass: #'Refactory.Browser.PackageEnvironment'
 	instanceVariableNames: 'packages'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-PackageEnvironment guid: (GUID fromString: '{1e100fa3-4c91-4f2c-8415-03d6fbca4185}')!
-PackageEnvironment comment: 'PackageEnvironment is a Dolphin specific BrowserEnvironment that represents the contents of one or more packages.
+Refactory.Browser.PackageEnvironment guid: (Core.GUID fromString: '{1e100fa3-4c91-4f2c-8415-03d6fbca4185}')!
+Refactory.Browser.PackageEnvironment comment: 'PackageEnvironment is a Dolphin specific BrowserEnvironment that represents the contents of one or more packages.
 
 Instance Variables:
 	packages		<Array> of <Package>'!
-!PackageEnvironment categoriesForClass!Refactoring-Environment! !
-!PackageEnvironment methodsFor!
+!Refactory.Browser.PackageEnvironment categoriesForClass!Refactoring-Environment! !
+!Refactory.Browser.PackageEnvironment methodsFor!
 
 classesDo: aBlock
 	"Note that the classes of the loose methods and the package's owned classes are non-overlapping sets, however since
@@ -57,8 +57,7 @@ classesDo: aBlock
 defaultLabel
 	| stream |
 	stream := String new writeStream.
-	self packageNames do: [:each | stream nextPutAll: each]
-		separatedBy: [stream nextPutAll: ', '].
+	self packageNames do: [:each | stream nextPutAll: each] separatedBy: [stream nextPutAll: ', '].
 	^stream contents!
 
 definesClass: aClass
@@ -103,19 +102,14 @@ packages
 packages: aCollection
 	packages := aCollection asArray!
 
-selectorsForClass: aClass do: aBlock
+selectorsForClass: aClass do: aBlock 
 	| name |
-	name := aClass name.
-	(self definesClass: aClass)
+	(self definesClass: aClass) 
 		ifTrue: 
-			[| methodName loose |
-			methodName := Association key: name value: nil.
-			loose := Package manager looseMethods.
-			aClass selectorsDo: 
-					[:each |
-					methodName value: each.
-					((loose includesKey: methodName) not and: [environment includesSelector: each in: aClass])
-						ifTrue: [aBlock value: each]].
+			[aClass selectorsAndMethodsDo: 
+					[:eachSelector :eachMethod | 
+					(eachMethod isLoose not and: [environment includesSelector: eachSelector in: aClass]) 
+						ifTrue: [aBlock value: eachSelector]].
 			"If only one package in the environment, can skip enumeration of loose
 			methods since there cannot be any (a package cannot both define a class and
 			own loose methods of that class)"
@@ -125,7 +119,7 @@ selectorsForClass: aClass do: aBlock
 	environment defines the class."
 	name := aClass fullyQualifiedReference.
 	packages do: 
-			[:eachPackage |
+			[:eachPackage | 
 			eachPackage methodNames do: 
 					[:each | 
 					each className = name 
@@ -137,22 +131,22 @@ storeOn: aStream
 	aStream nextPutAll: ' packageNames: '.
 	self packageNames storeOn: aStream.
 	aStream nextPutAll: ';yourself)'! !
-!PackageEnvironment categoriesFor: #classesDo:!accessing/classes!public! !
-!PackageEnvironment categoriesFor: #defaultLabel!constants!private! !
-!PackageEnvironment categoriesFor: #definesClass:!public!testing! !
-!PackageEnvironment categoriesFor: #definesLooseMethodsInClass:!private!testing! !
-!PackageEnvironment categoriesFor: #includesClass:!public!testing! !
-!PackageEnvironment categoriesFor: #includesResource:!public!testing! !
-!PackageEnvironment categoriesFor: #includesSelector:in:!public!testing! !
-!PackageEnvironment categoriesFor: #isSinglePackage!public!testing! !
-!PackageEnvironment categoriesFor: #packageNames!accessing!public! !
-!PackageEnvironment categoriesFor: #packageNames:!accessing!public! !
-!PackageEnvironment categoriesFor: #packages!accessing!public! !
-!PackageEnvironment categoriesFor: #packages:!accessing!private! !
-!PackageEnvironment categoriesFor: #selectorsForClass:do:!accessing!public! !
-!PackageEnvironment categoriesFor: #storeOn:!printing!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #classesDo:!accessing/classes!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #defaultLabel!constants!private! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #definesClass:!public!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #definesLooseMethodsInClass:!private!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #includesClass:!public!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #includesResource:!public!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #includesSelector:in:!public!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #isSinglePackage!public!testing! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #packageNames!accessing!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #packageNames:!accessing!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #packages!accessing!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #packages:!accessing!private! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #selectorsForClass:do:!accessing!public! !
+!Refactory.Browser.PackageEnvironment categoriesFor: #storeOn:!printing!public! !
 
-!PackageEnvironment class methodsFor!
+!Refactory.Browser.PackageEnvironment class methodsFor!
 
 onEnvironment: anEnvironment packageNames: aString
 	^(self onEnvironment: anEnvironment)
@@ -163,6 +157,6 @@ onEnvironment: anEnvironment packages: aPackage
 	^(self onEnvironment: anEnvironment)
 		packages: aPackage;
 		yourself! !
-!PackageEnvironment class categoriesFor: #onEnvironment:packageNames:!instance creation!public! !
-!PackageEnvironment class categoriesFor: #onEnvironment:packages:!instance creation!public! !
+!Refactory.Browser.PackageEnvironment class categoriesFor: #onEnvironment:packageNames:!instance creation!public! !
+!Refactory.Browser.PackageEnvironment class categoriesFor: #onEnvironment:packages:!instance creation!public! !
 

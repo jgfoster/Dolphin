@@ -1,12 +1,12 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-DolphinTest subclass: #ViewComposerTest
+Core.Tests.DolphinTest subclass: #ViewComposerTest
 	instanceVariableNames: 'vc sampleClass'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ViewComposerTest guid: (GUID fromString: '{84c0e504-bdda-4d87-92dc-53b89f80f634}')!
+ViewComposerTest guid: (Core.GUID fromString: '{84c0e504-bdda-4d87-92dc-53b89f80f634}')!
 ViewComposerTest comment: ''!
 !ViewComposerTest categoriesForClass!Unclassified! !
 !ViewComposerTest methodsFor!
