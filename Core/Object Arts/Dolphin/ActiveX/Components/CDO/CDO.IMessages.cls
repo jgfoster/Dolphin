@@ -1,20 +1,20 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-IDispatch subclass: #CDOIMessages
+OS.COM.IDispatch subclass: #'CDO.IMessages'
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: 'CDOConstants'
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-CDOIMessages guid: (IID fromString: '{cd000025-8b95-11d1-82db-00c04fb1625d}')!
-CDOIMessages comment: '<CDOIMessages> is a wrapper class for the COM interface ''CDO.IMessages'' generated from type information in the ''Microsoft CDO for Windows 2000 Library'' library. It contains methods to invoke the member functions exposed by that interface.
+CDO.IMessages guid: (OS.COM.IID fromString: '{cd000025-8b95-11d1-82db-00c04fb1625d}')!
+CDO.IMessages comment: '<CDOIMessages> is a wrapper class for the COM interface ''CDO.IMessages'' generated from type information in the ''Microsoft CDO for Windows 2000 Library'' library. It contains methods to invoke the member functions exposed by that interface.
 
 The type library contains the following helpstring for this interface
 	"Defines abstract methods and properties used to manage a collection of Message objects on the file system. Returned by IDropDirectory.GetMessages"
 
 Warning: This comment was automatically generated from the interface''s type information, but any changes made here will not be overwritten if the wrapper class is regenerated.'!
-!CDOIMessages categoriesForClass!CDO-Interfaces!COM-Interfaces! !
-!CDOIMessages methodsFor!
+!CDO.IMessages categoriesForClass!CDO-Interfaces!COM-Interfaces! !
+!CDO.IMessages methodsFor!
 
 _newEnum
 	"Answer the <IUnknown> value of the '_NewEnum' property of the receiver."
@@ -112,7 +112,7 @@ get_Item: index ppMessage: ppMessage
 			[out, retval] IMessage** ppMessage);
 	"
 
-	<virtual stdcall: hresult 8 sdword CDOIMessage**>
+	<virtual stdcall: hresult 8 sdword IMessage**>
 	^self invalidCall: _failureCode!
 
 isExtensible
@@ -130,26 +130,23 @@ item: index
 	Helpstring: 'Returns the message specified by index from the collection.'"
 
 	| answer |
-	answer := CDOIMessage newPointer.
-	self
-		get_Item: index
-		ppMessage: answer.
-	^answer asObject
-! !
-!CDOIMessages categoriesFor: #_newEnum!**auto generated**!properties!public! !
-!CDOIMessages categoriesFor: #count!**auto generated**!properties!public! !
-!CDOIMessages categoriesFor: #Delete:!**auto generated**!COM Interfaces-IMessages!public! !
-!CDOIMessages categoriesFor: #DeleteAll!**auto generated**!COM Interfaces-IMessages!public! !
-!CDOIMessages categoriesFor: #fileName:!**auto generated**!properties!public! !
-!CDOIMessages categoriesFor: #get__NewEnum:!**auto generated**!COM Interfaces-IMessages!private! !
-!CDOIMessages categoriesFor: #get_Count:!**auto generated**!COM Interfaces-IMessages!private! !
-!CDOIMessages categoriesFor: #get_FileName:FileName:!**auto generated**!COM Interfaces-IMessages!private! !
-!CDOIMessages categoriesFor: #get_Item:ppMessage:!**auto generated**!COM Interfaces-IMessages!private! !
-!CDOIMessages categoriesFor: #isExtensible!**auto generated**!public!testing! !
-!CDOIMessages categoriesFor: #isVBCollection!**auto generated**!public!testing! !
-!CDOIMessages categoriesFor: #item:!**auto generated**!properties!public! !
+	answer := CDO.IMessage newPointer.
+	self get_Item: index ppMessage: answer.
+	^answer asObject! !
+!CDO.IMessages categoriesFor: #_newEnum!**auto generated**!properties!public! !
+!CDO.IMessages categoriesFor: #count!**auto generated**!properties!public! !
+!CDO.IMessages categoriesFor: #Delete:!**auto generated**!COM Interfaces-IMessages!public! !
+!CDO.IMessages categoriesFor: #DeleteAll!**auto generated**!COM Interfaces-IMessages!public! !
+!CDO.IMessages categoriesFor: #fileName:!**auto generated**!properties!public! !
+!CDO.IMessages categoriesFor: #get__NewEnum:!**auto generated**!COM Interfaces-IMessages!private! !
+!CDO.IMessages categoriesFor: #get_Count:!**auto generated**!COM Interfaces-IMessages!private! !
+!CDO.IMessages categoriesFor: #get_FileName:FileName:!**auto generated**!COM Interfaces-IMessages!private! !
+!CDO.IMessages categoriesFor: #get_Item:ppMessage:!**auto generated**!COM Interfaces-IMessages!private! !
+!CDO.IMessages categoriesFor: #isExtensible!**auto generated**!public!testing! !
+!CDO.IMessages categoriesFor: #isVBCollection!**auto generated**!public!testing! !
+!CDO.IMessages categoriesFor: #item:!**auto generated**!properties!public! !
 
-!CDOIMessages class methodsFor!
+!CDO.IMessages class methodsFor!
 
 defineFunctions
 	"Declare the virtual function table for the COM interface 'CDO.IMessages'
@@ -176,6 +173,6 @@ initializeTypeLib
 	"
 
 	typeLib := CDOLib! !
-!CDOIMessages class categoriesFor: #defineFunctions!**auto generated**!initializing!public! !
-!CDOIMessages class categoriesFor: #initializeTypeLib!**auto generated**!initializing!private! !
+!CDO.IMessages class categoriesFor: #defineFunctions!**auto generated**!initializing!public! !
+!CDO.IMessages class categoriesFor: #initializeTypeLib!**auto generated**!initializing!private! !
 
