@@ -13,7 +13,7 @@ package setClassNames: #(
 ).
 
 package setMethodNames: #(
-	#(#{ExternalDescriptorTest} #testComPtrs)
+	#(#{External.Tests.DescriptorTest} #testComPtrs)
 ).
 
 package setPrerequisites: #(
@@ -47,7 +47,7 @@ DolphinTest subclass: #VARIANTTest
 	poolDictionaries: 'AXAutomationConstants'
 	classInstanceVariableNames: ''
 	classConstants: {}!
-GenericExternalArrayTest subclass: #SAFEARRAYTest
+External.Tests.GenericExternalArrayTest subclass: #SAFEARRAYTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: 'Win32Errors'
@@ -56,15 +56,15 @@ GenericExternalArrayTest subclass: #SAFEARRAYTest
 
 "Loose Methods"!
 
-!ExternalDescriptorTest methodsFor!
+!External.Tests.DescriptorTest methodsFor!
 
 testComPtrs
 	self
-		parseStructArg: IUnknown
+		parseStructArg: Smalltalk.IUnknown
 		valueType: ExtCallArgSTRUCT
 		refType: ExtCallArgCOMPTR.
 	self
-		parseStructArg: IDispatch
+		parseStructArg: Smalltalk.IDispatch
 		valueType: ExtCallArgSTRUCT
 		refType: ExtCallArgCOMPTR! !
 !ExternalDescriptorTest categoriesFor: #testComPtrs!public!unit tests! !

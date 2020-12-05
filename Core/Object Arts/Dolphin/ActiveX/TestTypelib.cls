@@ -1,11 +1,12 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-TestResource subclass: #TestTypelib
+XProgramming.SUnit.TestResource subclass: #TestTypelib
 	instanceVariableNames: 'analyzer'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
-	classInstanceVariableNames: ''!
-TestTypelib guid: (GUID fromString: '{bda93d8c-df4b-4461-8950-9db6e8797384}')!
+	imports: #(#{OS.Win32Constants} #{OS.NlsConstants})
+	classInstanceVariableNames: ''
+	classConstants: {}!
+TestTypelib guid: (Core.GUID fromString: '{bda93d8c-df4b-4461-8950-9db6e8797384}')!
 TestTypelib comment: ''!
 !TestTypelib categoriesForClass!Unclassified! !
 !TestTypelib methodsFor!

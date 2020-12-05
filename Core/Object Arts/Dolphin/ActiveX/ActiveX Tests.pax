@@ -1,25 +1,19 @@
 ﻿| package |
 package := Package name: 'ActiveX Tests'.
-package paxVersion: 1;
+package paxVersion: 2.1;
 	basicComment: ''.
 
 
-package classNames
-	add: #ADODBTest;
-	add: #AXEventSinkTest;
-	add: #AXTypeLibraryAnalyzerTest;
-	add: #CLSIDTest;
-	add: #COMInterfaceTest;
-	add: #IIDTest;
-	add: #TestTypelib;
-	add: #XmlFormatterTest;
-	yourself.
-
-package binaryGlobalNames: (Set new
-	yourself).
-
-package globalAliases: (Set new
-	yourself).
+package setClassNames: #(
+	#{Smalltalk.ADODBTest}
+	#{Smalltalk.AXEventSinkTest}
+	#{Smalltalk.AXTypeLibraryAnalyzerTest}
+	#{Smalltalk.CLSIDTest}
+	#{Smalltalk.COMInterfaceTest}
+	#{Smalltalk.IIDTest}
+	#{Smalltalk.TestTypelib}
+	#{Smalltalk.XmlFormatterTest}
+).
 
 package setPrerequisites: #(
 	'Automation\ActiveX Automation'
@@ -32,57 +26,61 @@ package setPrerequisites: #(
 	'Components\Font\OLE Font'
 	'..\..\..\Contributions\Camp Smalltalk\SUnit\SUnit'
 	'Components\XML DOM\XML DOM'
-	'..\..\Samples\MVP\XmlPad\XmlPad').
+	'..\..\Samples\MVP\XmlPad\XmlPad'
+).
 
 package!
 
 "Class Definitions"!
 
-DolphinTest subclass: #AXEventSinkTest
+Core.Tests.DolphinTest subclass: #AXEventSinkTest
 	instanceVariableNames: 'sink object received'
 	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''!
-DolphinTest subclass: #AXTypeLibraryAnalyzerTest
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+Core.Tests.DolphinTest subclass: #AXTypeLibraryAnalyzerTest
 	instanceVariableNames: 'analyzer'
 	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''!
-DolphinTest subclass: #COMInterfaceTest
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+Core.Tests.DolphinTest subclass: #COMInterfaceTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''!
-DolphinTest subclass: #XmlFormatterTest
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+Core.Tests.DolphinTest subclass: #XmlFormatterTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''!
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
 DBTest subclass: #ADODBTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	classInstanceVariableNames: ''!
+	classInstanceVariableNames: ''
+	classConstants: {}!
 GUIDTest subclass: #CLSIDTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	classInstanceVariableNames: ''!
+	classInstanceVariableNames: ''
+	classConstants: {}!
 GUIDTest subclass: #IIDTest
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
-	classInstanceVariableNames: ''!
+	classInstanceVariableNames: ''
+	classConstants: {}!
 TestResource subclass: #TestTypelib
 	instanceVariableNames: 'analyzer'
 	classVariableNames: ''
-	poolDictionaries: 'Win32Constants'
-	classInstanceVariableNames: ''!
-
-"Global Aliases"!
-
-
-"Loose Methods"!
+	imports: #(#{OS.Win32Constants} #{OS.NlsConstants})
+	classInstanceVariableNames: ''
+	classConstants: {}!
 
 "End of package definition"!
 
