@@ -22,12 +22,10 @@ package setMethodNames: #(
 	#(#{Core.Class} #subclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:)
 	#(#{Core.Class} #variableSubclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:)
 	#(#{Core.UndefinedObject} #subclass:instanceVariableNames:classVariableNames:poolDictionaries:classInstanceVariableNames:)
-	#(#{Kernel.Package} #allResourceNames)
 	#(#{Kernel.Package} #allResourceNames:)
 	#(#{Kernel.Package} #basicLoadVersion4:filer:)
 	#(#{Kernel.Package} #errorUnknownFileVersion:)
 	#(#{Kernel.Package} #fileInClassDefinitions:)
-	#(#{Kernel.Package} #initializeLegacyResources)
 	#(#{Kernel.Package} #loadGlobalsFromFiler:)
 	#(#{Kernel.Package} #loadLegacyPAC:)
 	#(#{Kernel.Package} #loadLegacyResources)
@@ -121,11 +119,6 @@ subclass: aClassSymbol instanceVariableNames: instVarString classVariableNames: 
 
 !Kernel.Package methodsFor!
 
-allResourceNames
-	"Private - Answer a <Collection> of all the resource names directly owned by the receiver or by its owned classes."
-
-	^self propertyAt: #allResourceNames ifAbsent: [^OrderedCollection new]!
-
 allResourceNames: resources
 	"Private - Record the <Collection> of <Associations>s, resources, as the names of all resources
 	in this package. This information is recorded only temporarily during package loading, and later
@@ -167,17 +160,6 @@ fileInClassDefinitions: aFileStream
 	aFileStream skipSeparators.
 	aFileStream next ~= $X ifTrue: [^self errorFileCorrupt].
 	aFileStream beBinary!
-
-initializeLegacyResources
-	"Private - For old (pre-D6) packages, we have to make sure that the resources loaded by this package actually
-	below to it. Obviously, those resources that already belong to classes in the package will be ok, so really
-	we are only concerned with loose resources"
-
-	self allResourceNames do: 
-			[:each |
-			| rid |
-			rid := UI.ResourceIdentifier class: each key asQualifiedReference value name: each value.
-			rid owningPackage == self ifFalse: [self manager addLooseMethod: rid compiledMethod to: self]]!
 
 loadGlobalsFromFiler: binaryFiler
 	"Private - File in binary definitions of all the globals held by
@@ -326,12 +308,10 @@ versionLookup
 		at: 5 put: #loadVersion5:filer:;
 		shrink;
 		yourself	"same format as 4, except VM version loaded here")	"same format as 4, except VM version loaded here"	"same format as 4, except VM version loaded here"! !
-!Kernel.Package categoriesFor: #allResourceNames!accessing!private! !
 !Kernel.Package categoriesFor: #allResourceNames:!private!source filing! !
 !Kernel.Package categoriesFor: #basicLoadVersion4:filer:!legacy package loading!private! !
 !Kernel.Package categoriesFor: #errorUnknownFileVersion:!exceptions!legacy package loading!private! !
 !Kernel.Package categoriesFor: #fileInClassDefinitions:!development!private!source filing! !
-!Kernel.Package categoriesFor: #initializeLegacyResources!initializing!private! !
 !Kernel.Package categoriesFor: #loadGlobalsFromFiler:!legacy package loading!private! !
 !Kernel.Package categoriesFor: #loadLegacyPAC:!legacy package loading!private! !
 !Kernel.Package categoriesFor: #loadLegacyResources!legacy package loading!private! !

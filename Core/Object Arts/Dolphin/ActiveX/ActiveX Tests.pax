@@ -60,25 +60,25 @@ Core.Tests.DolphinTest subclass: #XmlFormatterTest
 DBTest subclass: #ADODBTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-GUIDTest subclass: #CLSIDTest
+External.Tests.GUIDTest subclass: #CLSIDTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-GUIDTest subclass: #IIDTest
+External.Tests.GUIDTest subclass: #IIDTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-TestResource subclass: #TestTypelib
+XProgramming.SUnit.TestResource subclass: #TestTypelib
 	instanceVariableNames: 'analyzer'
 	classVariableNames: ''
-	imports: #(#{OS.Win32Constants} #{OS.NlsConstants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 

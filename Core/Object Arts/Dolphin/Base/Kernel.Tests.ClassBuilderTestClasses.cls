@@ -1,7 +1,7 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
 Core.Tests.DolphinTestClassResource subclass: #'Kernel.Tests.ClassBuilderTestClasses'
-	instanceVariableNames: 'testClass testSubclass1 testSubclass2 testPool1 testPool2 testPool3'
+	instanceVariableNames: 'testClass testSubclass1 testSubclass2 testPool1 testPool2 testPool3 classesDirtied'
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''
@@ -17,6 +17,7 @@ compileMethods
 	self compileAccessorsFor: testSubclass2!
 
 createClasses
+	classesDirtied := false.
 	testClass := self
 				createClass: #ClassBuilderTestClass
 				superclass: Object
@@ -56,22 +57,29 @@ createPools
 isAvailable
 	^testClass notNil!
 
+makeCleanClasses
+	classesDirtied := true!
+
 tearDown
 	super tearDown.
 	testClass := testSubclass1 := testSubclass2 := nil!
 
 testClass
+	classesDirtied ifTrue: [self createClasses].
 	^testClass!
 
 testSubclass1
+	classesDirtied ifTrue: [self createClasses].
 	^testSubclass1!
 
 testSubclass2
+	classesDirtied ifTrue: [self createClasses].
 	^testSubclass2! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #compileMethods!public!unit tests! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #createClasses!private!unit tests! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #createPools!Init / Release!private! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #isAvailable!public!Testing! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #makeCleanClasses!private!unit tests! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #tearDown!public!Running! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #testClass!accessing!public! !
 !Kernel.Tests.ClassBuilderTestClasses categoriesFor: #testSubclass1!accessing!public! !

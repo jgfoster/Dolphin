@@ -1208,7 +1208,7 @@ initialize
 	"
 
 	| fpeMask fmax emin eminDenorm mantissaBits mantissaHighBit |
-	#(#FloatD #FloatE #FloatQ) do: [:each | Smalltalk at: each ifAbsentPut: [self]].
+	#(#FloatD #FloatE #FloatQ) do: [:each | (Core declareVariable: each) value: self].
 	emin := -1022.
 	self addClassConstant: 'EMin' value: emin.
 	self addClassConstant: 'EMax' value: 1023.
@@ -1245,12 +1245,16 @@ initialize
 	self addClassConstant: 'FpClassNegative'
 		value: OS.CRTConstants._FPCLASS_ND | OS.CRTConstants._FPCLASS_NN | OS.CRTConstants._FPCLASS_NINF
 				| OS.CRTConstants._FPCLASS_NZ.
-	self addClassConstant: 'FpClassZero' value: OS.CRTConstants._FPCLASS_NZ | OS.CRTConstants._FPCLASS_PZ.
-	self addClassConstant: 'FpClassNaN' value: OS.CRTConstants._FPCLASS_QNAN | OS.CRTConstants._FPCLASS_SNAN.
+	self addClassConstant: 'FpClassZero'
+		value: OS.CRTConstants._FPCLASS_NZ | OS.CRTConstants._FPCLASS_PZ.
+	self addClassConstant: 'FpClassNaN'
+		value: OS.CRTConstants._FPCLASS_QNAN | OS.CRTConstants._FPCLASS_SNAN.
 	"Denormalized numbers - non-zero but with leading zeroes in the mantissa"
-	self addClassConstant: 'FpClassDenormal' value: OS.CRTConstants._FPCLASS_PD | OS.CRTConstants._FPCLASS_ND.
+	self addClassConstant: 'FpClassDenormal'
+		value: OS.CRTConstants._FPCLASS_PD | OS.CRTConstants._FPCLASS_ND.
 	"Non-zero, normals"
-	self addClassConstant: 'FpClassNormal' value: OS.CRTConstants._FPCLASS_NN | OS.CRTConstants._FPCLASS_PN.
+	self addClassConstant: 'FpClassNormal'
+		value: OS.CRTConstants._FPCLASS_NN | OS.CRTConstants._FPCLASS_PN.
 	"Finite numbers (anything other than infinites or NaNs)"
 	self addClassConstant: 'FpClassFinite'
 		value: OS.CRTConstants._FPCLASS_NN | OS.CRTConstants._FPCLASS_ND | OS.CRTConstants._FPCLASS_NZ

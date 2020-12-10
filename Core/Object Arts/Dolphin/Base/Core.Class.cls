@@ -185,6 +185,9 @@ basicClassPool: aDictionaryOrNil
 
 	classPool := aDictionaryOrNil ifNotNil: [aDictionaryOrNil isEmpty ifFalse: [aDictionaryOrNil]]!
 
+basicRemoveBinding: aVariableBinding
+	classPool removeKey: aVariableBinding key ifAbsent: []!
+
 binding
 	"Answer the <VariableBinding> of this namespace within it's environment."
 
@@ -262,7 +265,7 @@ category: category
 classBindingNames
 	"Answer a Set of the class variable names of the receiver. The answer will include constant names, if any."
 
-	^classPool isNil ifTrue: [Set new] ifFalse: [classPool keys]!
+	^(self bindings select: [:each | each isClassVariable]) collect: [:each | each key]!
 
 classCategories
 	"Private - Answer a <collection> of <ClassCategory> objects representing the 
@@ -289,6 +292,10 @@ classPool
 	^classPool ifNil: [Dictionary new]!
 
 classUpdated
+	self logDefinition.
+	Smalltalk classUpdated: self!
+
+classVariableRemoved: aString
 	self logDefinition.
 	Smalltalk classUpdated: self!
 
@@ -375,7 +382,7 @@ fullPath
 fullyQualifiedReference
 	"Answer a <BindingReference> that represents a fully qualified reference to the receiver relative to the Root namespace. Classes in the legacy 'flat' Smalltalk namespace will have Smalltalk as the first element of the binding path."
 
-	^BindingReference path: (self pathFrom: Root)!
+	^BindingReference pathString: self fullName!
 
 getFullName
 	| stream |
@@ -475,13 +482,6 @@ isLiteral
 	"Private - Answer whether or not the receiver has a literal representation (probably its	printString) which is directly recognised by the Compiler"
 
 	^name notNil!
-
-isNonInstantiable: aBoolean
-	"Private - Set whether the receiver should not be instantiated, e.g. it is abstract."
-
-	self isNonInstantiable == aBoolean ifTrue: [^self].
-	super isNonInstantiable: aBoolean.
-	self isChanged: true!
 
 localBindingFor: aString
 	"Answer a variable binding for the named variable directly in the scope of this class, i.e. one of its own class variables. If there is no such class variable, then answer nil."
@@ -625,9 +625,8 @@ removeClassVarName: aString
 	Note: This is a low-level operation and does not recompile affected classes. Generally 
 	speaking any modification to a class should be made through a <ClassBuilder>."
 
-	self classPool removeKey: aString.
-	classPool isEmpty ifTrue: [classPool := nil].
-	self variableRemoved: aString!
+	self removeLocalBindingFor: aString.
+	classPool isEmpty ifTrue: [classPool := nil]!
 
 removeFromCategory: category
 	"Remove the receiver from the aCategoryOrString, while leaving it in any other
@@ -653,6 +652,14 @@ removeFromSystem
 
 removeImport: aBindingReference
 	imports := imports copyWithout: aBindingReference!
+
+removeLocalBindingFor: aString
+	^(self localBindingFor: aString)
+		ifNotNil: 
+			[:binding |
+			self basicRemoveBinding: binding.
+			self variableRemoved: binding.
+			binding]!
 
 removeSubclass: aClass
 	"Private - Remove the argument, aClass, from the subclasses of the receiver.
@@ -784,7 +791,12 @@ setClassVarNames: anArray
 	added := anArray difference: original.
 	^(added notEmpty or: [removed notEmpty]) and: 
 			[removed do: [:each | classVars removeKey: each].
-			added do: [:each | classVars at: each ifAbsentPutValue: nil].
+			added do: 
+					[:each |
+					classVars add: ((VariableBinding key: each value: nil)
+								environment: self;
+								isClassVariable: true;
+								yourself)].
 			classPool := classVars notEmpty ifTrue: [classVars].
 			true]!
 
@@ -946,7 +958,8 @@ unqualifiedName
 	^name!
 
 variableAdded: aVariableBinding
-	self classUpdated!
+	super variableAdded: aVariableBinding.
+	aVariableBinding isClassVariable ifTrue: [self classUpdated]!
 
 variableByteSubclass: aClassSymbol instanceVariableNames: instVarString classVariableNames: classVarString imports: anArray
 	^(self
@@ -972,9 +985,13 @@ variableByteSubclass: aClassSymbol instanceVariableNames: instVarString classVar
 	subclass class instanceVariableNames: classInstVarString.
 	^subclass!
 
-variableRemoved: aString
-	self logDefinition.
-	Smalltalk classUpdated: self!
+variableRemoved: aVariableBinding
+	super variableRemoved: aVariableBinding.
+	aVariableBinding isClassVariable
+		ifTrue: 
+			[self logDefinition.
+			Smalltalk classUpdated: self]
+		ifFalse: [Smalltalk trigger: #variableRemoved: with: aVariableBinding]!
 
 variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariableNames: classVarString imports: anArray
 	^(self
@@ -1002,7 +1019,7 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #absoluteName!accessing!namespaces!public! !
 !Core.Class categoriesFor: #absoluteNameFor:!public! !
 !Core.Class categoriesFor: #absoluteReference!accessing!namespaces!public! !
-!Core.Class categoriesFor: #addBinding:!class hierarchy-mutating!class variables!private! !
+!Core.Class categoriesFor: #addBinding:!class variables!private! !
 !Core.Class categoriesFor: #addClassConstant:value:!class variables!development!public! !
 !Core.Class categoriesFor: #addClassVariable:value:!class hierarchy-mutating!class variables!public! !
 !Core.Class categoriesFor: #addClassVarNamed:!class hierarchy-mutating!class variables!public! !
@@ -1013,13 +1030,14 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #allEnvironments!class hierarchy-accessing!public! !
 !Core.Class categoriesFor: #allEnvironmentsDo:!class hierarchy-accessing!enumerating!private! !
 !Core.Class categoriesFor: #allImports!namespaces!public! !
-!Core.Class categoriesFor: #basicAddBinding:!class hierarchy-mutating!class variables!private! !
+!Core.Class categoriesFor: #basicAddBinding:!class variables!private! !
 !Core.Class categoriesFor: #basicClassPool:!class variables!private! !
-!Core.Class categoriesFor: #binding!binding!public! !
-!Core.Class categoriesFor: #bindingFor:!binding!public! !
-!Core.Class categoriesFor: #bindingOrNil!binding!public! !
-!Core.Class categoriesFor: #bindingsDo:!binding!enumerating!public! !
-!Core.Class categoriesFor: #canModifyBinding:newValue:!binding!private! !
+!Core.Class categoriesFor: #basicRemoveBinding:!bindings!private! !
+!Core.Class categoriesFor: #binding!bindings!public! !
+!Core.Class categoriesFor: #bindingFor:!bindings!public! !
+!Core.Class categoriesFor: #bindingOrNil!bindings!public! !
+!Core.Class categoriesFor: #bindingsDo:!bindings!enumerating!public! !
+!Core.Class categoriesFor: #canModifyBinding:newValue:!bindings!private! !
 !Core.Class categoriesFor: #categories!categories-accessing!public! !
 !Core.Class categoriesFor: #categories:!categories-accessing!public! !
 !Core.Class categoriesFor: #categoriesForClass!private!source filing-class definition! !
@@ -1031,6 +1049,7 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #classConstants!class variables!public! !
 !Core.Class categoriesFor: #classPool!accessing!class variables!public! !
 !Core.Class categoriesFor: #classUpdated!class hierarchy-mutating!class variables!private! !
+!Core.Class categoriesFor: #classVariableRemoved:!class hierarchy-mutating!class variables!private! !
 !Core.Class categoriesFor: #classVariables!class variables!public! !
 !Core.Class categoriesFor: #clearGuid!accessing!private! !
 !Core.Class categoriesFor: #comment!accessing!development!public! !
@@ -1059,10 +1078,9 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #isAnonymous!public!testing! !
 !Core.Class categoriesFor: #isAtomic!public!testing! !
 !Core.Class categoriesFor: #isLiteral!public!testing! !
-!Core.Class categoriesFor: #isNonInstantiable:!instance specification-accessing!private! !
-!Core.Class categoriesFor: #localBindingFor:!binding!public! !
+!Core.Class categoriesFor: #localBindingFor:!bindings!public! !
 !Core.Class categoriesFor: #name!accessing!public! !
-!Core.Class categoriesFor: #newBindingContextForIdentifier:!binding!private! !
+!Core.Class categoriesFor: #newBindingContextForIdentifier:!bindings!private! !
 !Core.Class categoriesFor: #newClassBuilder:instanceVariableNames:classVariableNames:imports:!class hierarchy-adding!private! !
 !Core.Class categoriesFor: #owningPackage!development!public!source filing! !
 !Core.Class categoriesFor: #owningPackage:!accessing!development!public! !
@@ -1079,16 +1097,17 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #removeFromSuper!class hierarchy-removing!private! !
 !Core.Class categoriesFor: #removeFromSystem!class hierarchy-removing!private! !
 !Core.Class categoriesFor: #removeImport:!namespaces!public! !
+!Core.Class categoriesFor: #removeLocalBindingFor:!bindings!public! !
 !Core.Class categoriesFor: #removeSubclass:!class hierarchy-removing!private! !
 !Core.Class categoriesFor: #rename:!class hierarchy-mutating!private! !
 !Core.Class categoriesFor: #rename:in:!class hierarchy-mutating!private! !
 !Core.Class categoriesFor: #requiresInstallation!public!testing! !
-!Core.Class categoriesFor: #resolveBindingPath:!binding!private! !
-!Core.Class categoriesFor: #resolveImportedBinding:!binding!private! !
-!Core.Class categoriesFor: #resolveLocallyImportedBinding:!binding!private! !
-!Core.Class categoriesFor: #resolvePathString:!binding!private! !
-!Core.Class categoriesFor: #resolvePublicBinding:!binding!private! !
-!Core.Class categoriesFor: #resolveUnqualifiedName:!binding!private! !
+!Core.Class categoriesFor: #resolveBindingPath:!bindings!private! !
+!Core.Class categoriesFor: #resolveImportedBinding:!bindings!private! !
+!Core.Class categoriesFor: #resolveLocallyImportedBinding:!bindings!private! !
+!Core.Class categoriesFor: #resolvePathString:!bindings!private! !
+!Core.Class categoriesFor: #resolvePublicBinding:!bindings!private! !
+!Core.Class categoriesFor: #resolveUnqualifiedName:!bindings!private! !
 !Core.Class categoriesFor: #setClassVarNames:!class variables!private! !
 !Core.Class categoriesFor: #setGuid:!accessing!private! !
 !Core.Class categoriesFor: #setName:!accessing!private! !
@@ -1113,7 +1132,7 @@ variableSubclass: aClassSymbol instanceVariableNames: instVarString classVariabl
 !Core.Class categoriesFor: #variableAdded:!class hierarchy-mutating!class variables!private! !
 !Core.Class categoriesFor: #variableByteSubclass:instanceVariableNames:classVariableNames:imports:!class hierarchy-adding!public! !
 !Core.Class categoriesFor: #variableByteSubclass:instanceVariableNames:classVariableNames:imports:classInstanceVariableNames:classConstants:!class hierarchy-adding!public! !
-!Core.Class categoriesFor: #variableRemoved:!class hierarchy-mutating!class variables!public! !
+!Core.Class categoriesFor: #variableRemoved:!class hierarchy-mutating!class variables!private! !
 !Core.Class categoriesFor: #variableSubclass:instanceVariableNames:classVariableNames:imports:!class hierarchy-adding!public! !
 !Core.Class categoriesFor: #variableSubclass:instanceVariableNames:classVariableNames:imports:classInstanceVariableNames:classConstants:!class hierarchy-adding!public! !
 

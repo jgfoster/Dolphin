@@ -31,8 +31,8 @@ convertToSharedPool
 			each environment: poolClass.
 			pool add: each].
 	poolClass basicClassPool: pool.
-	(Smalltalk associationAt: identifier) value: poolClass.
-	Smalltalk removeKey: tempName.
+	(Smalltalk localBindingFor: identifier) value: poolClass.
+	Smalltalk removeLocalBindingFor: tempName.
 	poolClass setName: identifier.
 	^poolClass!
 

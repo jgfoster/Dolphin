@@ -25,7 +25,12 @@ item: aCCITEM
 	item := aCCITEM!
 
 object
-	^object ifNil: [window objectFromHandle: item handle]!
+	"Answer the object that has been or is about to be edited."
+
+	^object!
+
+object: anObject
+	object := anObject!
 
 setSource: aWindow
 	cancel := false.
@@ -41,6 +46,7 @@ text: aString
 !UI.LabelEditEvent categoriesFor: #item!accessing!public! !
 !UI.LabelEditEvent categoriesFor: #item:!accessing!private! !
 !UI.LabelEditEvent categoriesFor: #object!accessing!public! !
+!UI.LabelEditEvent categoriesFor: #object:!accessing!initialization!private! !
 !UI.LabelEditEvent categoriesFor: #setSource:!initializing!private! !
 !UI.LabelEditEvent categoriesFor: #text!accessing!public! !
 !UI.LabelEditEvent categoriesFor: #text:!accessing!public! !

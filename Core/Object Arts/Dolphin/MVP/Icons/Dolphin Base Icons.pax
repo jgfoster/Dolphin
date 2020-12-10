@@ -65,6 +65,7 @@ package setMethodNames: #(
 	#(#{Core.WeakArray class} #icon)
 	#(#{External.BOOL class} #icon)
 	#(#{External.BOOLEAN class} #icon)
+	#(#{External.Callback class} #icon)
 	#(#{External.DOUBLE class} #icon)
 	#(#{External.ExternalArray class} #icon)
 	#(#{External.FLOAT class} #icon)
@@ -636,6 +637,14 @@ icon
 	^Boolean icon! !
 !External.BOOLEAN class categoriesFor: #icon!constants!public! !
 
+!External.Callback class methodsFor!
+
+icon
+	"Answers an Icon that can be used to represent this class"
+
+	^##(self) defaultIcon! !
+!External.Callback class categoriesFor: #icon!constants!public! !
+
 !External.DOUBLE class methodsFor!
 
 icon
@@ -675,6 +684,14 @@ icon
 
 	^##(self) defaultIcon! !
 !External.Library class categoriesFor: #icon!constants!public! !
+
+!External.Structure class methodsFor!
+
+icon
+	"Answers an Icon that can be used to represent this class"
+
+	^##(self) defaultIcon! !
+!External.Structure class categoriesFor: #icon!constants!public! !
 
 !Graphics.Color methodsFor!
 

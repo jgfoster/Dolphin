@@ -69,11 +69,6 @@ commandString
 
 	^self commandDescription commandString!
 
-commandString: commandText
-	"Sets the receiver's command from the <readableString> representation, commandText."
-
-	self commandDescription commandString: commandText!
-
 description
 	"Answers a short <readableString> description of the receiver's command."
 
@@ -190,7 +185,6 @@ text
 !UI.CommandMenuItem categoriesFor: #commandDescription!accessing!private! !
 !UI.CommandMenuItem categoriesFor: #commandDescription:!accessing!private! !
 !UI.CommandMenuItem categoriesFor: #commandString!accessing!public! !
-!UI.CommandMenuItem categoriesFor: #commandString:!accessing!public! !
 !UI.CommandMenuItem categoriesFor: #description!accessing!public! !
 !UI.CommandMenuItem categoriesFor: #description:!accessing!public! !
 !UI.CommandMenuItem categoriesFor: #displayOn:!displaying!public! !

@@ -84,7 +84,7 @@ testNameForArgument
 	self assert: (devsys nameForArgument: 'abc') equals: 'aString'.
 	self assert: (devsys nameForArgument: #[1 2 3]) equals: 'aByteArray'.
 	self assert: (devsys nameForArgument: Object yourAddress asExternalAddress)
-		equals: 'anExternalAddress'!
+		equals: 'anAddress'!
 
 testWrapText
 	| wrapped |

@@ -11,6 +11,9 @@ Kernel.Tests.NamespaceTest comment: ''!
 !Kernel.Tests.NamespaceTest categoriesForClass!Unclassified! !
 !Kernel.Tests.NamespaceTest methodsFor!
 
+canonicalSubject
+	^Kernel.Tests!
+
 nameCases
 	^#(#Core #Kernel #XProgramming #'XProgramming.SUnit') collect: [:each | each asQualifiedReference]!
 
@@ -25,7 +28,10 @@ testAbsoluteReference
 				equals: ('Root.' , each pathString) asQualifiedReference]!
 
 testAllClasses
-	self assert: (XProgramming allClasses difference: XProgramming.SUnit allClasses asSet) equals: #()!
+	"The XProgramming namespace is empty apart from it's SUnit sub-namespace."
+
+	self assert: (XProgramming allClasses difference: XProgramming.SUnit allClasses asSet)
+		equals: {XProgramming.SUnit}!
 
 testAllEnvironments
 	self assert: XProgramming allEnvironments equals: {Root}.
@@ -65,18 +71,19 @@ testFullyQualifiedReference
 testImportedBinding
 	| kernelRef |
 	"Core imports Kernel privately - sanity check"
-	kernelRef := Kernel fullyQualifiedReference.
-	self assert: (Core imports detect: [:each | each pathString = 'Kernel']) isPrivate.
+	kernelRef := Kernel fullyQualifiedReference isPrivate: true; yourself.
+	self assert: (Core imports detect: [:each | each = kernelRef]) isPrivate.
 	"Search for a binding directly defined in an immediate import"
 	self assert: (Core fullBindingFor: 'CompiledMethod') identicalTo: CompiledMethod binding.
 	"Or from any member of Core"
 	self assert: (Array fullBindingFor: 'CompiledMethod') identicalTo: CompiledMethod binding.
-	"OS imports Core, but not Kernel."
-	self assert: (OS imports includes: Core fullyQualifiedReference).
-	self deny: (OS imports includes: kernelRef).
-	"Search for a binding defined in an import of an import - this should fail because although External imports Core, the Kernel import into Core is private"
-	self assertIsNil: (OS fullBindingFor: 'CompiledMethod').
-	"Similarly for XProgramming.SUnit, but this time initiating the search from a class"
+	"XProgramming imports Core only."
+	self assert: XProgramming imports equals: {Core fullyQualifiedReference}.
+	"Search for a binding defined in a private import of an import - this should fail as private imports should not be exported."
+	self assertIsNil: (XProgramming fullBindingFor: 'CompiledMethod').
+	"And from a sub-namespace"
+	self assertIsNil: (XProgramming.SUnit fullBindingFor: 'CompiledMethod').
+	"And finally a class in a sub-namespace"
 	self assertIsNil: (TestCase fullBindingFor: 'CompiledMethod').
 !
 
@@ -127,15 +134,10 @@ testPrivateImportIntoParentNamespace
 	"But they should not be exported as names from that scope"
 	self deny: 'External.CompiledMethod' asQualifiedReference isDefined.
 
-	"OS.Tests should inherit the private import of Kernel."
+	"External.Tests should inherit the private import of Kernel."
 	self deny: (External.Tests imports includes: Kernel fullyQualifiedReference).
 	self assert: (External.Tests fullBindingFor: 'CompiledMethod') value equals: CompiledMethod.
-	self deny: 'External.Tests.CompiledMethod' asQualifiedReference isDefined.
-
-	"OS imports External, but should not see Kernel classes"
-	self deny: (OS imports includes: Kernel fullyQualifiedReference).
-	self assert: (OS imports includes: External fullyQualifiedReference).
-	self assertIsNil: (OS fullBindingFor: 'CompiledMethod')!
+	self deny: 'External.Tests.CompiledMethod' asQualifiedReference isDefined!
 
 testShortName
 	"The short name of a namespace is it's unqualified name if it is defined in Smalltalk, or in one of Smalltalk's imports, otherwise it is the full name."
@@ -154,6 +156,7 @@ testSimpleName
 testUnqualifiedName
 	self nameCases
 		do: [:each | self assert: each value unqualifiedName identicalTo: each unqualifiedName asSymbol]! !
+!Kernel.Tests.NamespaceTest categoriesFor: #canonicalSubject!private! !
 !Kernel.Tests.NamespaceTest categoriesFor: #nameCases!constants!private! !
 !Kernel.Tests.NamespaceTest categoriesFor: #testAbsoluteName!public!unit tests! !
 !Kernel.Tests.NamespaceTest categoriesFor: #testAbsoluteReference!public!unit tests! !

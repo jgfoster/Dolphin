@@ -82,6 +82,7 @@ package setMethodNames: #(
 	#(#{External.INT_PTR class} #arrayType)
 	#(#{External.INT_PTR class} #fieldType)
 	#(#{External.IntegerBytes class} #fieldType)
+	#(#{External.IntegerBytes class} #printStructField:indirections:on:)
 	#(#{External.Library} #DllRegisterServer)
 	#(#{External.POINT} #printOn:)
 	#(#{External.PointerArray class} #fieldType)
@@ -1191,8 +1192,22 @@ fieldType
 !External.IntegerBytes class methodsFor!
 
 fieldType
-	^self subclassResponsibility! !
+	^self subclassResponsibility!
+
+printStructField: aVARDESC indirections: anInteger on: aPuttableStream
+	"Private - Print a structure field definition message onto the <puttableStream> argument,
+	for the integer variable described by the <VARDESC> argument, with the specified <integer>
+	number of indirections."
+
+	"Implementation Note: Copy <ExternalStructure>'s implementation."
+
+	(self fieldType: aVARDESC indirections: anInteger)
+		printVariable: aVARDESC
+		type: self
+		indirections: anInteger
+		on: aPuttableStream! !
 !External.IntegerBytes class categoriesFor: #fieldType!constants!development!private! !
+!External.IntegerBytes class categoriesFor: #printStructField:indirections:on:!private! !
 
 !External.Library methodsFor!
 

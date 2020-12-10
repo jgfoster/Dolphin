@@ -217,11 +217,6 @@ fromCookie: anInteger
 		ifFalse: [inst]
 !
 
-icon
-	"Answers an Icon that can be used to represent this class"
-
-	^##(self) defaultIcon!
-
 initialize
 	"Private - Initialize the receiver's class variables.
 		External.Callback initialize
@@ -302,7 +297,6 @@ unitializeSubclass: anExternalCallbackClass
 !External.Callback class categoriesFor: #deallocateThunks!initializing!private! !
 !External.Callback class categoriesFor: #descriptorClass!constants!private! !
 !External.Callback class categoriesFor: #fromCookie:!accessing!public! !
-!External.Callback class categoriesFor: #icon!constants!public! !
 !External.Callback class categoriesFor: #initialize!development!initializing!public! !
 !External.Callback class categoriesFor: #new!instance creation!public! !
 !External.Callback class categoriesFor: #onStartup!event handling!public! !

@@ -471,7 +471,9 @@ nmBeginLabelEdit: pNMHDR
 	| item event |
 	item := self itemFromNMHDRW: pNMHDR.
 	event := LabelEditingEvent forSource: self.
-	event item: item.
+	event
+		item: item;
+		object: (self objectFromHandle: item handle).
 	self presenter onAboutToEditLabel: event.
 	(event cancel not and: [event text ~~ item text])
 		ifTrue: 

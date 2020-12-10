@@ -112,7 +112,7 @@ Are you sure you wish to remove it?']
 				ifFalse: ['Are you sure you wish to remove ' , pool name , '?'].
 	ok := MessageBox confirm: confirmationMsg caption: self caption.
 	ok ifFalse: [^self].
-	Smalltalk removeKey: pool name.
+	pool removeFromSystem.
 	self model remove: pool!
 
 selectedItemAccessorOrNil

@@ -480,12 +480,6 @@ atAddress: anAddress
 
 	^self fromAddress: anAddress!
 
-autoGenCategory
-	"Private - Answer the name of the <MethodCategory> into which the auto-generated 
-	structure accessors for the receiver should be compiled."
-
-	^'**compiled accessors**'!
-
 baseAlignment
 	^self == ##(self) ifTrue: [1] ifFalse: [self superclass alignment]!
 
@@ -529,79 +523,6 @@ clear: addressOrBytes
 	"Finalize an instance of the structure which instances of the receiver wrap
 	which resides at the specified address. Note that this is not about freeing
 	the specified memory block, but any resources which it references."!
-
-compileAllDefinitions
-	"Compile the definitions of the receiver and all its subclasses"
-
-	self withAllSubclassesDo: [:each | each compileDefinition].
-!
-
-compileDefinition
-	"Builds a new template and generates compiled methods for accessing the fields 
-	described by it. Depending on the description held in each field, some accessor
-	methods may be left as uncompiled to be addressed via the template and 
-	#doesNotUnderstand:"
-
-	self
-		newTemplate;
-		defineTemplate;
-		recompileDefinition;
-		shrink!
-
-compileGetFieldNames
-	"Private - Define a #getFieldList method for the structure class so that the field names are available even if the template is removed."
-
-	| methodText |
-	self shouldOverrideGetFieldNames ifFalse: [^self].
-	methodText := String smalltalkWriteStream: 256.
-	methodText
-		nextPutAll: #getFieldNames;
-		crtab;
-		nextPutAll: '^#('.
-	self fieldNamesFromTemplate do: [:each | methodText print: each] separatedBy: [methodText space].
-	methodText nextPut: $).
-	self class compile: methodText contents categories: {'constants'. 'private'. self autoGenCategory}!
-
-compileGetMethod: aSymbol forField: anExternalField
-	"Private - Generate a compiled 'get' accessor method for the selector aSymbol 
-	and field definition anExternalField."
-
-	| methodText |
-	anExternalField canGenerateAccessor ifFalse: [^self].
-	methodText := String smalltalkWriteStream: 256.
-	anExternalField printAccessor: aSymbol on: methodText.
-	self formatAndCompile: methodText contents categories: anExternalField autoGenCategories!
-
-compileNewFields
-	self definesNewFields ifFalse: [^self].
-	self template keysAndValuesDo: 
-			[:getSelector :field |
-			field isReadable
-				ifTrue: 
-					[(self shouldCompile: getSelector forField: field)
-						ifTrue: [self compileGetMethod: getSelector forField: field]].
-			field isWriteable
-				ifTrue: 
-					[| setSelector |
-					setSelector := (getSelector copyWith: ':') asSymbol.
-					(self shouldCompile: setSelector forField: field)
-						ifTrue: [self compileSetMethod: setSelector forField: field]]]!
-
-compileSetMethod: aSelector forField: anExternalField
-	"Private - Generate a compiled 'set' accessor method for the selector aSymbol 
-	and field definition, anExternalField"
-
-	| methodText |
-	anExternalField canGenerateMutator ifFalse: [^self].
-	methodText := String smalltalkWriteStream: 256.
-	anExternalField printMutator: aSelector on: methodText.
-	self formatAndCompile: methodText contents categories: anExternalField autoGenCategories!
-
-decompileDefinition
-	"Remove generated accessor methods from the receiver. The template will be lazily rebuilt."
-
-	{self. self class}
-		do: [:each | [each removeCategory: self autoGenCategory] on: NotFoundError do: [:e | e notify]]!
 
 defineField: fieldName type: anExternalField
 	"Add the argument anExternalField as the next field of the receiver's template, 
@@ -704,11 +625,6 @@ fieldNamesFromTemplate
 fieldOffsetConstantPrefix
 	^'_OffsetOf_'!
 
-formatAndCompile: aString categories: categories
-	| source |
-	source := Smalltalk developmentSystem reformatSource: aString in: self.
-	^self compile: source categories: categories!
-
 fromAddress: anAddress 
 	"Answer a new instance that points to the ExternalAddress 
 	respresented by anAddress (which responds to the protocol
@@ -734,24 +650,6 @@ getFieldNames
 	structure, that may be valid in this class of structure."
 
 	^self fieldNamesFromTemplate!
-
-hasHandCodedMethodFor: selector
-	"Private - Answer whether the receiver appears to have a hand coded implementation
-	for the specified selector <Symbol>."
-
-	| method |
-	method := self compiledMethodAt: selector ifAbsent: [^false].
-	^(self autoGenCategory asMethodCategory includesMethod: method) not!
-
-icon
-	"Answers an Icon that can be used to represent this class"
-
-	^##(self) defaultIcon!
-
-inheritsFieldNamed: aSymbol
-	| base |
-	base := self superclass.
-	^base ~~ Object and: [(base template includesKey: aSymbol) or: [base inheritsFieldNamed: aSymbol]]!
 
 inheritTemplate
 	| ancestor |
@@ -922,13 +820,6 @@ pointerClass
 
 	^External.Address!
 
-recompileDefinition
-	"Private - Recompiles the existing template for the receiver"
-
-	self decompileDefinition.
-	self compileNewFields.
-	self compileGetFieldNames!
-
 recompileReferences
 	"Private - Recompile all directly referencing external call methods that might need to
 	change if the receiver's size changes such any External.Library FFI methods that reference
@@ -1005,28 +896,6 @@ setGuid: aGUID
 		self register]
 !
 
-shouldCompile: selector forField: anExternalField
-	"Private - Answer whether to compile an accessor method
-	with the specified selector for the specified field in the
-	receiver."
-
-	^anExternalField canGenerateAccessors and: 
-			[(self hasHandCodedMethodFor: selector) not and: 
-					["Don't generate inherited fields unless specifically marked for override"
-					anExternalField isOverride or: [(self inheritsFieldNamed: (selector upTo: $:) asSymbol) not]]	"Don't overwrite manually written methods"]!
-
-shouldOverrideGetFieldNames
-	^self isNonInstantiable not and: 
-			[self definesNewFields and: 
-					[| categories |
-					categories := self class whichNonVirtualCategoriesIncludeSelector: #getFieldNames.
-					(categories isEmpty or: [categories includes: self autoGenCategory asMethodCategory]) and: 
-							[| inherited |
-							inherited := self superclass class lookupMethod: #getFieldNames.
-							inherited methodClass == Structure class
-								or: [self fieldNamesFromTemplate asSet ~= (inherited literalAt: 1) asSet]]]]!
-
-
 stbReadFrom: anSTBInFiler format: anSTBClassConversion 
 	self ensureDefined.
 	^super stbReadFrom: anSTBInFiler format: anSTBClassConversion!
@@ -1071,7 +940,6 @@ withBytes: aByteObject
 		yourself! !
 !External.Structure class categoriesFor: #alignment!constants!public! !
 !External.Structure class categoriesFor: #atAddress:!instance creation!public! !
-!External.Structure class categoriesFor: #autoGenCategory!compiling!constants!private! !
 !External.Structure class categoriesFor: #baseAlignment!private!template definition! !
 !External.Structure class categoriesFor: #basicByteSize!accessing!public! !
 !External.Structure class categoriesFor: #beCompiled!modes!public!template definition! !
@@ -1080,13 +948,6 @@ withBytes: aByteObject
 !External.Structure class categoriesFor: #byteSize:!initializing!private! !
 !External.Structure class categoriesFor: #changedByteSizeFrom:!private!template definition! !
 !External.Structure class categoriesFor: #clear:!public!realizing/unrealizing! !
-!External.Structure class categoriesFor: #compileAllDefinitions!compiling!public! !
-!External.Structure class categoriesFor: #compileDefinition!compiling!public! !
-!External.Structure class categoriesFor: #compileGetFieldNames!compiling!private! !
-!External.Structure class categoriesFor: #compileGetMethod:forField:!compiling!private! !
-!External.Structure class categoriesFor: #compileNewFields!compiling!private! !
-!External.Structure class categoriesFor: #compileSetMethod:forField:!compiling!private! !
-!External.Structure class categoriesFor: #decompileDefinition!compiling!public! !
 !External.Structure class categoriesFor: #defineField:type:!public!template definition! !
 !External.Structure class categoriesFor: #defineField:type:offset:!public!template definition! !
 !External.Structure class categoriesFor: #defineFields!public!template definition! !
@@ -1098,13 +959,9 @@ withBytes: aByteObject
 !External.Structure class categoriesFor: #ensureDefined!instance creation!private! !
 !External.Structure class categoriesFor: #fieldNamesFromTemplate!accessing!private! !
 !External.Structure class categoriesFor: #fieldOffsetConstantPrefix!constants!private!template definition! !
-!External.Structure class categoriesFor: #formatAndCompile:categories:!compiling!private! !
 !External.Structure class categoriesFor: #fromAddress:!instance creation!public! !
 !External.Structure class categoriesFor: #fromBytes:!instance creation!public! !
 !External.Structure class categoriesFor: #getFieldNames!accessing!private! !
-!External.Structure class categoriesFor: #hasHandCodedMethodFor:!compiling!private! !
-!External.Structure class categoriesFor: #icon!constants!public! !
-!External.Structure class categoriesFor: #inheritsFieldNamed:!compiling!private! !
 !External.Structure class categoriesFor: #inheritTemplate!private!template definition! !
 !External.Structure class categoriesFor: #init:!initializing!public! !
 !External.Structure class categoriesFor: #initializeAfterLoad!development!initializing!private! !
@@ -1126,15 +983,12 @@ withBytes: aByteObject
 !External.Structure class categoriesFor: #packing!constants!public! !
 !External.Structure class categoriesFor: #paddedSizeFor:!public!template definition! !
 !External.Structure class categoriesFor: #pointerClass!constants!private! !
-!External.Structure class categoriesFor: #recompileDefinition!compiling!private! !
 !External.Structure class categoriesFor: #recompileReferences!private!template definition! !
 !External.Structure class categoriesFor: #register!adding!public! !
 !External.Structure class categoriesFor: #registerClass:forGUID:!adding!public! !
 !External.Structure class categoriesFor: #removeRedundantOffsetConstants!private!template definition! !
 !External.Structure class categoriesFor: #resetTemplate!public!template definition! !
 !External.Structure class categoriesFor: #setGuid:!accessing!private! !
-!External.Structure class categoriesFor: #shouldCompile:forField:!compiling!private! !
-!External.Structure class categoriesFor: #shouldOverrideGetFieldNames!compiling!private! !
 !External.Structure class categoriesFor: #stbReadFrom:format:!binary filing!public! !
 !External.Structure class categoriesFor: #structurePacker!public!template definition! !
 !External.Structure class categoriesFor: #template!accessing!private! !

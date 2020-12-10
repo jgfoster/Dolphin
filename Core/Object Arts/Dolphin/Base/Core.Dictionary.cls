@@ -446,9 +446,9 @@ removeAssociation: anAssociation ifAbsent: aNiladicValuable
 	Answer anAssociation. If there is no such association in the receiver, answer the result of
 	evaluating the <niladicValuable>, operation."
 
-	self removeKey: anAssociation key ifAbsent: [^aNiladicValuable value].
-	^anAssociation
-!
+	^(self removeKey: anAssociation key ifAbsent: [AbsentCookie]) == AbsentCookie
+		ifTrue: [aNiladicValuable value]
+		ifFalse: [anAssociation]!
 
 removeKey: key 
 	"Remove the <Object> key (and its associated value), from the receiver. 

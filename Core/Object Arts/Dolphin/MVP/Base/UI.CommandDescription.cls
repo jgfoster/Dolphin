@@ -87,13 +87,6 @@ commandString
 
 	^self command printString!
 
-commandString: commandText
-	"Sets the receiver's command from the <readableString> representation, commandText."
-
-	| c |
-	c := Compiler evaluate: commandText.
-	c notNil ifTrue: [self command: c]!
-
 commandSymbol
 	"Answer a <Symbol> representing the receiver's command."
 
@@ -217,7 +210,6 @@ toolTipText
 !UI.CommandDescription categoriesFor: #command!accessing!public! !
 !UI.CommandDescription categoriesFor: #command:!accessing!public! !
 !UI.CommandDescription categoriesFor: #commandString!accessing!public! !
-!UI.CommandDescription categoriesFor: #commandString:!accessing!initializing!public! !
 !UI.CommandDescription categoriesFor: #commandSymbol!accessing!public! !
 !UI.CommandDescription categoriesFor: #description!accessing!public! !
 !UI.CommandDescription categoriesFor: #description:!accessing!public! !

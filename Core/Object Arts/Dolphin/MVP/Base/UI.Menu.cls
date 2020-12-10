@@ -154,7 +154,7 @@ commandString
 
 	^name ?? ''!
 
-commandString: aString 
+commandString: aString
 	"Sets the receiver's command from the <readableString> representation, aString."
 
 	| command |

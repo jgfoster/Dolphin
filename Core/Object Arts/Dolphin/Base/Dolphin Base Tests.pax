@@ -252,7 +252,7 @@ Core.Tests.DolphinTest subclass: #'Kernel.Tests.AbstractBindingReferenceTest'
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Tests.DolphinTest subclass: #'Kernel.Tests.AbstractNamespaceTest'
-	instanceVariableNames: ''
+	instanceVariableNames: 'removedVariables'
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''
@@ -300,7 +300,7 @@ Core.Tests.DolphinTest subclass: #'Core.Tests.CharacterTest'
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Tests.DolphinTest subclass: #'Kernel.Tests.ClassBuilderTest'
-	instanceVariableNames: 'wasOAD'
+	instanceVariableNames: 'wasOAD dirtiedClasses'
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''
@@ -1026,7 +1026,7 @@ Core.Tests.DolphinTestClassResource subclass: #'Core.Tests.BehaviorTestClasses'
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Tests.DolphinTestClassResource subclass: #'Kernel.Tests.ClassBuilderTestClasses'
-	instanceVariableNames: 'testClass testSubclass1 testSubclass2 testPool1 testPool2 testPool3'
+	instanceVariableNames: 'testClass testSubclass1 testSubclass2 testPool1 testPool2 testPool3 classesDirtied'
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''

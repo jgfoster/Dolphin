@@ -211,6 +211,9 @@ namespaceBinding
 		ifTrue: [self home resolveBindingPath: p allButLast]
 		ifFalse: [self home localEnvironment binding]!
 
+owningPackage: aPackage 
+	^self instance value owningPackage: aPackage!
+
 path
 	"Answer a <sequencedReadableCollection> of <String>, being the component parts of the qualified name in order from the home namespace."
 
@@ -269,7 +272,7 @@ undeclare
 			[(self home resolveBindingPath: nsPath)
 				ifNil: [^self]
 				ifNotNil: [:nsBinding | ns := nsBinding targetVariable value]].
-	^ns removeKey: p last!
+	^ns removeLocalBindingFor: p last!
 
 unqualifiedName
 	"Answer the unqualified name part of the receiver (the final component of the name)."
@@ -325,6 +328,7 @@ valueOrNil
 !Kernel.AbstractBindingReference categoriesFor: #meta!converting!public! !
 !Kernel.AbstractBindingReference categoriesFor: #namespace!operations!public! !
 !Kernel.AbstractBindingReference categoriesFor: #namespaceBinding!public! !
+!Kernel.AbstractBindingReference categoriesFor: #owningPackage:!accessing!development!private! !
 !Kernel.AbstractBindingReference categoriesFor: #path!accessing!public! !
 !Kernel.AbstractBindingReference categoriesFor: #pathString!accessing!public! !
 !Kernel.AbstractBindingReference categoriesFor: #printOn:!printing!public! !

@@ -12,6 +12,9 @@ Kernel.Tests.SystemNamespaceTest comment: ''!
 !Kernel.Tests.SystemNamespaceTest categoriesForClass!Unclassified! !
 !Kernel.Tests.SystemNamespaceTest methodsFor!
 
+canonicalSubject
+	^self subject!
+
 subject
 	^self subclassResponsibility!
 
@@ -45,6 +48,7 @@ testIncludesKey
 
 testShortName
 	self assert: self subject shortName equals: self subject name! !
+!Kernel.Tests.SystemNamespaceTest categoriesFor: #canonicalSubject!private! !
 !Kernel.Tests.SystemNamespaceTest categoriesFor: #subject!constants!private! !
 !Kernel.Tests.SystemNamespaceTest categoriesFor: #testAbsoluteName!public!unit tests! !
 !Kernel.Tests.SystemNamespaceTest categoriesFor: #testAbsoluteNameOfIdentifier!public!unit tests! !

@@ -20,7 +20,6 @@ package setMethodNames: #(
 	#(#{Kernel.ChunkSourceFiler} #emitCategories:for:in:)
 	#(#{Kernel.ChunkSourceFiler} #emitCategoriesOfClass:)
 	#(#{Kernel.ChunkSourceFiler} #emitCategoriesOfMethod:)
-	#(#{Kernel.ChunkSourceFiler} #emitClassName:)
 	#(#{Kernel.ChunkSourceFiler} #emitComment:)
 	#(#{Kernel.ChunkSourceFiler} #emitCommentOfClass:)
 	#(#{Kernel.ChunkSourceFiler} #emitMethod:)
@@ -273,11 +272,6 @@ emitCategoriesOfMethod: aCompiledMethod
 		for: aCompiledMethod selector
 		in: aCompiledMethod methodClass!
 
-emitClassName: aClass
-	aClass environment == aClass baseEnvironment
-		ifTrue: [stream nextPutAll: aClass name]
-		ifFalse: [aClass printFullNameOn: stream]!
-
 emitComment: aString
 	"Private - Record aString to the chunk stream as a comment. All comments logged are prefixed
 	with a timestamp. N.B. Logging requests should be directed through the SessionManager."
@@ -429,7 +423,6 @@ storeSource: aString for: aSourceObject
 !Kernel.ChunkSourceFiler categoriesFor: #emitCategories:for:in:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitCategoriesOfClass:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitCategoriesOfMethod:!private!source filing-file out! !
-!Kernel.ChunkSourceFiler categoriesFor: #emitClassName:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitComment:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitCommentOfClass:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitMethod:!private!source filing-file out! !

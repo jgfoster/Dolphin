@@ -331,9 +331,9 @@ install: aClassDescription in: aNamespace
 	binding := aNamespace localBindingFor: aClassDescription name.
 	binding
 		ifNil: 
-			[aNamespace at: aClassDescription name put: aClassDescription.
-			(aNamespace localBindingFor: aClassDescription name) isConstant: true]
-		ifNotNil: [binding setValue: aClassDescription]!
+			[binding := aNamespace declareVariable: aClassDescription name.
+			binding isConstant: true].
+	binding setValue: aClassDescription!
 
 installInSuperclass: aClass
 	aClass addToSuper!

@@ -419,32 +419,19 @@ severityClass
 	^self class severityClass!
 
 showMessage: aString style: anInteger
-	"Implementation Note: Avoid creating a dependency on MessageBox, as this class will always
-	be required in an application even if MessageBox is not."
+	"Implementation Note: Avoid creating a dependency on MessageBox, as this class will always be required in an application even if MessageBox is not."
 
-	^#{MessageBox} ifDefined: 
-			[:msgboxClass |
-			| mb |
-			mb := msgboxClass new.
-			self isSuppressible
-				ifTrue: 
-					[mb
-						uniqueId: self raisingFrame method displayString;
-						isSuppressible: true].
-			mb setStyle: anInteger maskedBy: MB_TYPEMASK.
-			mb warning: aString]
-		ifNotDefined: 
-			[#(#ok #cancel #abort #retry #ignore #yes #no #close #help #retry #ignore)
-				at: (OS.UserLibrary default
-						messageBox: nil
-						text: aString
-						caption: SessionManager current applicationName
-						style: (Processor isActiveMain
-								ifTrue: [anInteger maskSet: ##(MB_TASKMODAL | MB_SETFOREGROUND)]
-								ifFalse: [anInteger])
-						icon: nil
-						instance: nil)
-				ifAbsent: [#abort]]!
+	^#(#ok #cancel #abort #retry #ignore #yes #no #close #help #retry #ignore)
+		at: (OS.UserLibrary default
+				messageBox: nil
+				text: aString
+				caption: SessionManager current applicationName
+				style: (Processor isActiveMain
+						ifTrue: [anInteger maskSet: ##(MB_TASKMODAL | MB_SETFOREGROUND)]
+						ifFalse: [anInteger])
+				icon: nil
+				instance: nil)
+		ifAbsent: [#abort]!
 
 signal
 	"Raise (or re-raise) the receiver in the context of the current active process, causing its propagation 

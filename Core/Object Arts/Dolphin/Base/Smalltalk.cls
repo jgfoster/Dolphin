@@ -81,19 +81,9 @@ getEvents
 	^events!
 
 removeClass: aClass
-	aClass environment removeKey: aClass unqualifiedName ifAbsent: [].
+	aClass environment removeLocalBindingFor: aClass unqualifiedName.
 	aClass removeFromSuper.	"At this point it would be a good idea to make the class become: a special error reporting class"
 	self classRemoved: aClass!
-
-renameVariable: oldName to: newName
-	"Rename the global, informing the system of the change."
-
-	| binding oldSymbol |
-	binding := oldName asQualifiedReference binding.
-	oldSymbol := binding key.
-	binding environment
-		changeKey: oldSymbol to: newName asSymbol;
-		variableRenamed: binding from: oldSymbol!
 
 setEvents: anEventsCollectionOrNil
 	"Private - Set the EventsCollection of the receiver to be anEventsCollectionOrNil.
@@ -127,8 +117,7 @@ triggerVariableRenamed: aVariableBinding from: oldSymbol
 !Smalltalk class categoriesFor: #declareVariable:!public! !
 !Smalltalk class categoriesFor: #developmentSystem!accessing!public! !
 !Smalltalk class categoriesFor: #getEvents!events!private! !
-!Smalltalk class categoriesFor: #removeClass:!public! !
-!Smalltalk class categoriesFor: #renameVariable:to:!operations!public! !
+!Smalltalk class categoriesFor: #removeClass:!class hierarchy-removing!public! !
 !Smalltalk class categoriesFor: #setEvents:!events!private! !
 !Smalltalk class categoriesFor: #shortNameFor:in:!helpers!private! !
 !Smalltalk class categoriesFor: #triggerVariableRenamed:from:!events!private! !

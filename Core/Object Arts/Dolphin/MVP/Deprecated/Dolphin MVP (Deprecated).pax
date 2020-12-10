@@ -59,7 +59,6 @@ package setMethodNames: #(
 	#(#{Smalltalk.ScintillaView} #indicatorDefinitions:)
 	#(#{Smalltalk.ScintillaView} #isKeyboardInputUnicode)
 	#(#{Smalltalk.ScintillaView} #isKeyboardInputUnicode:)
-	#(#{Smalltalk.TextTileIcon class} #text:font:color:)
 	#(#{UI.AcceleratorTable} #accelerators)
 	#(#{UI.AcceleratorTable} #addKey:commandDescription:)
 	#(#{UI.AcceleratorTable class} #keyModifierNames:)

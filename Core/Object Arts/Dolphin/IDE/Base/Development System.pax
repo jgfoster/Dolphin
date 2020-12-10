@@ -158,6 +158,7 @@ package setMethodNames: #(
 	#(#{Core.Class} #isAbstract)
 	#(#{Core.Class} #isChanged:)
 	#(#{Core.Class} #isDeprecated)
+	#(#{Core.Class} #isNonInstantiable:)
 	#(#{Core.Class} #methodChanged:)
 	#(#{Core.Class} #notifyPackageOfChange)
 	#(#{Core.Class} #renameClassVar:to:)
@@ -293,14 +294,17 @@ package setMethodNames: #(
 	#(#{External.FLOATField} #newAspect:class:)
 	#(#{External.HANDLEField} #printAccessorExpressionSuffixOn:)
 	#(#{External.Integer} #printOn:)
+	#(#{External.Integer class} #newInstanceAspect:class:)
 	#(#{External.IntegerBytes} #debugPrintOn:)
 	#(#{External.IntegerBytes} #publishedKeyedAspects)
+	#(#{External.IntegerBytes class} #newInstanceAspect:class:)
 	#(#{External.LPVOIDField} #newAspect:class:)
 	#(#{External.LPVOIDField} #printAccessorExpressionSuffixOn:)
 	#(#{External.PointerField} #printAccessorExpression:on:)
 	#(#{External.PointerField} #printMutatorBody:on:)
 	#(#{External.QWORD} #printOn:)
 	#(#{External.Rectangle} #printOn:)
+	#(#{External.Scalar class} #shouldOverrideGetFieldNames)
 	#(#{External.ScalarField} #newAspect:class:)
 	#(#{External.ScalarField} #printAccessorExpression:on:)
 	#(#{External.ScalarField} #printMutatorBody:on:)
@@ -314,6 +318,20 @@ package setMethodNames: #(
 	#(#{External.Structure} #printFieldsOn:)
 	#(#{External.Structure} #printOn:)
 	#(#{External.Structure} #publishedAspects)
+	#(#{External.Structure class} #autoGenCategory)
+	#(#{External.Structure class} #compileAllDefinitions)
+	#(#{External.Structure class} #compileDefinition)
+	#(#{External.Structure class} #compileGetFieldNames)
+	#(#{External.Structure class} #compileGetMethod:forField:)
+	#(#{External.Structure class} #compileNewFields)
+	#(#{External.Structure class} #compileSetMethod:forField:)
+	#(#{External.Structure class} #decompileDefinition)
+	#(#{External.Structure class} #formatAndCompile:categories:)
+	#(#{External.Structure class} #hasHandCodedMethodFor:)
+	#(#{External.Structure class} #inheritsFieldNamed:)
+	#(#{External.Structure class} #recompileDefinition)
+	#(#{External.Structure class} #shouldCompile:forField:)
+	#(#{External.Structure class} #shouldOverrideGetFieldNames)
 	#(#{External.StructureArrayField} #printAccessorExpressionSuffixOn:)
 	#(#{External.StructureArrayPointerField} #printAccessorExpressionSuffixOn:)
 	#(#{External.StructureField} #printMutatorBody:on:)
@@ -328,6 +346,7 @@ package setMethodNames: #(
 	#(#{Graphics.Icon class} #choose)
 	#(#{Graphics.Icon class} #newInstanceAspect:class:)
 	#(#{Graphics.ImageList class} #newInstanceAspect:class:)
+	#(#{Graphics.InternalIcon class} #choose)
 	#(#{Graphics.Pen class} #publishedAspectsOfInstances)
 	#(#{Graphics.Point class} #publishedAspectsOfInstances)
 	#(#{Graphics.Point3D class} #publishedAspectsOfInstances)
@@ -474,9 +493,9 @@ package setMethodNames: #(
 	#(#{Refactory.Browser.VariableEnvironment} #includesMethodUncached:)
 	#(#{Refactory.Browser.VariableEnvironment} #updateCachesForMethod:)
 	#(#{Smalltalk class} #publishedEvents)
+	#(#{Smalltalk class} #renameVariable:to:)
 	#(#{Smalltalk.AXControlSite class} #publishedAspectsOfInstances)
 	#(#{Smalltalk.AXValueConvertingControlSite class} #publishedAspectsOfInstances)
-	#(#{Smalltalk.InternalIcon class} #choose)
 	#(#{Smalltalk.ScintillaAttribute class} #publishedAspectsOfInstances)
 	#(#{Smalltalk.ScintillaIndicatorStyle class} #publishedAspectsOfInstances)
 	#(#{Smalltalk.ScintillaKeyBinding class} #publishedAspectsOfInstances)
@@ -509,7 +528,9 @@ package setMethodNames: #(
 	#(#{UI.ColorView class} #publishedAspectsOfInstances)
 	#(#{UI.ComboBox} #visualObjectAtPoint:)
 	#(#{UI.ComboBox class} #publishedAspectsOfInstances)
+	#(#{UI.CommandDescription} #commandString:)
 	#(#{UI.CommandDescription class} #publishedAspectsOfInstances)
+	#(#{UI.CommandMenuItem} #commandString:)
 	#(#{UI.CommandMenuItem} #edit)
 	#(#{UI.CommandMenuItem class} #publishedAspectsOfInstances)
 	#(#{UI.ContainerView class} #applicableLayoutManagerCategories)
@@ -736,13 +757,13 @@ package!
 Core.Object subclass: #Grabber
 	instanceVariableNames: 'rectangle aspect constrain view composer'
 	classVariableNames: 'Cursors'
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Object subclass: #MenuPainter
 	instanceVariableNames: 'menu conflictingMnemonics conflictingAccelerators'
 	classVariableNames: ''
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 Core.Object subclass: #MethodCategorizationPolicy
@@ -1037,13 +1058,13 @@ UI.Presenter subclass: #PackageDependencyPresenter
 UI.Presenter subclass: #SmalltalkSearchPresenter
 	instanceVariableNames: 'environment'
 	classVariableNames: 'AutoCompleteDwell'
-	imports: #(#{ScintillaConstants})
+	imports: #(#{Smalltalk.ScintillaConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UI.Presenter subclass: #SmalltalkWorkspace
 	instanceVariableNames: 'evaluationContext errorModel findDetails workspacePool evaluationPools compilationErrors textStyles searchEnvironment modifiedModel flags indicatorStyles'
 	classVariableNames: 'Abbreviations AnnotationMode AutoCompleteDwell DefaultCaretColor DefaultFont DefaultTabWidth FontQuality IndicatorStyles IsAutoCompletionCaseInsensitive IsAutoCompletionEnabled IsAutoCompletionSpaceAdded IsAutoCompletionTruncating KeyBindings KeywordCompletions MaxAutoCompletionListSize StandardUnaryReturnTypes TextStyles UseDirectWrite WordWrap WrapIndentMode'
-	imports: #(#{Kernel.CompilerFlags} #{ScintillaConstants})
+	imports: #(#{Kernel.CompilerFlags} #{Smalltalk.ScintillaConstants})
 	classInstanceVariableNames: 'additionalKeyBindings commandQueryHandlers'
 	classConstants: {
 		'AutoCompleteMask' -> 16r1.
@@ -1172,7 +1193,7 @@ UI.Dialog subclass: #ResourceIdentifierDialog
 MenuItemDialog subclass: #CommandMenuItemDialog
 	instanceVariableNames: 'acceleratorPresenter isRadioButtonStylePresenter isDefaultPresenter isModalPresenter'
 	classVariableNames: ''
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 MenuItemDialog subclass: #MenuDialog
@@ -1184,7 +1205,7 @@ MenuItemDialog subclass: #MenuDialog
 UI.ValueDialog subclass: #CategoryPrompter
 	instanceVariableNames: 'treePresenter flags categoryClass'
 	classVariableNames: ''
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'AllowIntermediatesMask' -> 16r1.
@@ -1199,7 +1220,7 @@ UI.ValueDialog subclass: #ChooseClassDialog
 UI.ValueDialog subclass: #MenuComposer
 	instanceVariableNames: 'arena menuViews conflictingAccelerators'
 	classVariableNames: ''
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UI.ValueDialog subclass: #PackagePrompter
@@ -1257,7 +1278,7 @@ SmalltalkToolShell subclass: #MethodBrowserShell
 SmalltalkToolShell subclass: #PackageBrowserShell
 	instanceVariableNames: 'packagesPresenter classesPresenter methodsPresenter methodRefactoringTool variablesPresenter resourcesPresenter currentCard commentPresenter cardsPresenter updateFlags scriptTextPresenter scriptNamesPresenter prerequisitesPresenter dependentsPresenter statusModel versionModel'
 	classVariableNames: 'WordWrapComment'
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 SmalltalkToolShell subclass: #ResourceBrowser
@@ -1275,7 +1296,7 @@ SmalltalkToolShell subclass: #SmalltalkSystemShell
 SmalltalkToolShell subclass: #ViewComposer
 	instanceVariableNames: 'toolboxPresenter status arenaPresenter inspector composingView ownsComposingView resourceIdentifier addPositionOffset grabbers selections grid viewHierarchyPresenter adornmentRegion primarySelection vcFlags modificationStatus image clipboard undoList'
 	classVariableNames: 'Clipboard DefaultGridResolution ExtentImage PositionImage'
-	imports: #(#{Win32Constants})
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {
 		'AdornmentModifiedFlag' -> 16r4.
@@ -1443,13 +1464,13 @@ Kernel.STBInFiler subclass: #STBDebugger
 UI.View subclass: #MenuComposerView
 	instanceVariableNames: 'selectionIndex painter'
 	classVariableNames: ''
-	imports: #()
+	imports: #(#{OS.Win32Constants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UI.ContainerView subclass: #MenuComposerArena
 	instanceVariableNames: 'dragImageList dragPoint dragMenuIndex dragSource _unused'
 	classVariableNames: ''
-	imports: #(#{CommCtrlConstants})
+	imports: #(#{OS.CommCtrlConstants})
 	classInstanceVariableNames: ''
 	classConstants: {}!
 UI.ShellView subclass: #DebuggerShellView
@@ -1668,6 +1689,13 @@ isChanged: aBoolean
 isDeprecated
 	^(ClassCategory name: 'Deprecated') includesClass: self!
 
+isNonInstantiable: aBoolean
+	"Private - Set whether the receiver should not be instantiated, e.g. it is abstract."
+
+	self isNonInstantiable == aBoolean ifTrue: [^self].
+	super isNonInstantiable: aBoolean.
+	self isChanged: true!
+
 methodChanged: aCompiledMethod 
 	"Private - Flag the receiver as changed or not changed, according to the value 
 	of the <Boolean> argument. If the receiver is marked as changed, then
@@ -1695,6 +1723,7 @@ renameClassVar: oldString to: newString
 !Core.Class categoriesFor: #isAbstract!public!testing! !
 !Core.Class categoriesFor: #isChanged:!accessing!public! !
 !Core.Class categoriesFor: #isDeprecated!public!source filing! !
+!Core.Class categoriesFor: #isNonInstantiable:!instance specification-accessing!private! !
 !Core.Class categoriesFor: #methodChanged:!helpers!private! !
 !Core.Class categoriesFor: #notifyPackageOfChange!helpers!private! !
 !Core.Class categoriesFor: #renameClassVar:to:!class hierarchy-mutating!class variables!private! !
@@ -3106,6 +3135,15 @@ printOn: aStream
 	aStream nextPut: $)! !
 !External.Integer categoriesFor: #printOn:!printing!public! !
 
+!External.Integer class methodsFor!
+
+newInstanceAspect: aSymbol class: aspectClass 
+	"Private - Answer a new <Aspect> of the class, aspectClass, and with name, aSymbol, 
+    	which is appropriate for representing aspects of the receiver's type."
+
+	^aspectClass integer: aSymbol! !
+!External.Integer class categoriesFor: #newInstanceAspect:class:!adapters!private! !
+
 !External.IntegerBytes methodsFor!
 
 debugPrintOn: aStream
@@ -3117,6 +3155,15 @@ publishedKeyedAspects
 	^LookupTable new! !
 !External.IntegerBytes categoriesFor: #debugPrintOn:!printing!public! !
 !External.IntegerBytes categoriesFor: #publishedKeyedAspects!constants!public! !
+
+!External.IntegerBytes class methodsFor!
+
+newInstanceAspect: aSymbol class: aspectClass 
+	"Private - Answer a new <Aspect> of the class, aspectClass, and with name, aSymbol, 
+	which is appropriate for representing aspects of the receiver's type."
+
+	^aspectClass integer: aSymbol! !
+!External.IntegerBytes class categoriesFor: #newInstanceAspect:class:!adapters!private! !
 
 !External.LPVOIDField methodsFor!
 
@@ -3200,6 +3247,12 @@ printOn: aStream
 		print: self bottomRight;
 		nextPut: $)! !
 !External.Rectangle categoriesFor: #printOn:!printing!public! !
+
+!External.Scalar class methodsFor!
+
+shouldOverrideGetFieldNames
+	^false! !
+!External.Scalar class categoriesFor: #shouldOverrideGetFieldNames!compiling!private! !
 
 !External.ScalarField methodsFor!
 
@@ -3355,6 +3408,146 @@ publishedAspects
 !External.Structure categoriesFor: #printFieldsOn:!printing!private! !
 !External.Structure categoriesFor: #printOn:!printing!public! !
 !External.Structure categoriesFor: #publishedAspects!accessing!public! !
+
+!External.Structure class methodsFor!
+
+autoGenCategory
+	"Private - Answer the name of the <MethodCategory> into which the auto-generated 
+	structure accessors for the receiver should be compiled."
+
+	^'**compiled accessors**'!
+
+compileAllDefinitions
+	"Compile the definitions of the receiver and all its subclasses"
+
+	self withAllSubclassesDo: [:each | each compileDefinition].
+!
+
+compileDefinition
+	"Builds a new template and generates compiled methods for accessing the fields 
+	described by it. Depending on the description held in each field, some accessor
+	methods may be left as uncompiled to be addressed via the template and 
+	#doesNotUnderstand:"
+
+	self
+		newTemplate;
+		defineTemplate;
+		recompileDefinition!
+
+compileGetFieldNames
+	"Private - Define a #getFieldList method for the structure class so that the field names are available even if the template is removed."
+
+	| methodText |
+	self shouldOverrideGetFieldNames ifFalse: [^self].
+	methodText := String smalltalkWriteStream: 256.
+	methodText
+		nextPutAll: #getFieldNames;
+		crtab;
+		nextPutAll: '^#('.
+	self fieldNamesFromTemplate do: [:each | methodText print: each] separatedBy: [methodText space].
+	methodText nextPut: $).
+	self class compile: methodText contents categories: {'constants'. 'private'. self autoGenCategory}!
+
+compileGetMethod: aSymbol forField: anExternalField
+	"Private - Generate a compiled 'get' accessor method for the selector aSymbol 
+	and field definition anExternalField."
+
+	| methodText |
+	anExternalField canGenerateAccessor ifFalse: [^self].
+	methodText := String smalltalkWriteStream: 256.
+	anExternalField printAccessor: aSymbol on: methodText.
+	self formatAndCompile: methodText contents categories: anExternalField autoGenCategories!
+
+compileNewFields
+	self definesNewFields ifFalse: [^self].
+	self template keysAndValuesDo: 
+			[:getSelector :field |
+			field isReadable
+				ifTrue: 
+					[(self shouldCompile: getSelector forField: field)
+						ifTrue: [self compileGetMethod: getSelector forField: field]].
+			field isWriteable
+				ifTrue: 
+					[| setSelector |
+					setSelector := (getSelector copyWith: ':') asSymbol.
+					(self shouldCompile: setSelector forField: field)
+						ifTrue: [self compileSetMethod: setSelector forField: field]]]!
+
+compileSetMethod: aSelector forField: anExternalField
+	"Private - Generate a compiled 'set' accessor method for the selector aSymbol 
+	and field definition, anExternalField"
+
+	| methodText |
+	anExternalField canGenerateMutator ifFalse: [^self].
+	methodText := String smalltalkWriteStream: 256.
+	anExternalField printMutator: aSelector on: methodText.
+	self formatAndCompile: methodText contents categories: anExternalField autoGenCategories!
+
+decompileDefinition
+	"Remove generated accessor methods from the receiver. The template will be lazily rebuilt."
+
+	{self. self class}
+		do: [:each | [each removeCategory: self autoGenCategory] on: NotFoundError do: [:e | e notify]]!
+
+formatAndCompile: aString categories: categories
+	| source |
+	source := Smalltalk developmentSystem reformatSource: aString in: self.
+	^self compile: source categories: categories!
+
+hasHandCodedMethodFor: selector
+	"Private - Answer whether the receiver appears to have a hand coded implementation
+	for the specified selector <Symbol>."
+
+	| method |
+	method := self compiledMethodAt: selector ifAbsent: [^false].
+	^(self autoGenCategory asMethodCategory includesMethod: method) not!
+
+inheritsFieldNamed: aSymbol
+	| base |
+	base := self superclass.
+	^base ~~ Object and: [(base template includesKey: aSymbol) or: [base inheritsFieldNamed: aSymbol]]!
+
+recompileDefinition
+	"Private - Recompiles the existing template for the receiver"
+
+	self decompileDefinition.
+	self compileNewFields.
+	self compileGetFieldNames!
+
+shouldCompile: selector forField: anExternalField
+	"Private - Answer whether to compile an accessor method
+	with the specified selector for the specified field in the
+	receiver."
+
+	^anExternalField canGenerateAccessors and: 
+			[(self hasHandCodedMethodFor: selector) not and: 
+					["Don't generate inherited fields unless specifically marked for override"
+					anExternalField isOverride or: [(self inheritsFieldNamed: (selector upTo: $:) asSymbol) not]]	"Don't overwrite manually written methods"]!
+
+shouldOverrideGetFieldNames
+	^self isNonInstantiable not and: 
+			[self definesNewFields and: 
+					[| categories |
+					categories := self class whichNonVirtualCategoriesIncludeSelector: #getFieldNames.
+					(categories isEmpty or: [categories includes: self autoGenCategory asMethodCategory]) and: 
+							[| inherited |
+							inherited := self superclass class lookupMethod: #getFieldNames.
+							inherited methodClass == Structure class
+								or: [self fieldNamesFromTemplate asSet ~= (inherited literalAt: 1) asSet]]]]! !
+!External.Structure class categoriesFor: #autoGenCategory!compiling!constants!private! !
+!External.Structure class categoriesFor: #compileAllDefinitions!compiling!public! !
+!External.Structure class categoriesFor: #compileDefinition!compiling!public! !
+!External.Structure class categoriesFor: #compileGetFieldNames!compiling!private! !
+!External.Structure class categoriesFor: #compileGetMethod:forField:!compiling!private! !
+!External.Structure class categoriesFor: #compileNewFields!compiling!private! !
+!External.Structure class categoriesFor: #compileSetMethod:forField:!compiling!private! !
+!External.Structure class categoriesFor: #decompileDefinition!compiling!public! !
+!External.Structure class categoriesFor: #formatAndCompile:categories:!compiling!private! !
+!External.Structure class categoriesFor: #hasHandCodedMethodFor:!compiling!private! !
+!External.Structure class categoriesFor: #inheritsFieldNamed:!compiling!private! !
+!External.Structure class categoriesFor: #recompileDefinition!compiling!private! !
+!External.Structure class categoriesFor: #shouldCompile:forField:!compiling!private! !
+!External.Structure class categoriesFor: #shouldOverrideGetFieldNames!compiling!private! !
 
 !External.StructureArrayField methodsFor!
 
@@ -3537,6 +3730,20 @@ newInstanceAspect: aSymbol class: aspectClass
 
 	^aspectClass imageList: aSymbol! !
 !Graphics.ImageList class categoriesFor: #newInstanceAspect:class:!adapters!private! !
+
+!Graphics.InternalIcon class methodsFor!
+
+choose
+	| filename |
+	filename := UI.FileOpenDialog new
+				fileTypes: {self filesType. Icon filesType. UI.FileDialog allFilesType};
+				showModal.
+	^filename notNil
+		ifTrue: 
+			[(File splitExtensionFrom: filename) asLowercase = 'png'
+				ifTrue: [self fromFile: filename]
+				ifFalse: [Icon fromFile: filename]]! !
+!Graphics.InternalIcon class categoriesFor: #choose!public! !
 
 !Graphics.Pen class methodsFor!
 
@@ -3973,7 +4180,7 @@ isAbstract
 	^self hasAbstractMethods!
 
 isVisiblyAbstract
-	"All Namespaces are non-instantiable (they exist only as classes), but that doesn't mean they are abstract as such."
+	"Private - All Namespaces are non-instantiable (they exist only as classes), but that doesn't mean they are abstract as such."
 
 	^self == ##(self)!
 
@@ -3998,7 +4205,7 @@ publishedKeyedAspects
 
 	^classPool publishedAspects! !
 !Kernel.Namespace class categoriesFor: #isAbstract!public!testing! !
-!Kernel.Namespace class categoriesFor: #isVisiblyAbstract!public!testing! !
+!Kernel.Namespace class categoriesFor: #isVisiblyAbstract!private!testing! !
 !Kernel.Namespace class categoriesFor: #newInstanceAspect:class:!adapters!private! !
 !Kernel.Namespace class categoriesFor: #publishedAspects!constants!public! !
 !Kernel.Namespace class categoriesFor: #publishedKeyedAspects!constants!public! !
@@ -5097,8 +5304,19 @@ publishedEvents
 		add: #variableRemoved:;
 		add: #protocolUpdated:;
 		add: #protocolRemoved:;
-		yourself! !
+		yourself!
+
+renameVariable: oldName to: newName
+	"Rename the global, informing the system of the change."
+
+	| binding oldSymbol |
+	binding := oldName asQualifiedReference binding.
+	oldSymbol := binding key.
+	binding environment
+		changeKey: oldSymbol to: newName asSymbol;
+		variableRenamed: binding from: oldSymbol! !
 !Smalltalk class categoriesFor: #publishedEvents!events!public! !
+!Smalltalk class categoriesFor: #renameVariable:to:!operations!public! !
 
 !AXControlSite class methodsFor!
 
@@ -5137,20 +5355,6 @@ publishedAspectsOfInstances
 		add: (Aspect name: #value);
 		yourself! !
 !AXValueConvertingControlSite class categoriesFor: #publishedAspectsOfInstances!constants!must strip!public! !
-
-!InternalIcon class methodsFor!
-
-choose
-	| filename |
-	filename := UI.FileOpenDialog new
-				fileTypes: {self filesType. Icon filesType. UI.FileDialog allFilesType};
-				showModal.
-	^filename notNil
-		ifTrue: 
-			[(File splitExtensionFrom: filename) asLowercase = 'png'
-				ifTrue: [self fromFile: filename]
-				ifFalse: [Icon fromFile: filename]]! !
-!InternalIcon class categoriesFor: #choose!public! !
 
 !ScintillaAttribute class methodsFor!
 
@@ -5603,6 +5807,16 @@ publishedAspectsOfInstances
     		yourself! !
 !UI.ComboBox class categoriesFor: #publishedAspectsOfInstances!constants!public! !
 
+!UI.CommandDescription methodsFor!
+
+commandString: commandText
+	"Sets the receiver's command from the <readableString> representation, commandText."
+
+	| c |
+	c := Compiler evaluate: commandText.
+	c notNil ifTrue: [self command: c]! !
+!UI.CommandDescription categoriesFor: #commandString:!accessing!initializing!public! !
+
 !UI.CommandDescription class methodsFor!
 
 publishedAspectsOfInstances
@@ -5619,10 +5833,16 @@ publishedAspectsOfInstances
 
 !UI.CommandMenuItem methodsFor!
 
+commandString: commandText
+	"Sets the receiver's command from the <readableString> representation, commandText."
+
+	self commandDescription commandString: commandText!
+
 edit
     	"Private - Edit the receiver in a dialog box."
     
     	(Smalltalk.CommandMenuItemDialog createOn: self) showModal! !
+!UI.CommandMenuItem categoriesFor: #commandString:!accessing!public! !
 !UI.CommandMenuItem categoriesFor: #edit!operations!private! !
 
 !UI.CommandMenuItem class methodsFor!

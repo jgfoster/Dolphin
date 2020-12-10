@@ -56,7 +56,7 @@ fullyQualifiedReference
 	"Answer a <BindingReference> that represents a fully qualified reference to the receiver relative to Smalltalk. If the Class is not in the hierarchy below Smalltalk (i.e. it is in Root, or another namespace hierarchy under Root), then it will be an absolute binding reference.
 	The resulting binding reference can be used to resolve the receiver, if installed, or to redeclare it, when not."
 
-	^self asQualifiedReference asFullyQualifiedReference!
+	^BindingReference path: (environment fullPath copyWith: key)!
 
 isAlias
 	^false!

@@ -23,7 +23,7 @@ removalOfSelectionLeaves: aClass
 	siblings := aClass superclass subclasses.
 	^siblings size = 1 
 		ifTrue: [aClass superclass]
-		ifFalse: [siblings after: aClass]!
+		ifFalse: [siblings asSortedCollection after: aClass]!
 
 resetSelection
 	super resetSelection.

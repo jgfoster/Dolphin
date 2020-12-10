@@ -232,7 +232,6 @@ package setMethodNames: #(
 	#(#{Core.String} #setTextInto:)
 	#(#{Core.Symbol} #copyToClipboard)
 	#(#{Core.UndefinedObject} #asResourceId)
-	#(#{Kernel.ConsoleSessionManager class} #icon)
 	#(#{OS.KernelLibrary} #getConsoleWindow)
 	#(#{OS.UserLibrary} #adjustWindowRectEx:dwStyle:bMenu:dwExStyle:)
 	#(#{OS.UserLibrary} #animateWindow:dwTime:dwFlags:)
@@ -2954,14 +2953,6 @@ copyToClipboard
 asResourceId
 	^self! !
 !Core.UndefinedObject categoriesFor: #asResourceId!converting!public! !
-
-!Kernel.ConsoleSessionManager class methodsFor!
-
-icon
-	"Answers an Icon that can be used to represent this class"
-
-	^##(self) defaultIcon! !
-!Kernel.ConsoleSessionManager class categoriesFor: #icon!constants!development!public! !
 
 !OS.KernelLibrary methodsFor!
 

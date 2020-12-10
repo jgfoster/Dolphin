@@ -65,15 +65,6 @@ selectionOrNil
 icon
 	"Answers an Icon that can be used to represent this class"
 
-	^Smalltalk developmentSystem deprecatedIcon!
-
-publishedAspectsOfInstances
-	"Answer a <LookupTable> of the <Aspect>s published by instances of the receiver."
-
-	| aspects |
-	aspects := super publishedAspectsOfInstances.
-	(aspects at: #isMultiSelect) beReadOnly.
-	^aspects! !
+	^Smalltalk developmentSystem deprecatedIcon! !
 !MultipleSelectionListView class categoriesFor: #icon!constants!public! !
-!MultipleSelectionListView class categoriesFor: #publishedAspectsOfInstances!constants!development!public! !
 

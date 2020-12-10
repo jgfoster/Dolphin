@@ -86,7 +86,7 @@ testBasicEdit
 	"Test open a default view that is reasonably complex"
 	rid := ResourceIdentifier class: ViewComposer.
 	self openTestSubjectOn: rid.
-	self assert: vc caption equals: rid displayString, '(ShellView)'.
+	self assert: vc caption equals: rid displayString, '(UI.ShellView)'.
 	self assert: vc composingView class identicalTo: ShellView.
 	self assert: vc primarySelection equals: vc composingView.
 	"Test saving"

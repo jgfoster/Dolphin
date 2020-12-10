@@ -134,27 +134,8 @@ new
 
 	^self newFixed: self elementSize!
 
-newInstanceAspect: aSymbol class: aspectClass 
-	"Private - Answer a new <Aspect> of the class, aspectClass, and with name, aSymbol, 
-	which is appropriate for representing aspects of the receiver's type."
-
-	^aspectClass integer: aSymbol!
-
 pointerFieldType
 	^PointerField!
-
-printStructField: aVARDESC indirections: anInteger on: aPuttableStream
-	"Private - Print a structure field definition message onto the <puttableStream> argument,
-	for the integer variable described by the <VARDESC> argument, with the specified <integer>
-	number of indirections."
-
-	"Implementation Note: Copy <ExternalStructure>'s implementation."
-
-	(self fieldType: aVARDESC indirections: anInteger)
-		printVariable: aVARDESC
-		type: self
-		indirections: anInteger
-		on: aPuttableStream!
 
 valueAtAddress: anAddress 
 	^self subclassResponsibility! !
@@ -163,8 +144,6 @@ valueAtAddress: anAddress
 !External.IntegerBytes class categoriesFor: #fromInteger:!instance creation!public! !
 !External.IntegerBytes class categoriesFor: #initialize!development!initializing!private! !
 !External.IntegerBytes class categoriesFor: #new!instance creation!public! !
-!External.IntegerBytes class categoriesFor: #newInstanceAspect:class:!adapters!private! !
 !External.IntegerBytes class categoriesFor: #pointerFieldType!constants!private! !
-!External.IntegerBytes class categoriesFor: #printStructField:indirections:on:!private! !
 !External.IntegerBytes class categoriesFor: #valueAtAddress:!helpers!private! !
 

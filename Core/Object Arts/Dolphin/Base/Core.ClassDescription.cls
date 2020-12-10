@@ -184,10 +184,18 @@ baseEnvironment
 
 	^Smalltalk!
 
+bindingNames
+	"Answer a Set of the the names of all the bindings in the receiver. The answer will include constant names, if any."
+
+	^self classPool keys!
+
 bindings
 	"Answer the receiver's localled defined <VariableBinding>s."
 
 	^self classPool associations!
+
+bindingsChanged
+	BindingReference clearCachedBindings!
 
 bindingsDo: aMonadicValuable
 	"Evaluate the <monadicValuable> argument for each of the receiver's localled defined <VariableBinding>s."
@@ -922,6 +930,12 @@ suggestedPrivacyFor: aCompiledMethod
 	^#{MethodCategorizationPolicy}
 		ifDefined: [:policy | policy default suggestedPrivacyFor: aCompiledMethod]!
 
+variableAdded: aVariableBinding
+	self bindingsChanged!
+
+variableRemoved: aVariableBinding
+	self bindingsChanged!
+
 whichCategoriesIncludeSelector: aSelector
 	"Private - Answer a <collection> of the 'real' (i.e. non-pseudo or virtual) categories in the 
 	receiver's method catalogue which include the specified selector."
@@ -978,7 +992,9 @@ withAllSubclassesDo: aMonadicValuable
 !Core.ClassDescription categoriesFor: #allSubinstances!instances!public! !
 !Core.ClassDescription categoriesFor: #asQualifiedReference!converting!public! !
 !Core.ClassDescription categoriesFor: #baseEnvironment!constants!private! !
+!Core.ClassDescription categoriesFor: #bindingNames!bindings!public! !
 !Core.ClassDescription categoriesFor: #bindings!accessing!public! !
+!Core.ClassDescription categoriesFor: #bindingsChanged!adding!private! !
 !Core.ClassDescription categoriesFor: #bindingsDo:!enumerating!public! !
 !Core.ClassDescription categoriesFor: #canUnderstandProtocol:!methods-testing!public! !
 !Core.ClassDescription categoriesFor: #categoriesFor:!public!source filing-methods! !
@@ -1074,6 +1090,8 @@ withAllSubclassesDo: aMonadicValuable
 !Core.ClassDescription categoriesFor: #subclassesDo:!class hierarchy-accessing!public! !
 !Core.ClassDescription categoriesFor: #subclassInstVarNames!instance variables!public! !
 !Core.ClassDescription categoriesFor: #suggestedPrivacyFor:!compiling!private! !
+!Core.ClassDescription categoriesFor: #variableAdded:!class variables!private! !
+!Core.ClassDescription categoriesFor: #variableRemoved:!class variables!private! !
 !Core.ClassDescription categoriesFor: #whichCategoriesIncludeSelector:!categories-accessing!private! !
 !Core.ClassDescription categoriesFor: #whichClassDefinesClassVar:!class variables!public! !
 !Core.ClassDescription categoriesFor: #whichNonVirtualCategoriesIncludeSelector:!categories-accessing!private! !

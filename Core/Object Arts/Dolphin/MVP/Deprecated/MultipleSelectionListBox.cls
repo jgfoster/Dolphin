@@ -65,16 +65,6 @@ selectionOrNil
 icon
 	"Answers an Icon that can be used to represent this class"
 
-	^Smalltalk developmentSystem deprecatedIcon!
-
-publishedEventsOfInstances
-    	"Answer a Set of Symbols that describe the published events triggered
-    	by instances of the receiver."
-    
-    	^super publishedEventsOfInstances
-    		add: #drag:;
-    		yourself.
-    ! !
+	^Smalltalk developmentSystem deprecatedIcon! !
 !MultipleSelectionListBox class categoriesFor: #icon!constants!public! !
-!MultipleSelectionListBox class categoriesFor: #publishedEventsOfInstances!development!events!public! !
 

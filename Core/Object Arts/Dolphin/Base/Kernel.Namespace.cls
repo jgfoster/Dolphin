@@ -174,15 +174,12 @@ basicClassPool: aPoolDictionary
 
 	classPool := aPoolDictionary ?? Dictionary new!
 
-bindingsChanged
-	BindingReference clearCachedBindings!
-
 changeKey: aString to: aString2
 	"Private - Low level operation to rename a binding, potentially moving it to another namespace. No update events are triggered, and binding caches are not flushed."
 
 	| binding path targetNamespace |
-	binding := self associationAt: aString.
-	classPool removeKey: aString.
+	binding := self localBindingFor: aString.
+	self basicRemoveBinding: binding.
 	path := $. split: aString2.
 	binding setKey: path last asSymbol.
 	targetNamespace := (BindingReference path: path allButLast) value.
@@ -199,8 +196,8 @@ collect: aMonadicValuable
 	^classPool collect: aMonadicValuable!
 
 declareVariable: aString
-	^self associationAt: aString
-		ifAbsent: 
+	^(self localBindingFor: aString)
+		ifNil: 
 			[| var |
 			var := VariableBinding key: aString value: nil.
 			self addBinding: var.
@@ -212,9 +209,6 @@ detect: aMonadicValuable
 detect: aMonadicValuable ifNone: aNiladicValuable
 	^classPool detect: aMonadicValuable ifNone: aNiladicValuable!
 
-displayOn: aPuttableStream
-	self printFullNameOn: aPuttableStream!
-
 do:  aMonadicValuable
 	classPool do: aMonadicValuable!
 
@@ -224,7 +218,7 @@ do: aMonadicValuable separatedBy: aNiladicValuable
 hierarchyBindingFor: aString
 	"Private - Answer a variable binding for the named variable in the scope of this class, i.e. one of its own class variables or those of its superclasses."
 
-	^self localBindingFor: aString!
+	^classPool bindingFor: aString!
 
 includes: anObject
 	^self classPool includes: anObject!
@@ -257,6 +251,15 @@ keysAndValuesDo: aDyadicValuable
 keysDo: aMonadicValuable
 	classPool keysDo: aMonadicValuable!
 
+lookup: keyObject
+	"Answer the value named by the <Object> argument, keyObject, or nil if there is no such key in the receiver.
+	Clearly if the receiver can contain nil values then it will not be possible to distinguish between the absence
+	of the key and the key being associated with a nil value. However, this method expresses the
+	very common pattern of passing an empty block as absent handler to #at:ifAbsent:, e.g.
+		(dict at: key ifAbsent: []) ifNotNil: [:value | value ...]"
+
+	^classPool lookup: keyObject!
+
 new
 	"Namespaces do not have instances, only meta-instances (i.e. the class itself)."
 
@@ -284,14 +287,9 @@ removeKey: aString
 	^self removeKey: aString ifAbsent: [self errorNotFound: aString]!
 
 removeKey: aString ifAbsent: aNiladicValuable
-	^(self localBindingFor: aString)
+	^(self removeLocalBindingFor: aString)
 		ifNil: [aNiladicValuable value]
-		ifNotNil: 
-			[:binding |
-			classPool removeKey: binding key.
-			self bindingsChanged.
-			Smalltalk trigger: #variableRemoved: with: binding.
-			binding value]!
+		ifNotNil: [:binding | binding value]!
 
 resolveImportedBinding: aBindingContext
 	"Private - Search imported namespaces for a binding that matches the identifier in the <BindingContext> supplied. The search proceeds up through the class hierarchy (i.e. imports in the class hierarchy are inherited), and then out to the imports of the enclosing namespace. Imports into the enclosing namespaces of superclasses are not searched."
@@ -309,10 +307,6 @@ size
 
 values
 	^classPool values!
-
-variableAdded: aVariableBinding
-	self bindingsChanged.
-	Smalltalk classUpdated: self!
 
 variableRenamed: aVariableBinding from: aString
 	self bindingsChanged.
@@ -346,14 +340,12 @@ variableRenamed: aVariableBinding from: aString
 !Kernel.Namespace class categoriesFor: #at:put:!dictionary-accessing!public! !
 !Kernel.Namespace class categoriesFor: #baseEnvironment!constants!private! !
 !Kernel.Namespace class categoriesFor: #basicClassPool:!binding!private! !
-!Kernel.Namespace class categoriesFor: #bindingsChanged!adding!private! !
 !Kernel.Namespace class categoriesFor: #changeKey:to:!private! !
 !Kernel.Namespace class categoriesFor: #classBindingNames!accessing!class variables!public! !
 !Kernel.Namespace class categoriesFor: #collect:!dictionary-enumerating!public! !
 !Kernel.Namespace class categoriesFor: #declareVariable:!public! !
 !Kernel.Namespace class categoriesFor: #detect:!dictionary-enumerating!public! !
 !Kernel.Namespace class categoriesFor: #detect:ifNone:!dictionary-enumerating!public! !
-!Kernel.Namespace class categoriesFor: #displayOn:!displaying!public! !
 !Kernel.Namespace class categoriesFor: #do:!dictionary-enumerating!public! !
 !Kernel.Namespace class categoriesFor: #do:separatedBy:!dictionary-enumerating!public! !
 !Kernel.Namespace class categoriesFor: #hierarchyBindingFor:!binding!private! !
@@ -366,6 +358,7 @@ variableRenamed: aVariableBinding from: aString
 !Kernel.Namespace class categoriesFor: #keys!dictionary-accessing!public! !
 !Kernel.Namespace class categoriesFor: #keysAndValuesDo:!dictionary-enumerating!public! !
 !Kernel.Namespace class categoriesFor: #keysDo:!dictionary-enumerating!public! !
+!Kernel.Namespace class categoriesFor: #lookup:!dictionary-accessing!public! !
 !Kernel.Namespace class categoriesFor: #new!instance creation!public! !
 !Kernel.Namespace class categoriesFor: #notEmpty!dictionary-testing!public! !
 !Kernel.Namespace class categoriesFor: #occurrencesOf:!dictionary-searching!public! !
@@ -377,9 +370,8 @@ variableRenamed: aVariableBinding from: aString
 !Kernel.Namespace class categoriesFor: #removeKey:ifAbsent:!dictionary-removing!public! !
 !Kernel.Namespace class categoriesFor: #resolveImportedBinding:!binding!private! !
 !Kernel.Namespace class categoriesFor: #select:!dictionary-enumerating!public! !
-!Kernel.Namespace class categoriesFor: #size!accessing!public! !
+!Kernel.Namespace class categoriesFor: #size!accessing!dictionary-accessing!public! !
 !Kernel.Namespace class categoriesFor: #values!dictionary-accessing!public! !
-!Kernel.Namespace class categoriesFor: #variableAdded:!class hierarchy-mutating!class variables!private! !
 !Kernel.Namespace class categoriesFor: #variableRenamed:from:!events!private! !
 
 Kernel.Namespace class methodProtocol: #abstractDictionary attributes: #(#ansi #readOnly) selectors: #(#addAll: #allSatisfy: #anySatisfy: #asArray #asBag #asByteArray #asOrderedCollection #asSet #asSortedCollection #asSortedCollection: #at: #at:ifAbsent: #at:ifAbsentPut: #at:put: #collect: #detect: #detect:ifNone: #do: #do:separatedBy: #includes: #includesKey: #inject:into: #isEmpty #keyAtValue: #keyAtValue:ifAbsent: #keys #keysAndValuesDo: #keysDo: #notEmpty #occurrencesOf: #rehash #reject: #removeAllKeys: #removeAllKeys:ifAbsent: #removeKey: #removeKey:ifAbsent: #select: #size #values)!

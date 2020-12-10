@@ -21,6 +21,11 @@ emitChunk: aString
 		nextChunkPut: aString;
 		cr!
 
+emitClassName: aClass
+	aClass environment == aClass baseEnvironment
+		ifTrue: [stream nextPutAll: aClass name]
+		ifFalse: [aClass printFullNameOn: stream]!
+
 emitFooterForMethodsOf: aClass 
 	"Private - Ends the method definition chunks for aClass onto
 	the source stream."
@@ -200,6 +205,7 @@ storeSourceString: aString forMethod: aCompiledMethod
 		flush
 ! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitChunk:!private!source filing-file out! !
+!Kernel.ChunkSourceFiler categoriesFor: #emitClassName:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitFooterForMethodsOf:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitGUIDOfClass:!private!source filing-file out! !
 !Kernel.ChunkSourceFiler categoriesFor: #emitHeaderForMethodsOf:!private!source filing-file out! !

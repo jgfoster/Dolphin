@@ -3,10 +3,9 @@
 DBTest subclass: #ADODBTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	imports: #()
-	classInstanceVariableNames: ''
-	classConstants: {}!
-ADODBTest guid: (Core.GUID fromString: '{cbc7f08c-1041-4e55-a86a-5a963bba1649}')!
+	poolDictionaries: ''
+	classInstanceVariableNames: ''!
+ADODBTest guid: (GUID fromString: '{cbc7f08c-1041-4e55-a86a-5a963bba1649}')!
 ADODBTest comment: ''!
 !ADODBTest categoriesForClass!Unclassified! !
 !ADODBTest methodsFor!

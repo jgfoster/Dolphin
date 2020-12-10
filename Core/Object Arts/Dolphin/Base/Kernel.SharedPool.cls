@@ -62,9 +62,7 @@ subclass: aSymbol
 
 variableAdded: aVariableBinding
 	aVariableBinding isImmutable: true.
-	self
-		bindingsChanged;
-		classUpdated! !
+	super variableAdded: aVariableBinding! !
 !Kernel.SharedPool class categoriesFor: #at:ifAbsentPut:!accessing!development!public! !
 !Kernel.SharedPool class categoriesFor: #at:put:!adding!development!public! !
 !Kernel.SharedPool class categoriesFor: #baseEnvironment!constants!private! !

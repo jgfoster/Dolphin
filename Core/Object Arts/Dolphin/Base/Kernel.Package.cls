@@ -140,6 +140,11 @@ allResourceIdentifiers
 	self looseResourceIdentifiersDo: [:each | resources add: each].
 	^resources!
 
+allResourceNames
+	"Private - Answer a <Collection> of all the resource names directly owned by the receiver or by its owned classes."
+
+	^self propertyAt: #allResourceNames ifAbsent: [^OrderedCollection new]!
+
 allSourceObjects
 	"Answer a <collection> containing the members of the receiver that can be filed out as 
 	separate source files. These objects must respond to the <sourceObject> protocol. If the
@@ -269,7 +274,6 @@ bindingRefToLiteral: anObject
 				ifTrue: [anObject environment fullyQualifiedReference]
 				ifFalse: 
 					[| ref |
-					"Avoid interning symbols for all the string Pool variable names by checking first if the var name is a symbol"
 					ref := anObject fullyQualifiedReference.
 					ref bindingOrNil == anObject ifTrue: [ref]]]
 		ifFalse: 
@@ -498,18 +502,19 @@ fileInScript: aSymbol
 	aString isEmpty ifTrue: [^self].
 
 	"If the AnonymousClassBuilder is defined, then create an anonymous package class in which to run the script. This allows us to load legacy scripts with Smalltalk on the binding path so that legacy class names will be found. The alternative would be to compile the script in the context of a class in Smalltalk, but we want 'self' in the script to be this package."
-	#namespaceToDo. "Provide a means to supply a binding context (other than the method class) to the Compiler."
-	#{AnonymousClassBuilder} isDefined
-		ifTrue: 
-			[| originalClass anon |
+	#{AnonymousClassBuilder} ifDefined: 
+			[:builder |
+			| originalClass anon |
 			originalClass := self class.
-			anon := originalClass newAnonymousSubclass.
+			anon := (builder new
+						superclass: originalClass;
+						yourself) createNewClass.
 			anon environment: Smalltalk.
 			
 			[self becomeA: anon.
 			self evaluateScript: aSymbol source: aString]
 					ensure: [self becomeA: originalClass]]
-		ifFalse: [self evaluateScript: aSymbol source: aString]!
+		ifNotDefined: [self evaluateScript: aSymbol source: aString]!
 
 fileNameForBinaryVariable: globalName
 	"Private - Answer a filename for storing the binary globalName."
@@ -677,6 +682,17 @@ initializeGlobals
 			| target |
 			target := each value.
 			target class isMeta ifTrue: [ClassLocator addAlias: each asSymbol forClass: target]]!
+
+initializeLegacyResources
+	"Private - For old (pre-D6) packages, we have to make sure that the resources loaded by this package actually
+	below to it. Obviously, those resources that already belong to classes in the package will be ok, so really
+	we are only concerned with loose resources"
+
+	self allResourceNames do: 
+			[:each |
+			| rid |
+			rid := UI.ResourceIdentifier class: each key asQualifiedReference value name: each value.
+			rid owningPackage == self ifFalse: [self manager addLooseMethod: rid compiledMethod to: self]]!
 
 initializeOldSourcePackage
 	(self respondsTo: #loadLegacyResources) 
@@ -1772,6 +1788,7 @@ If you experience subsequent problems please contact the package supplier for an
 !Kernel.Package categoriesFor: #allMethodsDo:!enumerating!private! !
 !Kernel.Package categoriesFor: #allPrerequisites!accessing!private! !
 !Kernel.Package categoriesFor: #allResourceIdentifiers!accessing!public! !
+!Kernel.Package categoriesFor: #allResourceNames!accessing!private! !
 !Kernel.Package categoriesFor: #allSourceObjects!accessing!public!source filing! !
 !Kernel.Package categoriesFor: #allSourceObjectsDo:!enumerating!public!source filing! !
 !Kernel.Package categoriesFor: #basicAddClass:!adding!private! !
@@ -1840,6 +1857,7 @@ If you experience subsequent problems please contact the package supplier for an
 !Kernel.Package categoriesFor: #initialize!initializing!private! !
 !Kernel.Package categoriesFor: #initializeClasses!initializing!private! !
 !Kernel.Package categoriesFor: #initializeGlobals!initializing!private! !
+!Kernel.Package categoriesFor: #initializeLegacyResources!initializing!private! !
 !Kernel.Package categoriesFor: #initializeOldSourcePackage!initializing!private! !
 !Kernel.Package categoriesFor: #isAlias:!initializing!private! !
 !Kernel.Package categoriesFor: #isBasePackage!public!testing! !
