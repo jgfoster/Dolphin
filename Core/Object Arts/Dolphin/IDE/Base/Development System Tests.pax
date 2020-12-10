@@ -118,6 +118,12 @@ Core.Tests.DolphinTest subclass: #'OS.Tests.VersionResourceTest'
 	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
+Core.Tests.DolphinTest subclass: #XMLDOMNodeTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
 UI.Tests.PresenterTest subclass: #'Tools.Tests.SmalltalkWorkspaceTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
