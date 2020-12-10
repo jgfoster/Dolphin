@@ -72,6 +72,8 @@ contents
 		add: #('Core\Object Arts\Dolphin\Base\Dolphin.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Dolphin Message Box.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Dolphin Source Fileout.pax' #plain #imageBased);
+		add: #('Core\Object Arts\Dolphin\System\STON\Dolphin STON-Core.pax' #plain #imageBased);
+		add: #('Core\Object Arts\Dolphin\Base\Dolphin Source Package Fileout.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Dolphin Anonymous Classes.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\Base\Dolphin Command-line Parser.pax' #plain #imageBased);
 		add: #('Core\Object Arts\Dolphin\System\Compiler\Smalltalk Parser.pax' #plain #imageBased);
