@@ -36,8 +36,8 @@ package basicPackageVersion: '0.010'.
 
 
 package setClassNames: #(
-	#{Smalltalk.InternalBitmap}
-	#{Smalltalk.InternalIcon}
+	#{Graphics.InternalBitmap}
+	#{Graphics.InternalIcon}
 ).
 
 package setMethodNames: #(
@@ -57,20 +57,19 @@ package setPrerequisites: #(
 	'..\..\Base\Dolphin Message Box'
 	'..\Base\Dolphin MVP Base'
 	'..\Gdiplus\Gdiplus'
-	'..\Gdiplus\Gdiplus (Deprecated)'
 ).
 
 package!
 
 "Class Definitions"!
 
-Core.Object subclass: #InternalBitmap
+Core.Object subclass: #'Graphics.InternalBitmap'
 	instanceVariableNames: 'gdiplusBitmap'
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-InternalBitmap subclass: #InternalIcon
+Graphics.InternalBitmap subclass: #'Graphics.InternalIcon'
 	instanceVariableNames: 'tileColor'
 	classVariableNames: ''
 	imports: #(#{Graphics.Gdiplus.GdiplusConstants})
@@ -126,7 +125,7 @@ to convert to PNG format first?'.
 			^self].
 
 	"Let GDI+ do the image load"
-	internalIcon := Smalltalk.InternalIcon fromFile: imageFileName extent: extent.
+	internalIcon := Graphics.InternalIcon fromFile: imageFileName extent: extent.
 	methodSourceStream := String writeStream.
 	methodSourceStream
 		nextPutAll: methodName;
