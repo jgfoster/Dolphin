@@ -1,12 +1,12 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-ExternalLibrary subclass: #OLEAutLibrary
+External.Library subclass: #OLEAutLibrary
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-OLEAutLibrary guid: (GUID fromString: '{6467404a-3a82-101b-8181-00aa003743d3}')!
+OLEAutLibrary guid: (Core.GUID fromString: '{6467404a-3a82-101b-8181-00aa003743d3}')!
 OLEAutLibrary comment: 'OLEAutLibrary is the <ExternalLibrary> class to represent the Win32 System DLL, OLEAUT32.DLL.
 This library contains functions pertaining to the use of Active-X Automation.'!
 !OLEAutLibrary categoriesForClass!ActiveX Automation!External-Libraries-ActiveX! !

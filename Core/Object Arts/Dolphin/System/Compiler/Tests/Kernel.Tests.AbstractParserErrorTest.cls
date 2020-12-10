@@ -2013,7 +2013,6 @@ writtenNotReadRange: aString
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsNonsenseAtEndOfMethod!public!unit tests! !
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsOptimizedExpressionNotClosed!public!unit tests! !
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsPrimitives!public!unit tests! !
-!Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsPrimitivesCloseTagRecovery!public!unit tests! !
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsQualifiedReferenceBadExtension!public!unit tests! !
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsQualifiedReferenceExtraDot!public!unit tests! !
 !Kernel.Tests.AbstractParserErrorTest categoriesFor: #testErrorsQualifiedReferenceInvalidName!public!unit tests! !

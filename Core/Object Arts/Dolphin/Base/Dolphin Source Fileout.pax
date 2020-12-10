@@ -358,8 +358,8 @@ fileOutProtocols: aCollection ofBehavior: aClassDescription
 	aCollection isEmpty ifTrue: [^self].
 	(aCollection asSortedCollection: [:a :b | (a name <==> b name) <= 0]) do: 
 			[:p | 
+			self emitClassName: aClassDescription.
 			stream
-				nextPutAll: aClassDescription name;
 				nextPutAll: ' methodProtocol: ';
 				print: p asSymbol;
 				nextPutAll: ' attributes: ';

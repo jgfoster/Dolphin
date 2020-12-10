@@ -22,12 +22,10 @@ package setMethodNames: #(
 	#(#{Graphics.PrinterCanvas class} #choose)
 	#(#{OS.ComDlgLibrary} #printDlg:)
 	#(#{OS.ComDlgLibrary} #printDlgEx:)
-	#(#{Smalltalk.PrinterCanvas class} #choose)
 ).
 
 package setPrerequisites: #(
 	'..\..\..\Base\Dolphin'
-	'..\..\..\Base\Deprecated\Dolphin Base (Deprecated)'
 	'Dolphin Common Dialogs'
 	'..\..\Base\Dolphin MVP Base'
 	'..\..\..\ActiveX\COM\OLE COM'

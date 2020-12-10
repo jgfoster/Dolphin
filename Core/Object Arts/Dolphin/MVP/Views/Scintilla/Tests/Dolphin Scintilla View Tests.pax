@@ -13,13 +13,12 @@ package setClassNames: #(
 ).
 
 package setPrerequisites: #(
-	'..\..\..\..\Base\Dolphin'
-	'..\..\..\..\Base\Dolphin Base Tests'
-	'..\..\..\Base\Dolphin MVP Base'
-	'..\..\..\Dolphin MVP Tests'
-	'..\Dolphin Scintilla View'
-	'..\..\..\..\..\..\Contributions\Camp Smalltalk\SUnit\SUnit'
-	'..\..\..\..\..\..\Contributions\Camp Smalltalk\SUnit\SUnitPreload'
+	'..\..\..\Base\Dolphin'
+	'..\..\Base\Dolphin MVP Base'
+	'..\..\Dolphin MVP Tests'
+	'Dolphin Scintilla View'
+	'..\..\..\..\..\Contributions\Camp Smalltalk\SUnit\SUnit'
+	'..\..\..\..\..\Contributions\Camp Smalltalk\SUnit\SUnitPreload'
 ).
 
 package!
@@ -50,7 +49,7 @@ UI.Scintilla.Tests.ScintillaLexerMetadataTest subclass: #'UI.Scintilla.Tests.Sci
 	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-UI.Tests.MultilineTextEditTest subclass: #'UI.Scintilla.Tests.ScintillaViewTest'
+UI.Tests.AbstractMultilineTextEditTest subclass: #'UI.Scintilla.Tests.ScintillaViewTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
 	imports: #()
