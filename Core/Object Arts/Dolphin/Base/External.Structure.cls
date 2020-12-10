@@ -836,7 +836,7 @@ recompileReferences
 	Notification signal: ('Recompiling references to <1p> (size <2p>)...' expandMacrosWith: self
 				with: self basicByteSize).
 	pred := self referenceFilterFor: binding.
-	Library
+	DynamicLinkLibrary
 		allMethodsDo: [:each | (each isExternalCall and: [pred value: each]) ifTrue: [each recompile]].
 	Structure allMethodsDo: 
 			[:each |

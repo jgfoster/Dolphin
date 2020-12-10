@@ -1472,6 +1472,12 @@ UI.Scintilla.QueryableAttribute subclass: #'UI.Scintilla.Margin'
 	classConstants: {
 		'MarginTypes' -> #(#symbol #lineNumber #symbolBackground #symbolForeground #text #rightJustifiedText #color)
 	}!
+External.DynamicLinkLibrary subclass: #'UI.Scintilla.ScintillaLibrary'
+	instanceVariableNames: ''
+	classVariableNames: ''
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
 UI.Scintilla.LexerMetadata subclass: #'UI.Scintilla.LexerNamedStyle'
 	instanceVariableNames: 'name'
 	classVariableNames: ''
@@ -1480,12 +1486,6 @@ UI.Scintilla.LexerMetadata subclass: #'UI.Scintilla.LexerNamedStyle'
 	classConstants: {}!
 UI.Scintilla.LexerMetadata subclass: #'UI.Scintilla.LexerProperty'
 	instanceVariableNames: 'type'
-	classVariableNames: ''
-	imports: #()
-	classInstanceVariableNames: ''
-	classConstants: {}!
-External.Library subclass: #'UI.Scintilla.ScintillaLibrary'
-	instanceVariableNames: ''
 	classVariableNames: ''
 	imports: #()
 	classInstanceVariableNames: ''

@@ -471,7 +471,7 @@ registerServer
 	entrypoint := #DllRegisterServer.
 	
 	[| lib |
-	lib := External.Library open: dllpath.
+	lib := External.DynamicLinkLibrary open: dllpath.
 	
 	[| method proc |
 	proc := lib getProcAddress: entrypoint

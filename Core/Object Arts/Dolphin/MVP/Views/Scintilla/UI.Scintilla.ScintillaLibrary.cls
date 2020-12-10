@@ -1,6 +1,6 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-External.Library subclass: #'UI.Scintilla.ScintillaLibrary'
+External.DynamicLinkLibrary subclass: #'UI.Scintilla.ScintillaLibrary'
 	instanceVariableNames: ''
 	classVariableNames: ''
 	imports: #()

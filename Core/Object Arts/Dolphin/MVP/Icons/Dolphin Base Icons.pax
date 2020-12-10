@@ -69,6 +69,7 @@ package setMethodNames: #(
 	#(#{External.BOOLEAN class} #icon)
 	#(#{External.Callback class} #icon)
 	#(#{External.DOUBLE class} #icon)
+	#(#{External.DynamicLinkLibrary class} #icon)
 	#(#{External.ExternalArray class} #icon)
 	#(#{External.FLOAT class} #icon)
 	#(#{External.INTEGER class} #icon)
@@ -676,6 +677,14 @@ icon
 	^Float icon! !
 !External.DOUBLE class categoriesFor: #icon!constants!public! !
 
+!External.DynamicLinkLibrary class methodsFor!
+
+icon
+	"Answers an Icon that can be used to represent this class"
+
+	^##(self) defaultIcon! !
+!External.DynamicLinkLibrary class categoriesFor: #icon!constants!public! !
+
 !External.ExternalArray class methodsFor!
 
 icon
@@ -699,14 +708,6 @@ icon
  
 	^Integer icon! !
 !External.INTEGER class categoriesFor: #icon!constants!public! !
-
-!External.Library class methodsFor!
-
-icon
-	"Answers an Icon that can be used to represent this class"
-
-	^##(self) defaultIcon! !
-!External.Library class categoriesFor: #icon!constants!public! !
 
 !External.Structure class methodsFor!
 

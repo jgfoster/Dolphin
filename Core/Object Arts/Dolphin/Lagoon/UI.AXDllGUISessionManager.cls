@@ -32,7 +32,7 @@ openConsoleStreams
 icon
 	"Answers an Icon that can be used to represent this class"
 
-	^External.Library icon!
+	^External.DynamicLinkLibrary icon!
 
 imageExtension
 	"Answer the suffix for an executable image file"

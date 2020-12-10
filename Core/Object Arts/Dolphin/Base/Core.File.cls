@@ -573,7 +573,7 @@ writeByte: anIntegerOrCharacter
 !Core.File categoriesFor: #write:startingAt:count:!operations!public! !
 !Core.File categoriesFor: #writeByte:!operations!public! !
 
-File methodProtocol: #'streamable File' attributes: #(#readOnly) selectors: #(#close #flush #isReadable #isWriteable #position: #read:count: #reset #size #write:count:)!
+Core.File methodProtocol: #'streamable File' attributes: #(#readOnly) selectors: #(#close #flush #isReadable #isWriteable #position: #read:count: #reset #size #write:count:)!
 
 !Core.File class methodsFor!
 
