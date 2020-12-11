@@ -1,18 +1,18 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-MultilineTextEditTest subclass: #ScintillaViewTest
+UI.Tests.MultilineTextEditTest subclass: #'UI.Tests.ScintillaViewTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ScintillaViewTest guid: (GUID fromString: '{3c6fbe95-74e0-4325-97e1-82f12133d503}')!
-ScintillaViewTest comment: ''!
-!ScintillaViewTest categoriesForClass!Unclassified! !
-!ScintillaViewTest methodsFor!
+UI.Tests.ScintillaViewTest guid: (Core.GUID fromString: '{3c6fbe95-74e0-4325-97e1-82f12133d503}')!
+UI.Tests.ScintillaViewTest comment: ''!
+!UI.Tests.ScintillaViewTest categoriesForClass!Unclassified! !
+!UI.Tests.ScintillaViewTest methodsFor!
 
 classToTest
-	^ScintillaView!
+	^Smalltalk.ScintillaView!
 
 initializePresenter
 	| margins |
@@ -52,30 +52,30 @@ testFindStringStartingAt
 
 testLanguages
 	| lingos |
-	lingos := ScintillaView lexerLanguages.
+	lingos := Smalltalk.ScintillaView lexerLanguages.
 	lingos do: [:each | each notNil ifTrue: [presenter view lexer: each]]!
 
 testOverrideDefaultKeyBindings
 	| bindings code expectedDiffs binding actualBindings |
-	bindings := ScintillaView.DefaultKeyBindings copy.
+	bindings := Smalltalk.ScintillaView.DefaultKeyBindings copy.
 	expectedDiffs := Set new.
 	"Remove a key binding"
 	code := AcceleratorTable keyCodeFromInvariantString: 'PGDOWN'.
 	self assert: (bindings includesKey: code).
 	bindings removeKey: code.
 	expectedDiffs
-		add: (ScintillaKeyBinding newAcceleratorKey: code message: ScintillaConstants.SCI_NULL).
+		add: (Smalltalk.ScintillaKeyBinding newAcceleratorKey: code message: Smalltalk.ScintillaConstants.SCI_NULL).
 	"Add a binding"
 	code := AcceleratorTable keyCodeFromInvariantString: 'CTRL+J'.
 	self deny: (bindings includesKey: code).
-	binding := ScintillaKeyBinding newAcceleratorKey: code
-				message: ScintillaConstants.SCI_SELECTIONDUPLICATE.
+	binding := Smalltalk.ScintillaKeyBinding newAcceleratorKey: code
+				message: Smalltalk.ScintillaConstants.SCI_SELECTIONDUPLICATE.
 	bindings at: code put: binding.
 	expectedDiffs add: binding.
 	"Update a binding"
 	code := AcceleratorTable keyCodeFromInvariantString: 'CTRL+D'.
 	self assert: (bindings includesKey: code).
-	binding := ScintillaKeyBinding newAcceleratorKey: code message: ScintillaConstants.SCI_PAGEDOWN.
+	binding := Smalltalk.ScintillaKeyBinding newAcceleratorKey: code message: Smalltalk.ScintillaConstants.SCI_PAGEDOWN.
 	bindings at: code put: binding.
 	expectedDiffs add: binding.
 
@@ -92,25 +92,25 @@ testSetGetAnnotations
 	presenter text: self text.
 	annotations := OrderedCollection new.
 	annotations
-		add: (ScintillaAnnotation
+		add: (Smalltalk.ScintillaAnnotation
 					line: 1
 					text: 'Wobble'
 					style: #Error);
-		add: (ScintillaAnnotation
+		add: (Smalltalk.ScintillaAnnotation
 					line: 2
 					text: 'Wibble'
 					style: #Warning);
-		add: (ScintillaAnnotation
+		add: (Smalltalk.ScintillaAnnotation
 					line: 1
 					text: 'Blah'
 					style: #Notification).
 	presenter annotations: annotations.
 	self assert: (presenter annotations noDifference: annotations)! !
-!ScintillaViewTest categoriesFor: #classToTest!helpers!private! !
-!ScintillaViewTest categoriesFor: #initializePresenter!public!Running! !
-!ScintillaViewTest categoriesFor: #margins!private!unit tests! !
-!ScintillaViewTest categoriesFor: #testFindStringStartingAt!public!unit tests! !
-!ScintillaViewTest categoriesFor: #testLanguages!public!unit tests! !
-!ScintillaViewTest categoriesFor: #testOverrideDefaultKeyBindings!public!unit tests! !
-!ScintillaViewTest categoriesFor: #testSetGetAnnotations!public!unit tests! !
+!UI.Tests.ScintillaViewTest categoriesFor: #classToTest!helpers!private! !
+!UI.Tests.ScintillaViewTest categoriesFor: #initializePresenter!public!Running! !
+!UI.Tests.ScintillaViewTest categoriesFor: #margins!private!unit tests! !
+!UI.Tests.ScintillaViewTest categoriesFor: #testFindStringStartingAt!public!unit tests! !
+!UI.Tests.ScintillaViewTest categoriesFor: #testLanguages!public!unit tests! !
+!UI.Tests.ScintillaViewTest categoriesFor: #testOverrideDefaultKeyBindings!public!unit tests! !
+!UI.Tests.ScintillaViewTest categoriesFor: #testSetGetAnnotations!public!unit tests! !
 

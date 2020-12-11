@@ -1,14 +1,15 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-DolphinTest subclass: #ScintillaIndicatorTest
+Core.Tests.DolphinTest subclass: #UI.Tests.ScintillaIndicatorTest
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
-	classInstanceVariableNames: ''!
-ScintillaIndicatorTest guid: (GUID fromString: '{f9336218-5504-41d4-bf04-d9bbe66ecfbe}')!
-ScintillaIndicatorTest comment: ''!
-!ScintillaIndicatorTest categoriesForClass!Unclassified! !
-!ScintillaIndicatorTest methodsFor!
+	imports: #()
+	classInstanceVariableNames: ''
+	classConstants: {}!
+UI.Tests.ScintillaIndicatorTest guid: (Core.GUID fromString: '{f9336218-5504-41d4-bf04-d9bbe66ecfbe}')!
+UI.Tests.ScintillaIndicatorTest comment: ''!
+!UI.Tests.ScintillaIndicatorTest categoriesForClass!Unclassified! !
+!UI.Tests.ScintillaIndicatorTest methodsFor!
 
 testStyleNameRangeTag
 	| indicator1 indicator2 tag originalMethod testMethod |
@@ -30,5 +31,5 @@ testStyleNameRangeTag
 	self assert: indicator1 styleName identicalTo: #normal.
 	self assert: indicator1 range equals: (1 to: 10).
 	self assert: indicator1 tag identicalTo: tag! !
-!ScintillaIndicatorTest categoriesFor: #testStyleNameRangeTag!public!unit tests! !
+!UI.Tests.ScintillaIndicatorTest categoriesFor: #testStyleNameRangeTag!public!unit tests! !
 

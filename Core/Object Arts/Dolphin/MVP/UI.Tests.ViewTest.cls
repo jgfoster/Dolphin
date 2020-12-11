@@ -1,15 +1,15 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-DolphinTest subclass: #ViewTest
+Core.Tests.DolphinTest subclass: #'UI.Tests.ViewTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ViewTest guid: (GUID fromString: '{cf223394-a19e-45f9-a270-551c288901ef}')!
-ViewTest comment: ''!
-!ViewTest categoriesForClass!Unclassified! !
-!ViewTest methodsFor!
+UI.Tests.ViewTest guid: (Core.GUID fromString: '{cf223394-a19e-45f9-a270-551c288901ef}')!
+UI.Tests.ViewTest comment: ''!
+!UI.Tests.ViewTest categoriesForClass!Unclassified! !
+!UI.Tests.ViewTest methodsFor!
 
 testRecreateMaintainsModelConnection
 	| t |
@@ -21,5 +21,5 @@ testRecreateMaintainsModelConnection
 	"If this fails, then the view did not receive a #valueChanged event from the model"
 	self assert: t view value equals: 'bbb'.
 	t topShell exit! !
-!ViewTest categoriesFor: #testRecreateMaintainsModelConnection!public!unit tests! !
+!UI.Tests.ViewTest categoriesFor: #testRecreateMaintainsModelConnection!public!unit tests! !
 
