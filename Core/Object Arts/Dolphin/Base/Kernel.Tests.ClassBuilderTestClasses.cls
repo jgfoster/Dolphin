@@ -1,15 +1,15 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-DolphinTestClassResource subclass: #ClassBuilderTestClasses
+Core.Tests.DolphinTestClassResource subclass: #'Kernel.Tests.ClassBuilderTestClasses'
 	instanceVariableNames: 'testClass testSubclass1 testSubclass2 testPool1 testPool2 testPool3'
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ClassBuilderTestClasses guid: (GUID fromString: '{b9045f26-8b7d-468f-969a-7e228869fe20}')!
-ClassBuilderTestClasses comment: ''!
-!ClassBuilderTestClasses categoriesForClass!Unclassified! !
-!ClassBuilderTestClasses methodsFor!
+Kernel.Tests.ClassBuilderTestClasses guid: (Core.GUID fromString: '{b9045f26-8b7d-468f-969a-7e228869fe20}')!
+Kernel.Tests.ClassBuilderTestClasses comment: ''!
+!Kernel.Tests.ClassBuilderTestClasses categoriesForClass!Unclassified! !
+!Kernel.Tests.ClassBuilderTestClasses methodsFor!
 
 compileMethods
 	self compileAccessorsFor: testClass.
@@ -24,13 +24,13 @@ createClasses
 				pools: 'ClassBuilderTestPool1'
 				classVars: 'Var1 Var2'.
 	testSubclass1 := self
-				createClass: #ClassBuilderTestSubClass
+				createClass: #'Kernel.Tests.ClassBuilderTestSubClass'
 				superclass: testClass
 				instVars: 'var3 var4'
 				pools: 'ClassBuilderTestPool2'
 				classVars: ''.
 	testSubclass2 := self
-				createClass: #ClassBuilderTestSubClass2
+				createClass: #'Root.ClassBuilderTestSubClass2'
 				superclass: testClass
 				instVars: 'var3 var4'
 				pools: 'ClassBuilderTestPool3 ClassBuilderTestPool2'
@@ -68,12 +68,12 @@ testSubclass1
 
 testSubclass2
 	^testSubclass2! !
-!ClassBuilderTestClasses categoriesFor: #compileMethods!public!unit tests! !
-!ClassBuilderTestClasses categoriesFor: #createClasses!private!unit tests! !
-!ClassBuilderTestClasses categoriesFor: #createPools!Init / Release!private! !
-!ClassBuilderTestClasses categoriesFor: #isAvailable!public!Testing! !
-!ClassBuilderTestClasses categoriesFor: #tearDown!public!Running! !
-!ClassBuilderTestClasses categoriesFor: #testClass!accessing!public! !
-!ClassBuilderTestClasses categoriesFor: #testSubclass1!accessing!public! !
-!ClassBuilderTestClasses categoriesFor: #testSubclass2!accessing!public! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #compileMethods!public!unit tests! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #createClasses!private!unit tests! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #createPools!Init / Release!private! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #isAvailable!public!Testing! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #tearDown!public!Running! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #testClass!accessing!public! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #testSubclass1!accessing!public! !
+!Kernel.Tests.ClassBuilderTestClasses categoriesFor: #testSubclass2!accessing!public! !
 

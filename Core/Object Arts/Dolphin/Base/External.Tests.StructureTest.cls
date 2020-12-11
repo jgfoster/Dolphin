@@ -1,15 +1,15 @@
 ﻿"Filed out from Dolphin Smalltalk 7"!
 
-DolphinTest subclass: #ExternalStructureTest
+Core.Tests.DolphinTest subclass: #'External.Tests.StructureTest'
 	instanceVariableNames: ''
 	classVariableNames: ''
-	poolDictionaries: ''
+	imports: #()
 	classInstanceVariableNames: ''
 	classConstants: {}!
-ExternalStructureTest guid: (GUID fromString: '{a9244232-e68c-4a65-bbf2-c8392aee459b}')!
-ExternalStructureTest comment: 'SUnitBrowser openOnTestCase: self'!
-!ExternalStructureTest categoriesForClass!Unclassified! !
-!ExternalStructureTest methodsFor!
+External.Tests.StructureTest guid: (Core.GUID fromString: '{a9244232-e68c-4a65-bbf2-c8392aee459b}')!
+External.Tests.StructureTest comment: 'SUnitBrowser openOnTestCase: self'!
+!External.Tests.StructureTest categoriesForClass!Unclassified! !
+!External.Tests.StructureTest methodsFor!
 
 testCompileDefinition
 	"Test that compiling structure fields defines the right set of accessors:
@@ -19,7 +19,7 @@ testCompileDefinition
 		- no selectors for filler fields."
 
 	| subject |
-	subject := ExternalStructure newAnonymousSubclass.
+	subject := Structure newAnonymousSubclass.
 	subject class
 		compile: 'defineFields
 	self
@@ -33,7 +33,7 @@ testCompileDefinition
 
 testDynamicSelectors
 	| subject expected |
-	subject := ExternalStructure newAnonymousSubclass.
+	subject := Structure newAnonymousSubclass.
 	subject initializeTemplate.
 	subject
 		defineField: #writeOnly type: DWORDField writeOnly;
@@ -68,45 +68,23 @@ testEquals
 	self assert: s1 equals: s4.
 	self assert: s4 equals: s1!
 
-testExtendedErrorInfo
-	"Tests that extended error info is accessed on failed external API calls through COM interfaces if the target object supports it."
-
-	| script errorInfo error |
-	script := IScriptControl new.
-	self assert: script supportsErrorInfo.
-	errorInfo := [script eval: '1+2'] on: HRESULTError do: [:ex | ex errorInfo].
-	self assert: errorInfo notNil.
-	self assert: errorInfo source equals: 'ScriptControl'.
-	self assert: errorInfo guid equals: IScriptControl guid.
-	script free.
-	error := [script eval: '1+2'] on: HRESULTError do: [:ex | ex ].
-	self assertIsNil: error errorInfo.
-	self assert: error hresult equals: (HRESULT fromPrimitiveFailureCode: _PrimitiveFailureCode.InvalidPointer)!
-
 testIsNull
 	| struct |
 	self assert: FILETIME newPointer isNull.
-
 	struct := FILETIME new.
 	self assert: struct isNull not.
-
 	struct bytes: 0.
 	self assert: struct isNull.
-	
 	struct bytes: nil.
 	self assert: struct isNull.
-
 	struct bytes: Object new.
 	self should: [struct isNull] raise: MessageNotUnderstood.
-	
 	struct bytes: ByteArray new.
 	self assert: struct isNull not.
-
-	struct bytes: ExternalAddress new.
-	self assert: struct isNull.! !
-!ExternalStructureTest categoriesFor: #testCompileDefinition!public!unit tests! !
-!ExternalStructureTest categoriesFor: #testDynamicSelectors!public!unit tests! !
-!ExternalStructureTest categoriesFor: #testEquals!public!unit tests! !
-!ExternalStructureTest categoriesFor: #testExtendedErrorInfo!public!unit tests! !
-!ExternalStructureTest categoriesFor: #testIsNull!public!unit tests! !
+	struct bytes: External.Address new.
+	self assert: struct isNull! !
+!External.Tests.StructureTest categoriesFor: #testCompileDefinition!public!unit tests! !
+!External.Tests.StructureTest categoriesFor: #testDynamicSelectors!public!unit tests! !
+!External.Tests.StructureTest categoriesFor: #testEquals!public!unit tests! !
+!External.Tests.StructureTest categoriesFor: #testIsNull!public!unit tests! !
 
